@@ -1,0 +1,15 @@
+---
+output: html_document
+---
+  ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## **Schoen Lab Data Management Workshop Series**
+
+* [**Data Management Overview: Session 1**](slides/data_mgmt_part1.html)  
+*May 26th, 2022*
+  
+* [**Data Management Overview: Session 2**]()  
+*June 2nd, 2022*
+  
