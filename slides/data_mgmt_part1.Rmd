@@ -57,13 +57,13 @@ background-image: url(img/cover2.png)
 
 ## Crystal Lewis
 
-Slides available on [`r fontawesome::fa("github", fill = "white")`](https://cghlewis.github.io/mpsi-training1/#1)
+Slides available on [`r fontawesome::fa("github", fill = "white")`](https://cghlewis.github.io/schoen-workshop-series/)
 
 ---
 
 # About me
 
-* Data Manager for Missouri Prevention Science Institute for 8 years. Oversaw data management for 8 large-scale federally funded grants and 1 county funded grant.
+* Data Manager for Missouri Prevention Science Institute for 8 years. Oversaw data management for 8 large-scale federally funded RCTs.
 
 * Developed a passion for learning about and teaching others best practices in data management.
 
@@ -222,7 +222,7 @@ Someone did a good job of data management.
 .pull-right[
 
 ```{r, echo = FALSE, out.width = "800px", fig.align='center'}
-knitr::include_graphics("img/scriberia-1.png")
+knitr::include_graphics("img/scriberia-1.PNG")
 ```
 
 Source: [<span style="color:white">Scriberia</span>](https://the-turing-way.netlify.app/reproducible-research/overview.html)
@@ -242,7 +242,7 @@ Source: [<span style="color:white">Scriberia</span>](https://the-turing-way.netl
   - Replication Crisis that has been going on for over a decade 
       - Ex: A **[2015 study](https://www.science.org/doi/10.1126/science.aac4716)** conducted replications of 100 psychology studies and was only able to replicate 39 of them  
   - Practices that contribute to reproducibility include  
-      - Documentation  
+      - Data Dictionary  
       - Style Guide  
       - Creating a data cleaning plan  
       - Syntax writing  
@@ -278,7 +278,7 @@ Mistake Types and Their Reported Outcomes
       - Validity checks
 
 4\. Keeps data secure
-  - Data security is required by both theIRB and funders
+  - Data security is required by both the IRB and funders
   - Incidents where data is not stored properly could lead to lost, destroyed, or unusable data as well as breaches of confidentiality
   - Practices to support data security include:
       - Storing paper and electronic data according to IRB rules
@@ -294,12 +294,36 @@ class: center, middle, inverse
 
 ---
 
-background-image: url(img/lifecycle.png)
+background-image: url(img/lifecycle.PNG)
 background-size: cover
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+[Project Planning](pm_check.html)   
+[Data Planning](dm_check.html)
 
 ---
 
-background-image: url(img/cycle.png)
+background-image: url(img/cycle.PNG)
 background-position: cover
 
 
@@ -309,12 +333,14 @@ background-position: cover
 
 - <span style = 'font-size: 150%;'>`r fontawesome::fa("repeat", fill = "#782F40")`</span>  All of the phases that occur in the cyclical portion of the lifecycle happen every data collection phase.
 
-- <span style = 'font-size: 150%;'>`r fontawesome::fa("exclamation-triangle", fill = "#782F40")`</span>  It is best practice to do these steps **EVERY** cycle.
+- <span style = 'font-size: 150%;'>`r fontawesome::fa("exclamation-triangle", fill = "#782F40")`</span>  It is best practice to do each step **EVERY** cycle.
 
 - <span style = 'font-size: 150%;'>`r fontawesome::fa("times-circle", fill = "#782F40")`</span>  Waiting until the end of the study to track, document, clean and validate your data can have consequences.
 
   - You miss out on the opportunity to discover missing data and the chance to still collect that data
+  
   - You miss the chance to revise any errors in your data collection instruments, and therefore may be creating unusable data
+  
   - You won't be able to access data when you need it. You will need to notify someone of your need and then wait for the data to be prepared.
 
 ---
@@ -336,52 +362,10 @@ background-position: cover
 
 # Data Management Planning - Roles
 
-1. **Primary Investigator**
-  - Oversight of grant
-  - Budget
-  - Technical findings
-  - Approval of project decisions
-  - Choosing measures
-  - Randomization
-  
-2. **Project Coordinator**
-  - Creation of protocols and project documentation
-  - Hiring contract staff
-  - Training data collectors
-  - Creating data collection instruments
-  - Scheduling and oversight of data collection
-  - Communication with participants
-  - Consenting participants
-  - Tracking data
-  
----
-
-# Data Management Planning - Roles
-  
-3\. **Data Manager**
-  - Data documentation
-  - Oversee security of data (storage, access, permissions, privacy)
-  - Data capture (downloading, entry)
-  - Data cleaning
-  - Data validation
-  - Data sharing
-
-4\. **Other roles**
-  - Database developer (Develop Qualtrics surveys, develop tracking databases, develop data entry databases)
-  - Graduate research assistants (Data collection, project coordination, data cleaning, data analysis)
-  - Methodologist (Randomization, study design, data analysis)
-  - IT professionals (Data storage, data backup, data security)
-  - Contractors (Data collection, data entry, transcribing)
-  - Researchers/post-docs (data analysis, data collection, documentation)
-
----
-
-# Data Management Planning - Roles
-
 - Develop a system for how these roles will communicate with and notify each other when they are ready to hand off tasks
 
 ```{r, echo = FALSE, out.width = "500px", fig.align='center'}
-knitr::include_graphics("img/hand-off.png")
+knitr::include_graphics("img/hand-off.PNG")
 ```
 
 Source: [<span style="color:white">Scriberia</span>](https://the-turing-way.netlify.app/project-design/pd-overview.html)
@@ -390,15 +374,16 @@ Source: [<span style="color:white">Scriberia</span>](https://the-turing-way.netl
 
 # Data Management Planning - Roles
 
-The best way to assign responsibilities may be by developing a flow chart for each project/measure
+The best way to assign responsibilities may be by developing a flow chart for each project and each task
 
 Add these roles and responsibilities to your protocol
 
 **Simple flowchart for a Qualtrics survey**
 
+<br>
 
-```{r, echo = FALSE, out.width = "800px", fig.align='center'}
-knitr::include_graphics("img/qualtrics_flow.png")
+```{r, echo = FALSE, out.width = "850px", fig.align='center'}
+knitr::include_graphics("img/qualtrics_flow.PNG")
 ```
 
 ---
@@ -407,7 +392,20 @@ knitr::include_graphics("img/qualtrics_flow.png")
 
 **Simple flowchart for a paper survey**
 
-![](img/paper_flow.png)
+![](img/paper_flow.PNG)
+---
+
+# Data Management Planning - Roles
+
+**Simple flowchart for receiving district data**
+
+<br>
+
+```{r, echo = FALSE, out.width = "800px", fig.align='center'}
+knitr::include_graphics("img/district_flow.PNG")
+```
+
+
 ---
 
 class: center, middle, inverse
@@ -416,15 +414,30 @@ class: center, middle, inverse
 
 ---
 
-# Why is Documentation Step #1?
+# Why Document?
 
-**It is a roadmap for where you are going.**
+.pull-left[
+**Internally**:
+* It is a roadmap for where you are going.
+* Make decisions/analyses replicable
+  - Hand over documentation to new team members
+* Helps with recall 
+  - What decisions did you make, when, and why
+* Creates standardization
+  - Consistent naming and coding across forms and time
+  - Consistent processes to gather data
+* Helps you discover errors in your data
+  - Catch missing data or values out of range
+* Reduces data rot
+  - With so many transformations over time, data becomes unusable if you don't track that information
+]
 
-```{r, echo = FALSE, out.width = "725px", fig.align='center'}
-knitr::include_graphics("img/documentation.png")
-```
-
-Source: [OSF:NIH](https://osf.io/48ufs/)
+.pull-right[
+**Externally**:
+* Required in DMP
+  - Project level metadata also needed for pre-registration
+* Ensure others use and interpret data accurately
+]
 ---
 
 background-image: url(img/pen-to-square-solid.svg)
@@ -433,7 +446,7 @@ background-position: 95% 15%
 
 # Types of Documentation
 
-There are 4 levels of documentation.
+There are 4 levels of documentation/metadata.
 
 Within each of these levels, are different types of documentation.
 
@@ -443,8 +456,8 @@ Within each of these levels, are different types of documentation.
   - Wiki
 2. Project level
   - Project Documentation
-  - **Standard Operating Procedures (SOPs) or Protocols**
   - Supplemental Materials
+  - **Standard Operating Procedures (SOPs) or Protocols**
 3. Dataset level
   - **ReadMe**
 4. Variable level
@@ -453,9 +466,15 @@ Within each of these levels, are different types of documentation.
 
 ---
 
+class: inverse, middle, center
+
+# Team Documentation
+
+---
+
 # Lab Manual
 
-A lab manual is important because it creates common knowledge.
+*A lab manual creates common knowledge among team members.*
 
 Samuel Mehr, a Researcher from Harvard University, [summarized the contents of 25 lab manuals](https://thebiologist.rsb.org.uk/images/biologist/2020/Apr_May_2020_67-2/67.2_Handbook.pdf) and came up with 20 common elements included.
 
@@ -478,9 +497,9 @@ Samuel Mehr, a Researcher from Harvard University, [summarized the contents of 2
 
 <br>
 
-|Who creates it|When to create | Formats|
-|-------------|---------------|--------|
-|PI, Project Coordinators |When lab is formed|Markdown, PDF, Word|
+|Who creates it|When to create | Formats| Type |Other terms|
+|-------------|---------------|--------|-------|-----------|
+|PI, Project Coordinators |When lab is formed|Markdown, PDF, Word| Internal|Handbook|
 
 ---
 
@@ -493,6 +512,7 @@ You need to access the data dictionary for Project A, so you start to look aroun
 ```{r fig.align="center", echo=FALSE, out.width='50%'}
 knitr::include_graphics("img/batman.png")
 ```
+Source: [tenor.com](https://tenor.com/view/batman-hmmm-thinking-one-second-let-me-think-gif-5454647)
 
 ---
 
@@ -575,16 +595,17 @@ tibble::tribble (~ var_name, ~ question, ~value,
 
 # Style Guide
 
-A style guide is a document that provides a set of standards for how you work with your data.
+*A [style guide](https://hwpi.harvard.edu/files/sdp/files/sdp-toolkit-coding-style-guide.pdf) is a document that provides a set of standards for how you work with your data.*
 
 .pull-left[
-A style guide:
+Purpose:
   - Improves searchability
   - Standardization within and across projects
   - It allows for clear interpretation
   - It contributes to the reproducibility of your work
 ]
 .pull-right[
+
 Categories to include in your style guide:
   - Folder/Directory structure
   - File naming
@@ -594,9 +615,9 @@ Categories to include in your style guide:
 
 <br>
 
-|Who creates it|When to create | Formats|
-|-------------|---------------|--------|
-|PI, Project Coordinators, Data Managers |Before a project begins, When a lab is formed|Markdown, PDF, Word, txt|
+|Who creates it|When to create | Formats| Type |Other terms|
+|-------------|---------------|--------|------|------------|
+|PI, Project Coordinators, Data Managers |Before a project begins, When a lab is formed|Markdown, PDF, Word, txt| Internal|Protocol|
   
 ---
 
@@ -813,6 +834,7 @@ knitr::include_graphics("img/phd.png")
 ```
 Source: [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1531)
 ]
+
 ---
 
 
@@ -929,16 +951,17 @@ Source: [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1531)
 "fs`_`1819`_`teach`_`pinfo`_`v03.csv"
 ```
 
+
 ```{r, results='asis', echo=FALSE}
 
 library(flair)
 
 decorate("filenames") %>% 
-flair("dsc") %>%
-flair("c1") %>%
-flair("stu") %>%
-flair("svy-protocol") %>%
-flair("2021-01-07") %>%
+flair("fs") %>%
+flair("1819") %>%
+flair("teach") %>%
+flair("pinfo") %>%
+flair("v03") %>%
 knit_print.with_flair()
 ```
 
@@ -1001,7 +1024,9 @@ You have one of two options:
   + No need to add version or date to your file name (or to your style guide)
   + Every time you save a new copy you can add comments to explain the differences between versions
   + You can go back into your history and restore previous versions
-  
+
+--
+
 2. Create your own manual versioning
 
   + By adding a date and/or a version number to your documents you can track the most recent versions of documents
@@ -1045,8 +1070,10 @@ class: center, inverse
 
 # Choosing variable names is hard
 
-<img src="img/var_name4.png"; style="max-width:450px;">  
-Source: [Reddit](https://www.reddit.com/r/ProgrammerHumor/comments/8k9cmu/indeed_everytime/)
+```{r fig.align="center", echo=FALSE,out.width='40%', out.height= '55%'}
+knitr::include_graphics("img/var_name4.png")
+```
+Source: [<span style="color: white; ">Reddit</span>](https://www.reddit.com/r/ProgrammerHumor/comments/8k9cmu/indeed_everytime/)
 
 
 ---
@@ -1146,13 +1173,13 @@ Source: [Reddit](https://www.reddit.com/r/ProgrammerHumor/comments/8k9cmu/indeed
   
 ---
 
-# Style Guide - Variable names - Time
+# Style Guide - Variable Names - Time
 
 If your data is longitudinal, you need to consider time in your variable naming
 
 Depending on how you plan to merge your data, there are 2 ways to account for time:
 
-1. Concatenate time to your variables.
+1. **Concatenate time to your variables.**
 
   + You do this if you plan to merge your data in wide format
   + Every participant has one row of data
@@ -1161,7 +1188,9 @@ Depending on how you plan to merge your data, there are 2 ways to account for ti
       + *s_w1_bmtl01*, *s_w2_bmtl01*, *s_w3_bmtl01*
   + If you are collecting cohorts, you may still want *cohort* added as a separate variable
 
-2. Create time variables and add them to your data.
+--
+
+2. **Create time variables and add them to your data.**
 
   + You do this if you plan to append your data in long format.
   + Every participant occurs in your data more than once for each wave of data collection.
@@ -1275,28 +1304,348 @@ Source: [NCES](https://nces.ed.gov/pubs2015/2015074.pdf)
 
 ---
 
-# Style Guide - Wrap Up
+# Wiki
+
+*A [site](https://osf.io/mdh87/wiki/Applying%20to%20PhD%20Programs/) that is designed for groups of people to quickly capture and share ideas by creating simple pages and linking them together*
+
+* Think Wikipedia: anyone on your team can add/edit content and then can link to referenced documents for easy access
+* Easily built in tools such as Microsoft SharePoint, Teams, OSF, or Notion
 
 .pull-left[
-
-### **Harvard Strategic Data Project has an excellent style guide for reference**
-
+* You can make project level wikis to house important reference materials
+  + Protocols
+  + Style Guide
+  + Participant Payment Forms
 ]
 .pull-right[
-
-```{r fig.align="center", echo=FALSE,out.width='75%'}
-knitr::include_graphics("img/sdp.png")
-```
-Source: [Harvard SDP](https://hwpi.harvard.edu/files/sdp/files/sdp-toolkit-coding-style-guide.pdf)
-
+* Or you can make a team wiki to house more general information
+  + Lab manual
+  + Meeting notes
+  + Organization charts
+  + Style Guide
 ]
+
+|Who creates it|When to create | Formats| Type|
+|-------------|---------------|--------|------|
+|Anyone |Before a project begins, When a lab is formed|Tool of choice| Internal|
 
 ---
 
-# Wiki
+class: inverse, middle, center
 
-A site that is designed for groups of people to quickly capture and share ideas by creating simple pages and linking them together
+# Project Documentation
 
+---
+
+# Project Level Documentation
+
+*A living document to record information about your project.  Contains detailed description of procedures, methods, measures, and sample*
+
+Purpose:
+  * To provide context for your data and improve interpretation
+
+The bones of this document can be initially populated from your pre-registration but it should include an overview of the following:
+  * Project and Study Design
+  * Participants
+  * Intervention
+  * Procedures (will come from SOPs)
+  * Measures - including citations for measures
+
+
+|Who creates it|When to create | Formats| Type|Other terms|
+|-------------|---------------|--------|------|-----------|
+|PI, Project Coordinator |At any point during the project|PDF, Word, Markdown| External|Methods and Measures|
+
+Source: [IES](https://ies.ed.gov/ncee/pubs/2022004/pdf/2022004.pdf)
+
+---
+
+# Supplemental Materials
+
+*These are materials that may be added to your project level documentation that provide a service for you internally and can provide further clarification for external users as well*
+
+1. **Timeline**: What data is collected at what time points throughout the year and across the years?
+  + This information is best displayed in table format (or spreadsheet)
+  + It’s helpful to add a column that shows how this data is collected (ex: Qualtrics, observation, etc.)
+  
+2. **Instruments**: Copies of all IRB approved data collection instruments used. These can also be annotated to show how you renamed items.
+
+3. **Consort Diagram**: A flow diagram that shows participant flow through an RCT, from enrollment, to allocation to treatment, and up to analysis. 
+
+
+|Who creates it|When to create | Formats| Type|
+|-------------|---------------|--------|------|
+|PI, Project Coordinator, Data Managers |At any point during the project|PDF, Word, Markdown, Excel| Internal & External|
+
+---
+
+# Supplemental Materials - Timeline
+
+```{r, echo=FALSE, fig.align="center", out.width = "700px"}
+knitr::include_graphics("img/timeline2.PNG")
+```
+
+Source: [IES](https://ies.ed.gov/ncee/pubs/2022004/pdf/2022004.pdf)
+---
+
+# Supplemental Materials - Consort Diagram
+
+```{r, echo=FALSE, fig.align="center", out.width = "400px"}
+knitr::include_graphics("img/consort.PNG")
+```
+
+Source: [Consort](http://www.consort-statement.org/consort-statement/flow-diagram)
+---
+
+# Standard Operating Procedures
+
+*SOPs or Protocols are document/s to record all your procedures as well as changes made to those procedures throughout the grant.*
+
+Purpose:
+
+* For you to document every decision you make so that over time you both **remember what you did and why** as well as **implement your procedures with fidelity**.
+
+* To document roles and responsibilities for each procedure
+
+* You will eventually summarize these protocols and add them to your project level documentation
+
+<br>
+
+|Who creates it|When to create | Formats| Type|Other terms|
+|-------------|---------------|--------|------|-----------|
+|Whoever oversees the procedure |Before the procedure occurs|PDF, Word, Markdown| Internal & External|Protocols|
+
+Source: [CITI Program: Good Clinical] Practice(https://about.citiprogram.org/series/good-clinical-practice-gcp/)
+
+---
+
+background-image: url(img/file-pen-solid.svg)
+background-size: 300px 300px
+background-position: 90% 65%
+
+# Standard Operating Procedures
+
+These SOPs should cover both project administration procedures as well as data management procedures
+
+Project administration:
+- Recruitment
+- Consenting/Assenting Participants
+- Inclusion/Exclusion criteria
+- Randomization
+- Payments/Incentives
+- Intervention implementation
+- Data Collection
+- Training
+
+Data management:
+- Data Entry
+- Data scoring
+- How to deal with missing data
+
+---
+
+# Standard Operating Procedures
+
+The SOP can either be one large document, with a table of contents, or stand alone documents.
+
+Each SOP should *begin* with:
+
+* Title
+* Date the protocol was made   
+* Who made the protocol  
+* Purpose of the protocol  
+* Any related documents or research behind this protocol  
+
+**Then write up the details about the procedure/protocol.**
+
+--
+
+For any *changes* to the protocol after the project has begun add the following below the original protocol section:  
+ * Revision date  
+ * Who decided on the revision  
+ * Any rationale behind the revision  
+ * Any related documents or research behind the revision 
+
+---
+
+# Recall this Qualtrics Flowchart
+
+![](img/qualtrics_flow.PNG)
+
+---
+
+background-image: url(img/sop_combined.PNG)
+background-size: cover
+
+---
+
+class: center, inverse, middle
+
+Dataset Documentation
+
+---
+
+# ReadMe
+
+**A plain text document that contains information about your files. May also be seen written as README.** 
+
+They are most known for their use in computer science, but have become more prevalent in research. 
+
+Can serve many purposes:
+- Descriptive information about the purpose and organization of a dataset
+- Information about a set of files in a directory
+- **Changelog of differences between versions of a file**
+- Steps and/or files in a process
+
+<br>
+
+|Who creates it|When to create | Formats| Type|Other terms|
+|-------------|---------------|--------|------|-----------|
+|Anyone associated with the process|Before a project, As it is required|txt, PDF, Word, Markdown| Internal & External|Metadata|
+
+---
+
+# ReadMe - Dataset
+
+```{r, echo=FALSE, fig.align="center", out.width = "650px"}
+knitr::include_graphics("img/metadata.PNG")
+```
+Source: [University of Portland](https://libguides.up.edu/datamanagement/documentation)
+
+---
+
+# ReadMe - Set of Files
+
+```{r, echo=FALSE, fig.align="center", out.width = "800px"}
+knitr::include_graphics("img/readme.PNG")
+```
+Source: [IES](https://ies.ed.gov/ncee/pubs/2022004/pdf/2022004.pdf)
+
+---
+
+# ReadMe - Changelog
+
+```{r, echo=FALSE, fig.align="center", out.width = "1000px"}
+knitr::include_graphics("img/changelog.PNG")
+```
+<br>
+Source: [Wheel of Names](https://wheelofnames.com/changelog)
+
+---
+
+class: inverse, center, middle
+
+# Variable Documentation
+
+---
+
+# Codebook
+
+*A well-documented codebook contains information intended to be complete and self-explanatory for each variable in a data file, such as the wording and coding of the item, and the underlying construct* [FORRT](https://forrt.org/glossary/codebook/)
+
+Purpose:
+  * Without ever having to open the data file, a user can see summary statistics about the data and make decisions based on that information.
+
+<br>
+
+|Who creates it|When to create | Formats| Type| Other terms|
+|-------------|---------------|--------|------|------------|
+|Data Managers |Before sharing data |PDF, Word, Markdown| External| Summary Statistics|
+
+
+---
+
+# Codebook - Example
+
+```{r, echo=FALSE, fig.align="center", out.width = "550px"}
+knitr::include_graphics("img/codebook1.PNG")
+```
+Source: [ICPSR](https://www.icpsr.umich.edu/files/deposit/Guide-to-Codebooks_v1.pdf)
+
+---
+
+# Data Dictionary
+
+*A collection of names, definitions, and attributes about data elements that are being used or captured in a database, information system, or part of a research project*
+
+Purpose:
+* Enforces data standards
+* Creates consistency across the members of the team and across the project over time
+* Provides a roadmap for instrument creation
+  - Tells you how to name variables and code values in an instrument like Qualtrics
+* Can be integrated into data cleaning
+* Assists in data validation
+* Communicates the contents of dataset
+
+<br>
+
+|Who creates it|When to create | Formats| Type| Other terms|
+|-------------|---------------|--------|------|------------|
+|Data Managers |**Before a project begins**, When extant data is received|Excel, Other rectangular format| Internal & External| Codebook|
+
+---
+
+# Data Dictionary - Elements
+
+- Variable Name
+- Variable Label
+- Associated scale/measure
+  + Group your variables by scale/measure
+- Associated form (Student survey, teacher rating of student)
+- Value range or value codes ([1-99] or 0=No, 1=Yes)
+- Measurement unit (numeric, string, date, etc.)
+- Missing data codes
+- Variable universe (Who gets this question? Is there skip logic?)
+- What time periods does this variable exist
+- Reverse coding
+- Calculations (composite variables, scores)
+- Notes (such as versions/changes to this variable)
+- Order number of the question on the form
+
+---
+
+# Data Dictionary 
+
+In order to start a data dictionary, you should gather the following information:
+
+- What measures are we collecting? (Ex: Student Assessment, Teacher Observation, Teacher Survey, Principal Interview)
+- What are the items/scales included?
+  + Get a copy of the original measure and make sure the question wording is accurate. Make sure the subscale you've assigned the question to is accurate
+- What is your variable naming protocol? (Check your style guide)
+- Do your items/scales have pre-determined value coding rules or can we assign our own? What is our value coding protocol? (See value coding)
+
+--
+
+It’s good to also consider starting to document the variables you aren’t collecting but you are assigning or deriving.
+
+- Cohort/Group
+- Time period
+- Treatment
+- What variables do you plan to derive (ex: Mean Scores)? 
+
+---
+
+# Data Dictionary - Example
+
+|measure|subscale|var_name|label|type|values|recode|
+|------|--------|--------|-----|----|------|------|
+|cip|Individual Teacher Instructional Practices| CIP_StudWork| Used student work to plan for mathematics instruction | numeric | 1 = Never, 2 = Less than once a month, 3 = 2 or 3 times a month, 4 = Once or twice a week, 5 = Daily | NA |
+|cip|Individual Teacher Instructional Practices| CIP_TeachMat | Examined your teaching materials/assignments in relation to the Math | numeric | 1 = Never, 2 = Less than once a month, 3 = 2 or 3 times a month, 4 = Once or twice a week, 5 = Daily | NA|
+
+```{r, echo=FALSE, fig.align="center", out.width = "500px"}
+knitr::include_graphics("img/cip_measure.PNG")
+```
+
+---
+
+background-image: url(img/data-dictionary.PNG)
+background-size: contain
+
+---
+
+class: inverse, center, middle
+
+# Questions?
 
 
 
