@@ -10,6 +10,6 @@ knitr::opts_chunk$set(echo = TRUE)
 * [**Data Management Overview: Session 1**](slides/data_mgmt_part1.html)  
 *May 26th, 2022*
   
-* [**Data Management Overview: Session 2**]()  
+* [**Data Management Overview: Session 2**](slides/data_mgmt_part2.html)  
 *June 2nd, 2022*
   

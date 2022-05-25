@@ -1,5 +1,5 @@
 ---
-title: "Data Management Processes: Session 1"
+title: "Data Management Overview: Session 1"
 subtitle: "Training for Schoen Research"  
 author: "<br> Crystal Lewis"
 date: '2022-05-26 (updated: `r Sys.Date()`)'
@@ -11,7 +11,7 @@ output:
       highlightStyle: github
       highlightLines: true
       ratio: 16:9
-      countIncrementalSlides: true
+      countIncrementalSlides: false
       titleSlideClass: [left, middle]
     seal: false
 ---
@@ -29,9 +29,11 @@ knitr::opts_chunk$set(
 )
 ```
 
+
 ```{r xaringan-tile-view, echo=FALSE}
 xaringanExtra::use_tile_view()
 ```
+
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
 
@@ -45,12 +47,11 @@ style_duo_accent(
 )
 ```
 
-
 class: inverse, left, middle
 
 background-image: url(img/cover2.png)
 
-# Data Management Processes: Session 1
+# Data Management Overview: Session 1
 ## Training for Schoen Research
 
 ----
@@ -81,26 +82,26 @@ background-size: cover
 
 # Introductions
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
-[Photo by Bundo Kim on Unsplash](https://unsplash.com/photos/NIKl5WwL-RE)
+.footnote[[Photo by Bundo Kim on Unsplash](https://unsplash.com/photos/NIKl5WwL-RE)]
 
+
+---
+
+class: inverse, center, middle
+
+> If the data you need still exists;  
+If you found the data you need;  
+If you understand the data you found;  
+If you trust the data you understand;  
+If you can use the data you trust;  
+Someone did a good job of data management.  
+
+> `r tufte::quote_footer('--- Rex Sanders ‐ USGS‐Santa Cruz')`
+
+???
+
+US Geological Services
 
 ---
 
@@ -108,17 +109,14 @@ background-size: cover
 
 .pull-left[
 Session 1
-* Overview
-* Lifecycle
-* Roles and Responsibilities
+* Data flow
 * Documentation
 
 Session 2
+* Creating instruments
 * Tracking data
-* Capturing data
-* Storing data
-* Cleaning and validating data
-* Putting it all together
+* Capturing and storing data
+* Preparing to clean and validate data
 ]
 
 .pull-right[
@@ -136,148 +134,262 @@ knitr::include_graphics("img/r-project.svg")
 
 ]
 
+???
+
+* Specifically, from data collection to data cleaning – getting us read to clean data in R
+* Internal documentation you need to have in place to plan for and document data cleaning
+* Best practices for creating instruments that export data that is useable
+* Tracking data in a way that you can confirm the accuracy of what you are seeing in your data
+* How to capture and store data in a reproducible and reliable way
+* What steps we need to take before we actually clean and validate our data – what do we need to prepare before we start actually writing code
+
+
 ---
+
+# What this series is and is not
+
+.pull-left[
+**What it is**:
+
+1. Taking us from planning data collection to cleaning data
+2. Best practices to collect data that requires as minimal "cleaning" as possible
+3. How to wrangle data into a clean format for sharing with a broad audience.
+  - Clear variable names
+  - Clear variable labels
+  - Clear value labels
+  - Accurate values 
+  - De-identified
+]
+
+.pull-right[
+**What it is not**:
+
+1. Writing a data management plan
+2. Detailed project planning or assigning of roles
+3. Creating Documentation for data sharing
+  - Codebooks
+  - Project level documentation
+4. Data Sharing
+  - What, how, where to share data
+5. Data Analysis
+]
+
+???
+
+You want your data to come to you free of errors and require minimal effort (less recoding, less renaming) 
+
+What this series is not, is everything that happens outside of this data cleaning process
+
+
+---
+
 
 # Disclaimers and Expectations
 
 .pull-left[
 Disclaimers:
 
-* You may already know a lot of this
+* There is more to data management
+* You may already know some of this
+* All use of names or measures are just for demonstration purposes
+* Our terminology may be different
 
-* Some examples may feel familiar
-
-* We all make mistakes. The hope is to create a culture of owning up to, learning from, and correcting mistakes.
-  + **[*Error Tight: Exercises for Lab Groups to Prevent Research Mistakes*](https://psyarxiv.com/rsn5y)**, Julia Strand
-
-]
-
-.pull-right[
 Expectations:
 
 * Please ask questions
-
 * Please share your ideas
-
 * A second monitor will be helpful for the R portion
-
-```{r, echo = FALSE, out.width = "400px", fig.align='center'}
-knitr::include_graphics("img/homer-thinking.png")
-```
-Source: [dohiy.com](https://www.dohiy.com/2016/03/31/wiring-level-acceptable/)
 ]
----
-
-class: center, middle, inverse
-
-# Overview
-
----
-
-# What is Research Data Management?
-
-*Research data management involves the planning, documentation, organization, storage, and dissemination of research study data*
-
-.pull-left[
-Research data can include:
-
-* participant tracking databases
-* survey responses
-* measurements
-* assessments
-* recordings
-* code
-* transcripts
-* statistics
-]
-
 .pull-right[
-Formats may be:
-
-* text (.pdf, .txt., .docx)
-* tabular (.xlsx, .csv, .sav, .dta) 
-* multimedia (.mpeg, .wav)
-* databases (.fmp12, .accdb, .csv)
-]
-
-
----
-class: inverse
-
-<br>
-<br>
-
-.pull-left[
-> If the data you need still exists;  
-If you found the data you need;  
-If you understand the data you found;  
-If you trust the data you understand;  
-If you can use the data you trust;  
-Someone did a good job of data management.  
-
-> `r tufte::quote_footer('--- Rex Sanders ‐ USGS‐Santa Cruz')`
-
-]
-
-.pull-right[
-
-```{r, echo = FALSE, out.width = "800px", fig.align='center'}
-knitr::include_graphics("img/scriberia-1.PNG")
+```{r, echo = FALSE, out.width = "300px", fig.align='center'}
+knitr::include_graphics("img/cat_hand.jpg")
 ```
-
-Source: [<span style="color:white">Scriberia</span>](https://the-turing-way.netlify.app/reproducible-research/overview.html)
 ]
+
+.footnote[Source: [amazon.com](https://www.amazon.com/Raising-Hand-Funny-Graduation-Card/dp/B00TQZKMKI)]
+
+???
+
+* There’s a lot more to data mgmt. 
+* But we are specifically focusing on how to clean data in a streamlined and organized way
+* A great example is the term data dictionary and codebook. 
+* Rectangular variable level file. 
+* Experts across the field also use those terms interchangeably.
+* I think what is most important is that you choose a term and there is a shared understanding on the team of what that term means.
+
+* Please interact with me
 
 
 ---
 
-# Why care about data management?
+background-image: url(img/step1.PNG)
+background-size: cover
 
-1. Required by funders
-  - Most federal agencies require the submission of a data management and sharing plan as an appendix to a grant proposal (ex: IES, NSF, NIH, NIJ)
-  - Journal publishers may also require data sharing
+???
+
+When you think of this flow, it seems like it should be this simple
+
+---
+
+
+background-image: url(img/step2.PNG)
+background-size: cover
+
+---
+
+background-image: url(img/step3.PNG)
+background-size: cover
+
+
+---
+
+background-image: url(img/step4.PNG)
+background-size: cover
+
+???
+
+* We can put that process into context of an actual instrument your team collects – and assign roles and responsibilities
+* So say this is a process for a teacher survey
+* And this is great. Except we all know that this is not a one time thing. This exact process will happen every cycle you collect data.
+
+---
+
+background-image: url(img/step5.PNG)
+background-size: cover
+
+???
+
+It’s a cyclical process that happens every wave for every piece of data that you collect
+
+---
+
+# Data Management Cycle
+
+- <span style = 'font-size: 150%;'>`r fontawesome::fa("repeat", fill = "#782F40")`</span>  These phases happen every data collection wave.
+
+- <span style = 'font-size: 150%;'>`r fontawesome::fa("exclamation-triangle", fill = "#782F40")`</span>  It is best practice to do each step **EVERY** wave.
+
+- <span style = 'font-size: 150%;'>`r fontawesome::fa("times-circle", fill = "#782F40")`</span>  Waiting until the end of the study to track, document, clean and validate your data can have consequences.
+
+  - If you don't track until the end, you miss out on the opportunity to discover missing data and the chance to still collect that data
   
-2. Creates reproducible work
+  - If you don't clean until the end, you miss the chance to revise any errors in your data collection instruments, and therefore may be creating unusable data
+  
+  - If you don't clean, you won't be able to access data when you need it. You will need to notify someone of your need and then wait for the data to be prepared.
+  
+???
+
+Don't skip any steps
+
+Instead of just grabbing it from the clean data folder as soon as you need it and being ready to go
+  
+---
+
+# Phases of the data cycle
+
+.pull-left[
+1. **Documentation**
+  - **Style Guide**
+  - **Protocol**
+  - **Timeline**
+  - **ReadMe**
+  - **Data Dictionary**
+
+2. Instrument Creation
+
+3. Collecting - not covering this
+
+4. Tracking
+
+5. Capture and Store
+
+6. Writing a data cleaning plan
+]
+
+.pull-right[
+
+```{r, echo = FALSE, out.width = "1500px", fig.align='center'}
+knitr::include_graphics("img/step5.PNG")
+```
+
+]
+
+???
+
+So these phases of the data cycle are what we are covering in this series
+
+There are other types of documentation -especially project level and summary types of data you want to create when you share your data
+
+For now we aren’t focused on that, we are focused on internal documentation that helps us be organized with our process
+
+
+---
+
+background-image: url(img/lifecycle.PNG)
+background-size: cover
+
+
+---
+
+## Why implement best practices?
+
+1. Makes our work reproducible
   - "Reproducible research is the by-product of careful attention to data management practices throughout the entire lifecycle of a project" - **[A Beginner's Guide to Conducting Reproducible Research](https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/bes2.1801)**, Alston & Rick
   - Replication Crisis that has been going on for over a decade 
       - Ex: A **[2015 study](https://www.science.org/doi/10.1126/science.aac4716)** conducted replications of 100 psychology studies and was only able to replicate 39 of them  
   - Practices that contribute to reproducibility include  
       - Data Dictionary  
       - Style Guide  
+      - Protocols
       - Creating a data cleaning plan  
       - Syntax writing  
 
 ---
 
-# Why care about data management?
+## Why implement best practices?
 
-3\. Creates reliable work
+2\. Creates reliable work
   - Humans are fallible
   - [**The Role of Human Fallibility in Psychological Research: A Survey of Mistakes in Data Management**](https://journals.sagepub.com/doi/full/10.1177/25152459211045930), Kovacs, Hoekstra & Ackzel
   
 .pull-left[
 Mistake Types and Their Reported Causes
-![](img/serious_cause.png)
-]
+```{r, echo = FALSE, out.width = "475px", fig.align='center'}
+knitr::include_graphics("img/serious_cause.PNG")
+```
+] 
 
 .pull-right[
 Mistake Types and Their Reported Outcomes
-![](img/serious_mistake.png)
+```{r, echo = FALSE, out.width = "475px", fig.align='center'}
+knitr::include_graphics("img/serious_mistake.PNG")
+```
 ]
-  
+
+???
+
+We make mistakes, and that’s ok
+
+What we are trying to do is minimize those mistakes by learning best practices and implementing good procedures
+
+Authors surveyed 488 researchers who had published in a psychology journal between 2010 and 2018 and had them report on how often they believed they made data mgmt mistakes, what types of mistakes, causes, and the consequences
+* Poor project mgmt. and lack of knowledge
+* These are not mistakes to take lightly
+
+
 ---
 
-# Why care about data management?
+## Why implement best practices?
 
-3\. Creates reliable work
+2\. Creates reliable work - cont.
   - There is an entire blog, **[Retraction Watch](https://retractionwatch.com/)**, dedicated to monitoring scientific journal retractions
       - While there are varying reasons to retract an article, unreliable data is a top reason for article retractions
   - Practices that contribute to reliable data include:
-      - Participant data tracking
-      - Versioning of data
+      - Keeping one source of truth in participant data tracking
+      - Versioning data
       - Validity checks
 
-4\. Keeps data secure
+3\. Keeps data secure
   - Data security is required by both the IRB and funders
   - Incidents where data is not stored properly could lead to lost, destroyed, or unusable data as well as breaches of confidentiality
   - Practices to support data security include:
@@ -286,241 +398,92 @@ Mistake Types and Their Reported Outcomes
       - Training staff on data security and require data access and use agreements
       - Assigning roles and responsibilities
 
+???
+
+Intentional or unintentional
+
+Can be things like plagiarism or conflicts of interest or the review process was compromised
+
+Retraction Watch has a searchable data
+
+Tracking the differences between those versions
 ---
 
 class: center, middle, inverse
 
-# Lifecycle
+# Documentation
 
 ---
 
-background-image: url(img/lifecycle.PNG)
-background-size: cover
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-[Project Planning](pm_check.html)   
-[Data Planning](dm_check.html)
-
----
-
-background-image: url(img/cycle.PNG)
-background-position: cover
-
-
----
-
-# Data Management Cycle
-
-- <span style = 'font-size: 150%;'>`r fontawesome::fa("repeat", fill = "#782F40")`</span>  All of the phases that occur in the cyclical portion of the lifecycle happen every data collection phase.
-
-- <span style = 'font-size: 150%;'>`r fontawesome::fa("exclamation-triangle", fill = "#782F40")`</span>  It is best practice to do each step **EVERY** cycle.
-
-- <span style = 'font-size: 150%;'>`r fontawesome::fa("times-circle", fill = "#782F40")`</span>  Waiting until the end of the study to track, document, clean and validate your data can have consequences.
-
-  - You miss out on the opportunity to discover missing data and the chance to still collect that data
-  
-  - You miss the chance to revise any errors in your data collection instruments, and therefore may be creating unusable data
-  
-  - You won't be able to access data when you need it. You will need to notify someone of your need and then wait for the data to be prepared.
-
----
-
-# Data Management Planning - Roles
-
-- It is important that roles are assigned, not just presumed
-
-- Create a table with roles and responsibilities and attach names to it
-
-|Name | Role | Responsibilities|
-|-----|------|-----------------|
-|Rob  | PI   | Oversight of project, project approval, choose measures, recruit participants, randomization of participants|
-|Amanda|Research Coordinator | Creates project documentation, builds surveys, sends surveys to participants, downloads raw surveys, tracks participant surveys, submits materials to IRB|
-|Nancy| Database Coordinator| Builds tracking databases, builds data entry files|
-|Naomi|Data Manager|Creates data documentation, cleans and de-identifies raw data, validates clean data, monitors data security|
-
----
-
-# Data Management Planning - Roles
-
-- Develop a system for how these roles will communicate with and notify each other when they are ready to hand off tasks
-
-```{r, echo = FALSE, out.width = "500px", fig.align='center'}
-knitr::include_graphics("img/hand-off.PNG")
-```
-
-Source: [<span style="color:white">Scriberia</span>](https://the-turing-way.netlify.app/project-design/pd-overview.html)
-
----
-
-# Data Management Planning - Roles
-
-The best way to assign responsibilities may be by developing a flow chart for each project and each task
-
-Add these roles and responsibilities to your protocol
-
-**Simple flowchart for a Qualtrics survey**
-
-<br>
-
-```{r, echo = FALSE, out.width = "850px", fig.align='center'}
-knitr::include_graphics("img/qualtrics_flow.PNG")
-```
-
----
-
-# Data Management Planning - Roles
-
-**Simple flowchart for a paper survey**
-
-![](img/paper_flow.PNG)
----
-
-# Data Management Planning - Roles
-
-**Simple flowchart for receiving district data**
-
-<br>
-
-```{r, echo = FALSE, out.width = "800px", fig.align='center'}
-knitr::include_graphics("img/district_flow.PNG")
-```
-
-
----
-
-class: center, middle, inverse
-
-# Document
-
----
-
-# Why Document?
+## Documentation
 
 .pull-left[
-**Internally**:
+
+**Why start documentation before a project begins?**
+
 * It is a roadmap for where you are going.
-* Make decisions/analyses replicable
+  - What measures are you collecting? Who gets those measures and when?
+  - How will we name and code those measures?
+  - What are acceptable values?
+
+* Make decisions replicable
   - Hand over documentation to new team members
+  
 * Helps with recall 
   - What decisions did you make, when, and why
-* Creates standardization
+]
+
+
+.pull-right[
+
+**Why document for internal users?**
+
+* Creates standardization/fidelity
   - Consistent naming and coding across forms and time
   - Consistent processes to gather data
 * Helps you discover errors in your data
-  - Catch missing data or values out of range
+
+  - Catch questions you accidentally left off of a survey
+  - Catch values out of range
+  
 * Reduces data rot
   - With so many transformations over time, data becomes unusable if you don't track that information
 ]
 
-.pull-right[
-**Externally**:
-* Required in DMP
-  - Project level metadata also needed for pre-registration
-* Ensure others use and interpret data accurately
-]
----
+???
 
-background-image: url(img/pen-to-square-solid.svg)
-background-size: 300px 300px
-background-position: 95% 15%
+I think that is counterintuitive for people. 
 
-# Types of Documentation
+I think we tend to think about documenting what HAS happened not what WILL happen. 
 
-There are 4 levels of documentation/metadata.
+But we are trying to change that mindset.
 
-Within each of these levels, are different types of documentation.
+They can pick up where you left off
 
-1. Team level
-  - Lab Manual
-  - **Style Guide**
-  - Wiki
-2. Project level
-  - Project Documentation
-  - Supplemental Materials
-  - **Standard Operating Procedures (SOPs) or Protocols**
-3. Dataset level
-  - **ReadMe**
-4. Variable level
-  - Codebook
-  - **Data Dictionary**
+Damian Conway said: Documentation is a love letter you write to your future self 
+-	A year from now, you won’t remember the decisions you made or why you made them
+
+Again we normally think about building documentation for external users to be able to interpret our data
+
 
 ---
 
-class: inverse, middle, center
-
-# Team Documentation
-
----
-
-# Lab Manual
-
-*A lab manual creates common knowledge among team members.*
-
-Samuel Mehr, a Researcher from Harvard University, [summarized the contents of 25 lab manuals](https://thebiologist.rsb.org.uk/images/biologist/2020/Apr_May_2020_67-2/67.2_Handbook.pdf) and came up with 20 common elements included.
-
-.pull-left[
-- Administrative elements
-  - Mission of lab
-  - Culture and values
-  - Expectations of lab members
-  - HR information
-  - Communication
-]
-.pull-right[
-- A lab manual can also contain data management guidelines:
-  - Expectations for data access, sharing, use
-  - Intellectual property and reuse
-  - Saving and archiving of data
-  - Protection of data privacy
-  - Open science practices
-]
-
-<br>
-
-|Who creates it|When to create | Formats| Type |Other terms|
-|-------------|---------------|--------|-------|-----------|
-|PI, Project Coordinators |When lab is formed|Markdown, PDF, Word| Internal|Handbook|
-
----
 
 # Style Guide - A Scenario
 
 You need to access the data dictionary for Project A, so you start to look around in the Project A directory
 
-<br>
-
 ```{r fig.align="center", echo=FALSE, out.width='50%'}
 knitr::include_graphics("img/batman.png")
 ```
-Source: [tenor.com](https://tenor.com/view/batman-hmmm-thinking-one-second-let-me-think-gif-5454647)
+
+.footnote[Source: [tenor.com](https://tenor.com/view/batman-hmmm-thinking-one-second-let-me-think-gif-5454647)]
 
 ---
 
 class: inverse
 
 # Style Guide - A Scenario
-
-Project A Directory
 
 What folder do you look in? What questions do you have?
 
@@ -561,8 +524,6 @@ What file do you choose?
   * `r emo::ji("page facing up")` data dictionary 11.07.2020_AS JT edits_FINAL.xlsx
 
 ---
-
-class: inverse
 
 # Style Guide - A Scenario
 
@@ -613,11 +574,10 @@ Categories to include in your style guide:
   - Value coding
 ]
 
+
 <br>
 
-|Who creates it|When to create | Formats| Type |Other terms|
-|-------------|---------------|--------|------|------------|
-|PI, Project Coordinators, Data Managers |Before a project begins, When a lab is formed|Markdown, PDF, Word, txt| Internal|Protocol|
+**This can be created in any file format: PDF, txt, Word, Markdown**
   
 ---
 
@@ -655,6 +615,15 @@ class: inverse
       + `r emo::ji("page facing up")` project-new_data-dictionary_v05.xlsx
       + `r emo::ji("page facing up")` project-new_codebook_v02.pdf
 
+???
+
+Before we jump into best practices for directory structures, I want to talk about file paths
+
+Which are created from your directory structure
+
+File paths will be a huge part of syntax writing – you will write paths in your syntax to direct your computer to your data
+
+This is called a "relative file path" because it exists in a subdirectory of your home directory
 
 --
 
@@ -670,22 +639,44 @@ On Mac:
 * project-new/documentation/project-new_data-dictionary_v05.xlsx
 * project-new/documentation/project-new_codebook_v02.pdf
 
+
 ---
+
 
 # Directory Structure - File Paths
 
-Your file paths live within a home directory
+Your file paths (absolute paths) live within a home directory
 
 * If you are storing files on your computer, your home folder is most likely your username. 
   * **Windows**: C:\Users\username
   * **Mac**: Users/username
   
+???
+
+This is called your absolute path because it starts at the root of your directory
+
+For many reasons, not just syntax writing, it's important to think about directory structure in the context of this full file path
+
+It's easy to see that we are working in the Foundations for Success directory (no big deal), but it actually goes deeper than that because that is usually not your highest level directory
+
+It's good to look at this full path because some platforms actually have character limits on how long your path can be. 
+
+So if you are 20 folders deep and your file name is 90 characters long, you could be facing real issues where you are actually unable to open your file
+
+I have a coworker who has had this exact thing happen
+
+It's important to know the term absolute and relative file paths because we will use these terms when we jump into coding in R
+
+--
+
 So the full file path for our previously mentioned data dictionary may be:
   * C:\Users\username\project-new\documentation\project-new_data-dictionary_v05.xlsx  
   
   OR  
   
   * /Users/username/project-new\documentation\project-new_data-dictionary_v05.xlsx
+
+
 
 ---
 
@@ -731,6 +722,11 @@ Or right click on a document and go to *properties* and then *security*
   + Which file paths maintain reproducibility across time?
       - **SG**: W:\project-a\data\cohort-1\stu\svy **and** W:\project-a\data\cohort-2\stu\svy
       - **No SG**: W:\project-a\data\cohort-1\stu\svy **and** W:\project-a\data\cohort-2\<span style="color: blue; ">svy</span>\<span style="color: blue; ">stu</span>
+      - **No SG**: W:\project-a\data\cohort-1\stu\svy **and** W:\project-a\data\cohort-2\stu\<span style="color: blue; ">Srvy</span>
+
+???
+
+When you write syntax you are going to assume you kept paths the same over time, but that’s not true and now you need to go see what changed
 
 --
 
@@ -738,7 +734,6 @@ Or right click on a document and go to *properties* and then *security*
   + Which path is easier to maintain security?
       - **SG**: W:\project-a\data
       - **No SG**: W:\project-a
-
 
 ---
 
@@ -780,6 +775,21 @@ Or right click on a document and go to *properties* and then *security*
 
 ---
 
+class: inverse
+
+# A true file path horror story
+
+--
+
+<br>
+<br>
+
+### *W:\Projects\Lab-All-Projects\Lab-Project A\ProjectA DATA2\Demographic Work\Old Files, Probably Good for Nothing - Dont Delete\Extreme Power\OldFiles, Maybe no good*
+
+??? Can anyone tell me what rules this file path is breaking
+
+---
+
 # Style Guide - Directory Structure - Example
 
 1. All project directories follow this hierarchical metadata structure  
@@ -798,7 +808,10 @@ Or right click on a document and go to *properties* and then *security*
       - README_changelog.txt placed in each folder to document changes between versions
 4. Keep only one copy of a file. Never duplicate a file in multiple locations.
 
-      
+???
+
+Lifecycle folders meaning that cycle we spoke about early (data, documentation, instrument creation, tracking)
+
 ---
 
 class: inverse
@@ -832,9 +845,9 @@ class: inverse
 ```{r fig.align="center", echo=FALSE,out.width='65%', out.height= '55%'}
 knitr::include_graphics("img/phd.png")
 ```
-Source: [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1531)
 ]
 
+.footnote[Source: [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1531)]
 ---
 
 
@@ -850,7 +863,11 @@ Source: [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1531)
 * Allow your computer to find files easier
   + Which path is more machine readable?
       - **SG**: fs_stu_svy-protocol_2020-10-01.docx
-      - **No SG**: Student survey protocol(1).docx
+      - **No SG**: Student survey protocol.1.docx
+
+???
+
+Not only does this one have spaces but it has a dot which causes a lot of confusion because a dot is typically a delimiter between file name and file extension
 
 --
 
@@ -861,6 +878,9 @@ Source: [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1531)
       - **No SG**: tch\_form\_cohort1\_time1.xlsx **and** tch\_form\_cohort1<span style="color: blue; ">-</span>time2.xlsx
       - **No SG**: tch\_form\_cohort1\_time1.xlsx **and** tch\_form\_cohort1\_<span style="color: blue; ">T</span>ime2.xlsx
 
+???
+
+This is kinda like the Highlights magazine find the difference game for kids
 
 ---
 
@@ -869,6 +889,10 @@ Source: [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1531)
 * Don't use spaces between words
 
   + They can often break a URL when shared
+  
+???
+
+And they're just a pain for any command line operations
   
 --
 
@@ -879,11 +903,14 @@ Source: [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1531)
   
 --
 
-* Don't use file extensions in the name of the file (ex: renaming_csv_files.xlsx)
+* Don't use file extensions in the name of the file (ex: `renaming_csv_files.xlsx`)
 
   + Can cause confusion when searching for files
 
-    
+???
+
+We often do this technique called globbing or wildcard expansion where we grab files from your directory based on file extensions
+
 --
 
 * Be intentional with capitalization 
@@ -904,6 +931,10 @@ Source: [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1531)
 * Pay attention to the number of characters to prevent hitting your path limit
   + Ex: SharePoint has a path limit of 260 characters
   + This is a real file name created by Qualtrics for a downloaded survey `r emo::ji("shocked")`: `Rural+Center+Montana+Study+(EIS+first)+2020-+Exemplar+Schools_March+19,+2021_07.49.sav`
+
+???
+
+This was saved on a shared network drive we used at the time which had a character limit and we were unable to open the file b/c it hit the character limit (this is 86 characters alone)
 
 --
 
@@ -1022,7 +1053,7 @@ You have one of two options:
 1. Use versioning software/platform (Git, SharePoint, Box, OneDrive)
 
   + No need to add version or date to your file name (or to your style guide)
-  + Every time you save a new copy you can add comments to explain the differences between versions
+  + Every time you save a new copy you can add comments to explain the differences between versions - (only Git)
   + You can go back into your history and restore previous versions
 
 --
@@ -1031,7 +1062,15 @@ You have one of two options:
 
   + By adding a date and/or a version number to your documents you can track the most recent versions of documents
       - **I recommend to always manually version your data no matter what**
-  + Adding a README to your folders (ex: ReadME_changelog.txt) where you add comments explaining the document updates each time you save a new version
+  + Adding a README to your folders (ex: ReadMe_changelog.txt) where you add comments explaining the updates each time you save a new version
+
+???
+
+You are going to update your data a lot and you are going to want to keep all versions of your data
+
+You might create a file that someone uses and then 3 months later you find an error and create a new updated version
+
+So you want to be able to track who used which version of your data and what the differences were between files
 
 ---
 
@@ -1050,6 +1089,10 @@ You have one of two options:
       - **SG**: *toca33*
       - **No SG**: *Family_problems_negatively_affect_this_childs_behavior_in_school*
 
+???
+
+This one doesn’t look bad until you realize most programming languages have a character limit for variable names
+
 --
 
 * Maintain reproducibility in your data management tasks (consistent variable names)
@@ -1064,17 +1107,26 @@ You have one of two options:
       - **SG**: <span style="color: blue; ">Project A</span>: *toca1* **and** <span style="color: blue; ">Project B</span>: *toca1*
       - **No SG**: <span style="color: blue; ">Project A</span>: *toca1* **and** <span style="color: blue; ">Project B</span>: *toca_1*
 
+???
+
+You want your variables to be comparable over time. 
+
+If you change the variable name, no one knows it is the same variable.
+
 ---
 
 class: center, inverse
 
 # Choosing variable names is hard
 
-```{r fig.align="center", echo=FALSE,out.width='40%', out.height= '55%'}
+```{r fig.align="center", echo=FALSE,out.width='35%'}
 knitr::include_graphics("img/var_name4.png")
 ```
 Source: [<span style="color: white; ">Reddit</span>](https://www.reddit.com/r/ProgrammerHumor/comments/8k9cmu/indeed_everytime/)
 
+???
+
+I'm not going to lie, choosing variable names is hard
 
 ---
 
@@ -1089,6 +1141,14 @@ Source: [<span style="color: white; ">Reddit</span>](https://www.reddit.com/r/Pr
 * Set a character limit
 
   + Most statistical programs have limits (SPSS = 64, Stata = 32, SAS = 32)
+  
+???
+
+Mplus is something absurd like 8
+
+I don't even talk about that one b/c I like to clean data that is easy to read for the general user and variable names at 8 characters are really difficult to interpret
+
+If you decide to use Mplus to analyze the clean data, you can always rename variables for your analysis file later
 
 --
 
@@ -1113,17 +1173,19 @@ Source: [<span style="color: white; ">Reddit</span>](https://www.reddit.com/r/Pr
 
 # Style Guide - Variable Names - Rules
 
-* Don't use spaces or special characters (except `-` or `_`)
+* Don't use spaces or special characters (except `_`)
+  
+    + Even "-" is not allowed in most programs as it can be mistaken for minus sign
 
 --
 
 * Be consistent with delimiters and capitalization
 
   + Pascal case (*ScaleSum*)
-  + Snake case (*scale_sum*)--preferred method for variable names
+  + Snake case (*scale_sum*)
   + Camel case (*scaleSum*)
-  + Kebab case (*scale-sum*)
-  + Train case (*Scale-Sum*)
+  + Kebab case (*scale-sum*)--don't use this for variable names
+  + Train case (*Scale-Sum*)--don't use this for variable names
 
 --
 
@@ -1131,6 +1193,16 @@ Source: [<span style="color: white; ">Reddit</span>](https://www.reddit.com/r/Pr
 
   + Most statistical programs won't even allow this
 
+
+---
+
+# Style Guide - Variable Names - Rules
+
+* Don't name variables any keywords or functions in programming languages
+
+  + Ex: *if*, *for*, *repeat* - R
+  + Ex: *or*, *with*, *to* - SPSS
+  
 --
 
 * All variable names in a study should be unique 
@@ -1138,17 +1210,17 @@ Source: [<span style="color: white; ">Reddit</span>](https://www.reddit.com/r/Pr
   + *d_gender* = student gender reported by the district
   + *s_gender* = student gender self-reported
   + *t_gender* = teacher gender self-reported
-
----
-
-
-# Style Guide - Variable Names - Rules
+  
+--
 
 * Denote reverse coding in the variable name
   
   + *scale01* and *scale01_r*
 
---
+---
+
+# Style Guide - Variable Names - Rules
+
 
 * Choose abbreviations to use for common scale names and phrases
 
@@ -1162,7 +1234,7 @@ Source: [<span style="color: white; ">Reddit</span>](https://www.reddit.com/r/Pr
 
   + If a question wording significantly changes or response options change for a variable mid-project after you've collected data, version that variable
   + Ex: revised *scale1* becomes *scale1_v02*
-  
+
 --
 
 * Consider including an indication of the instrument in your variable name
@@ -1184,7 +1256,6 @@ Depending on how you plan to merge your data, there are 2 ways to account for ti
   + You do this if you plan to merge your data in wide format
   + Every participant has one row of data
   + For example for 3 waves of scale1 on the student self-survey
-      + *s_fall_bmtl01*, *s_wint_bmtl01*, *s_spr_bmtl01* 
       + *s_w1_bmtl01*, *s_w2_bmtl01*, *s_w3_bmtl01*
   + If you are collecting cohorts, you may still want *cohort* added as a separate variable
 
@@ -1204,7 +1275,7 @@ Depending on how you plan to merge your data, there are 2 ways to account for ti
 Wide Format
 
 ```{r echo=FALSE, out.width='10%', out.height= '50%'}
-tibble::tribble (~ stu_id, ~ cohort, ~s_w1_bmtl01, ~s_w2_bmtl02, ~s_w1_btml01, ~s_w2_bmtl02,
+tibble::tribble (~ stu_id, ~ cohort, ~s_w1_bmtl01, ~s_w1_bmtl02, ~s_w2_btml01, ~s_w2_bmtl02,
                  30415, 1, 1, 1, 1, 0,
                  30524, 1, 3, 0, 1, 1,
                  30530, 2, 2, 2, 0, 0) %>%
@@ -1228,7 +1299,7 @@ tibble::tribble (~ stu_id, ~ cohort, ~wave, ~s_bmtl01, ~s_bmtl02,
 
 ---
 
-# Style Guide - Variable Names - Time
+# Style Guide - Variable Names
 
 You do not need to decide any of this right away:
 
@@ -1240,9 +1311,10 @@ You do not need to decide any of this right away:
 
 As you collect data, account for all relevant metadata in your file name:
 
-  * c1_w1_stu_svy_clean-data_2021-01-10.sav
+  * `c1_w1_stu_svy_clean-data_2021-01-10.sav`
   * Because of my style guide, I know this file is cohort 1, wave 1, student, self-report survey
   * When I go to finally merge my data, I can make my decisions then about how to account for time
+  * It's very easy to add these variables or append this information to existing variables at any point
 
 --
 
@@ -1256,15 +1328,22 @@ Whatever you finally decide on, document your rule in your **style guide**
 
 # Style Guide - Variable Names - Example
 
-```{r fig.align="center", echo=FALSE, out.width='50%'}
+```{r fig.align="center", echo=FALSE, out.width='45%'}
 knitr::include_graphics("img/varnames.png")
 ```
-Source: Dr. Aaron Thompson, STARS study, [MPSI](http://moprevention.org/)
+
+.footnote[Source: Dr. Aaron Thompson, STARS study, [MPSI](http://moprevention.org/)]
 
 ---
 
 # Style Guide - Value Coding - Rules
 
+* Keep values consistent within identical variables across time
+
+  + **Do**: Use 1 = yes, 0 = no for *stress02* in wave 1, and 1 = yes, 0 = no for wave 2
+      + **Don't**: Use 1 = yes, 0 = no for *stress02* in wave 1, and 1 = no, 2 = yes for wave 2
+  
+--
 
 * Keep values consistent across the project
   
@@ -1280,7 +1359,9 @@ Source: Dr. Aaron Thompson, STARS study, [MPSI](http://moprevention.org/)
   + **Do**: Strongly Disagree = 1; Disagree = 2; Agree =3; Strongly Agree = 4
       + **Don't**: Strongly Disagree = 1; Disagree = 3; Agree = 4; Strongly Agree = 2
     
---
+---
+
+# Style Guide - Value Coding - Rules
 
 * Define missing values
 
@@ -1289,117 +1370,18 @@ Source: Dr. Aaron Thompson, STARS study, [MPSI](http://moprevention.org/)
       - Use extreme values that do not actually occur in your data
       - Do not use character values in numeric fields
       
----
-
-# Style Guide - Missing Values - Example
-
-<br>
 
 ```{r, echo=FALSE, fig.align="center"}
 knitr::include_graphics("img/missing.png")
 ```
-Source: [NCES](https://nces.ed.gov/pubs2015/2015074.pdf)
 
-<br>
-
----
-
-# Wiki
-
-*A [site](https://osf.io/mdh87/wiki/Applying%20to%20PhD%20Programs/) that is designed for groups of people to quickly capture and share ideas by creating simple pages and linking them together*
-
-* Think Wikipedia: anyone on your team can add/edit content and then can link to referenced documents for easy access
-* Easily built in tools such as Microsoft SharePoint, Teams, OSF, or Notion
-
-.pull-left[
-* You can make project level wikis to house important reference materials
-  + Protocols
-  + Style Guide
-  + Participant Payment Forms
-]
-.pull-right[
-* Or you can make a team wiki to house more general information
-  + Lab manual
-  + Meeting notes
-  + Organization charts
-  + Style Guide
-]
-
-|Who creates it|When to create | Formats| Type|
-|-------------|---------------|--------|------|
-|Anyone |Before a project begins, When a lab is formed|Tool of choice| Internal|
+.footnote[Source: [NCES](https://nces.ed.gov/pubs2015/2015074.pdf)]
 
 ---
 
-class: inverse, middle, center
+# Protocols
 
-# Project Documentation
-
----
-
-# Project Level Documentation
-
-*A living document to record information about your project.  Contains detailed description of procedures, methods, measures, and sample*
-
-Purpose:
-  * To provide context for your data and improve interpretation
-
-The bones of this document can be initially populated from your pre-registration but it should include an overview of the following:
-  * Project and Study Design
-  * Participants
-  * Intervention
-  * Procedures (will come from SOPs)
-  * Measures - including citations for measures
-
-
-|Who creates it|When to create | Formats| Type|Other terms|
-|-------------|---------------|--------|------|-----------|
-|PI, Project Coordinator |At any point during the project|PDF, Word, Markdown| External|Methods and Measures|
-
-Source: [IES](https://ies.ed.gov/ncee/pubs/2022004/pdf/2022004.pdf)
-
----
-
-# Supplemental Materials
-
-*These are materials that may be added to your project level documentation that provide a service for you internally and can provide further clarification for external users as well*
-
-1. **Timeline**: What data is collected at what time points throughout the year and across the years?
-  + This information is best displayed in table format (or spreadsheet)
-  + It’s helpful to add a column that shows how this data is collected (ex: Qualtrics, observation, etc.)
-  
-2. **Instruments**: Copies of all IRB approved data collection instruments used. These can also be annotated to show how you renamed items.
-
-3. **Consort Diagram**: A flow diagram that shows participant flow through an RCT, from enrollment, to allocation to treatment, and up to analysis. 
-
-
-|Who creates it|When to create | Formats| Type|
-|-------------|---------------|--------|------|
-|PI, Project Coordinator, Data Managers |At any point during the project|PDF, Word, Markdown, Excel| Internal & External|
-
----
-
-# Supplemental Materials - Timeline
-
-```{r, echo=FALSE, fig.align="center", out.width = "700px"}
-knitr::include_graphics("img/timeline2.PNG")
-```
-
-Source: [IES](https://ies.ed.gov/ncee/pubs/2022004/pdf/2022004.pdf)
----
-
-# Supplemental Materials - Consort Diagram
-
-```{r, echo=FALSE, fig.align="center", out.width = "400px"}
-knitr::include_graphics("img/consort.PNG")
-```
-
-Source: [Consort](http://www.consort-statement.org/consort-statement/flow-diagram)
----
-
-# Standard Operating Procedures
-
-*SOPs or Protocols are document/s to record all your procedures as well as changes made to those procedures throughout the grant.*
+*Also called Standard Operating Procedures (SOPs) are document/s to record all your procedures as well as changes made to those procedures throughout the grant.*
 
 Purpose:
 
@@ -1407,48 +1389,33 @@ Purpose:
 
 * To document roles and responsibilities for each procedure
 
-* You will eventually summarize these protocols and add them to your project level documentation
+.pull-left[
+* Have one protocol for each piece of data that you collect, and include steps from instrument creation all the way through data capture
+  - Qualtrics Teacher Survey
+  - Paper Student Assessment
+  - District Data
+  - Classroom Observations
+]
 
-<br>
+.pull-right[
+* Have protocols for data cleaning processes
+  - Rules for dealing with duplicate surveys
+  - How to lay out a syntax file
+]
 
-|Who creates it|When to create | Formats| Type|Other terms|
-|-------------|---------------|--------|------|-----------|
-|Whoever oversees the procedure |Before the procedure occurs|PDF, Word, Markdown| Internal & External|Protocols|
+**Can be created in Word, PDF, txt, Markdown**
 
-Source: [CITI Program: Good Clinical] Practice(https://about.citiprogram.org/series/good-clinical-practice-gcp/)
+???
 
+Markdown is a text-to-HTML conversion language
+  
 ---
 
-background-image: url(img/file-pen-solid.svg)
-background-size: 300px 300px
-background-position: 90% 65%
+# Protocols
 
-# Standard Operating Procedures
+The protcol can either be one large document, with a table of contents, or stand alone documents.
 
-These SOPs should cover both project administration procedures as well as data management procedures
-
-Project administration:
-- Recruitment
-- Consenting/Assenting Participants
-- Inclusion/Exclusion criteria
-- Randomization
-- Payments/Incentives
-- Intervention implementation
-- Data Collection
-- Training
-
-Data management:
-- Data Entry
-- Data scoring
-- How to deal with missing data
-
----
-
-# Standard Operating Procedures
-
-The SOP can either be one large document, with a table of contents, or stand alone documents.
-
-Each SOP should *begin* with:
+Each protocol should *begin* with:
 
 * Title
 * Date the protocol was made   
@@ -1470,24 +1437,54 @@ For any *changes* to the protocol after the project has begun add the following 
 
 # Recall this Qualtrics Flowchart
 
+<br>
+
 ![](img/qualtrics_flow.PNG)
 
 ---
 
 background-image: url(img/sop_combined.PNG)
-background-size: cover
+background-size: contain
 
 ---
 
-class: center, inverse, middle
+# Timeline
 
-Dataset Documentation
+*A planning tool for seeing what data is collected and when. Allows the data team to know when to expect to receive data*
+
+**Can be created in any tool that helps you display the information**
+
+```{r, echo=FALSE, fig.align="center", out.width = "750px"}
+knitr::include_graphics("img/timeline.PNG")
+```
+
+.footnote[Source: [MPSI](https://moprevention.org/)]
 
 ---
+
+```{r, echo=FALSE, fig.align="center", out.width = "850px"}
+knitr::include_graphics("img/timeline2.PNG")
+```
+
+.footnote[Source: [IES](https://ies.ed.gov/ncee/pubs/2022004/pdf/2022004.pdf)]
+
+---
+
+class: inverse
+
+```{r, echo=FALSE, fig.align="center", out.width = "1000px"}
+knitr::include_graphics("img/timeline3.PNG")
+```
+
+---
+
+background-image: url(img/README2.PNG)
+background-position: 95% 85%
+background-size: 35%
 
 # ReadMe
 
-**A plain text document that contains information about your files. May also be seen written as README.** 
+*A plain text document that contains information about your files. May also be seen written as README.*
 
 They are most known for their use in computer science, but have become more prevalent in research. 
 
@@ -1496,30 +1493,13 @@ Can serve many purposes:
 - Information about a set of files in a directory
 - **Changelog of differences between versions of a file**
 - Steps and/or files in a process
+- Data cleaning plan
 
 <br>
 
-|Who creates it|When to create | Formats| Type|Other terms|
-|-------------|---------------|--------|------|-----------|
-|Anyone associated with the process|Before a project, As it is required|txt, PDF, Word, Markdown| Internal & External|Metadata|
+**Can be in many formats including txt, PDF, Word, Markdown, Excel**
 
----
-
-# ReadMe - Dataset
-
-```{r, echo=FALSE, fig.align="center", out.width = "650px"}
-knitr::include_graphics("img/metadata.PNG")
-```
-Source: [University of Portland](https://libguides.up.edu/datamanagement/documentation)
-
----
-
-# ReadMe - Set of Files
-
-```{r, echo=FALSE, fig.align="center", out.width = "800px"}
-knitr::include_graphics("img/readme.PNG")
-```
-Source: [IES](https://ies.ed.gov/ncee/pubs/2022004/pdf/2022004.pdf)
+.footnote[Source: [University of Michigan](https://deepblue.lib.umich.edu/bitstream/handle/2027.42/154114/Personal%20README%20Files-%20User%20Manuals%20for%20Library%20Staff.pdf?sequence=1)]
 
 ---
 
@@ -1528,79 +1508,89 @@ Source: [IES](https://ies.ed.gov/ncee/pubs/2022004/pdf/2022004.pdf)
 ```{r, echo=FALSE, fig.align="center", out.width = "1000px"}
 knitr::include_graphics("img/changelog.PNG")
 ```
-<br>
-Source: [Wheel of Names](https://wheelofnames.com/changelog)
 
----
+.footnote[Source: [Wheel of Names](https://wheelofnames.com/changelog)]
 
-class: inverse, center, middle
+???
 
-# Variable Documentation
+If I was going to say what one of THE most important pieces of documentation for a data manager is, it's this document
 
----
+In addition to the data dictionary which we will discuss next
 
-# Codebook
+The reason is, every time you think you are done cleaning the data, you are wrong
 
-*A well-documented codebook contains information intended to be complete and self-explanatory for each variable in a data file, such as the wording and coding of the item, and the underlying construct* [FORRT](https://forrt.org/glossary/codebook/)
+1. Someone will find something wrong or missing in the raw data
+2. Someone will decide that they want to code or name a variable a different way than you already have in your clean data
+3. Someone will find an error in your clean data caused by a coding mistake
 
-Purpose:
-  * Without ever having to open the data file, a user can see summary statistics about the data and make decisions based on that information.
+You will ultimately have multiple versions of a file
 
-<br>
+And that's fine if you never put that data out in the world, because no one has used the data. But a lot of times, these things come up 1, 2, 6 months, 2 years after you have given this data to other people.
 
-|Who creates it|When to create | Formats| Type| Other terms|
-|-------------|---------------|--------|------|------------|
-|Data Managers |Before sharing data |PDF, Word, Markdown| External| Summary Statistics|
+And people have one version of your data, and you will now have this new version, and you will want to keep track of the differences.
 
+Because at some point, someone is going to ask you, why is my data different than your data.
 
----
-
-# Codebook - Example
-
-```{r, echo=FALSE, fig.align="center", out.width = "550px"}
-knitr::include_graphics("img/codebook1.PNG")
-```
-Source: [ICPSR](https://www.icpsr.umich.edu/files/deposit/Guide-to-Codebooks_v1.pdf)
+And this is going to save you. Because you will not remember. This is what contributes to the reproducibility of your work.
 
 ---
 
 # Data Dictionary
 
-*A collection of names, definitions, and attributes about data elements that are being used or captured in a database, information system, or part of a research project*
+*A rectangular format collection of names, definitions, and attributes about data elements that are being used or captured in a database, information system, or part of a research project. Some may refer to this as a codebook.*
 
 Purpose:
-* Enforces data standards
-* Creates consistency across the members of the team and across the project over time
 * Provides a roadmap for instrument creation
   - Tells you how to name variables and code values in an instrument like Qualtrics
+* Enforces data standards
+* Creates consistency across the members of the team and across the project over time
 * Can be integrated into data cleaning
+  - Renaming, labeling, calculations
 * Assists in data validation
+  - Checking columns, types, and ranges
 * Communicates the contents of dataset
+  - Do we have everything we should in our data, based on our data dictionary
 
-<br>
 
-|Who creates it|When to create | Formats| Type| Other terms|
-|-------------|---------------|--------|------|------------|
-|Data Managers |**Before a project begins**, When extant data is received|Excel, Other rectangular format| Internal & External| Codebook|
+**Can be created in Excel or other rectangular formats**
+
+.right[Source: [UC Merced](https://library.ucmerced.edu/data-dictionaries)]
 
 ---
 
 # Data Dictionary - Elements
 
-- Variable Name
-- Variable Label
-- Associated scale/measure
+.pull-left[
+
+* Variable Name
+
+* Variable Label
+
+* Associated scale/measure
   + Group your variables by scale/measure
-- Associated form (Student survey, teacher rating of student)
-- Value range or value codes ([1-99] or 0=No, 1=Yes)
-- Measurement unit (numeric, string, date, etc.)
-- Missing data codes
-- Variable universe (Who gets this question? Is there skip logic?)
-- What time periods does this variable exist
-- Reverse coding
-- Calculations (composite variables, scores)
-- Notes (such as versions/changes to this variable)
-- Order number of the question on the form
+
+* Associated form (Student survey, teacher rating of student)
+
+* Value range or value codes ([1-99] or 0=No, 1=Yes)
+
+* Measurement unit (numeric, string, date, etc.)
+]
+
+.pull-right[
+
+* Missing data codes
+
+* Variable universe (Who gets this question? Is there skip logic?)
+
+* What time periods does this variable exist
+
+* Reverse coding
+
+* Calculations (composite variables, scores)
+* Notes (such as versions/changes to this variable)
+
+* Order number of the question on the form
+]
 
 ---
 
@@ -1612,7 +1602,7 @@ In order to start a data dictionary, you should gather the following information
 - What are the items/scales included?
   + Get a copy of the original measure and make sure the question wording is accurate. Make sure the subscale you've assigned the question to is accurate
 - What is your variable naming protocol? (Check your style guide)
-- Do your items/scales have pre-determined value coding rules or can we assign our own? What is our value coding protocol? (See value coding)
+- Do your items/scales have pre-determined value coding rules or can we assign our own? What is our value coding protocol? (Check your style guide)
 
 --
 
@@ -1621,7 +1611,65 @@ It’s good to also consider starting to document the variables you aren’t col
 - Cohort/Group
 - Time period
 - Treatment
-- What variables do you plan to derive (ex: Mean Scores)? 
+- Variables do you plan to derive (ex: mean scores, collapsed categorical variables)
+
+---
+
+# Data Dictionary - Example
+
+1. Used student work to plan for mathematics instruction 
+2. Examined your teaching materials/assignments in relation to the Math standards
+
+<br>
+
+|measure|scale|var_name|label|type|values|recode|
+|------|--------|--------|-----|----|------|------|
+|cip|?|?| Used student work to plan for mathematics instruction | ? | ?| ? |
+|cip|?| ?| Examined your teaching materials/assignments in relation to the Math standards | ? |?| ?|
+
+???
+
+Example of the process you might go through to create a data dictionary
+
+This is just for one instrument. Say a teacher survey.
+
+Say Rob sends you 2 questions he wants to add to the survey. They're from the CIP measure.
+
+I'm going to go ahead and add some columns to my data dictionary and add info
+
+What I am going to do next is either ask Rob for or start googling for the cip measure
+
+---
+
+```{r, echo=FALSE, fig.align="center", out.width = "1000px"}
+knitr::include_graphics("img/cip_measure.PNG")
+```
+
+???
+
+I see two things I want to ask about
+
+1. The question wording isn't identical
+2. There are more questions than just those 2 for this scale
+
+---
+
+# Data Dictionary - Example
+
+|measure|scale|var_name|label|type|values|recode|
+|------|--------|--------|-----|----|------|------|
+|cip|Individual Teacher Instructional Practices|CIP_StudWork| Used student work to plan for mathematics instruction | ? | ?| ? |
+|cip|Individual Teacher Instructional Practices|CIP_TeachMath| Examined your teaching materials/assignments in relation to the Math standards | ? |?| ?|
+|cip|Individual Teacher Instructional Practices| CIP_Pace | Used the pacing guides to plan for mathematics instruction | ? | ? | ? |
+
+---
+<br>
+<br>
+<br>
+
+```{r, echo=FALSE, fig.align="center", out.width = "1000px"}
+knitr::include_graphics("img/cip_measure2.PNG")
+```
 
 ---
 
@@ -1631,23 +1679,99 @@ It’s good to also consider starting to document the variables you aren’t col
 |------|--------|--------|-----|----|------|------|
 |cip|Individual Teacher Instructional Practices| CIP_StudWork| Used student work to plan for mathematics instruction | numeric | 1 = Never, 2 = Less than once a month, 3 = 2 or 3 times a month, 4 = Once or twice a week, 5 = Daily | NA |
 |cip|Individual Teacher Instructional Practices| CIP_TeachMat | Examined your teaching materials/assignments in relation to the Math | numeric | 1 = Never, 2 = Less than once a month, 3 = 2 or 3 times a month, 4 = Once or twice a week, 5 = Daily | NA|
+|cip|Individual Teacher Instructional Practices| CIP_Pace | Used the pacing guides to plan for mathematics instruction | numeric  | 1 = Never, 2 = Less than once a month, 3 = 2 or 3 times a month, 4 = Once or twice a week, 5 = Daily  | NA |
 
-```{r, echo=FALSE, fig.align="center", out.width = "500px"}
-knitr::include_graphics("img/cip_measure.PNG")
-```
+???
+
+And now I have a data dictionary
+
+There are still several columns I might want to add such as universe, skip logic, etc
 
 ---
 
-background-image: url(img/data-dictionary.PNG)
+class: inverse, center
+background-image: url(img/data-dictionary2v02.PNG)
 background-size: contain
 
+# Data Dictionary - Survey Complete
+
+???
+
+A data dictionary can be built for existing tools as well. 
+
+So maybe a survey was collected before anyone ever built a data dictionary. That’s okay. 
+
+Build it after you download it. 
+
+Now instead of being a roadmap for how you will build the survey, it will be a roadmap for how you will clean it. 
+
+It’s less ideal, but it still helps.
+
 ---
 
-class: inverse, center, middle
+background-image: url(img/data-dictionary3.PNG)
+background-size: contain
+
+class: inverse
+
+# Data Dictionary - Extant Data
+
+???
+
+Data dictionaries aren’t just for surveys. 
+
+Build them for all data you are going to collect. Observations, forms, assessments, etc.
+
+Same thing goes for outside data (district data), which may not come with its own codebook/data dictionary. 
+
+You will need to build your own. 
+
+This may take a lot of effort on your part to work with the owner to learn what data codes mean, etc.
+
+But everything you learn, you add to the data dictionary.
+
+---
+
+# Comparison to Codebook
+
+*Contains information intended to be complete and self-explanatory for each variable in a data file, such as the wording and coding of the item, and the underlying construct - [FORRT](https://forrt.org/glossary/codebook/)*
+
+.pull-left[
+Purpose:
+  * Without ever having to open the data file, a user can see summary statistics about the data and make decisions based on that information.
+  
+**Can be created in txt, PDF, Word, Markdown**
+
+]
+
+```{r, echo=FALSE, fig.align="right", out.width = "450px"}
+knitr::include_graphics("img/codebook2.PNG")
+```
+
+
+.footnote[Source: [Child and Family Data Archive](https://www.childandfamilydataarchive.org/cfda/archives/CFDA/studies/38290/datadocumentation#)]
+
+---
+
+
+background-image: url(img/document.jpg)
+background-position: 95% 55%
+background-size: 600px
+
+# Key Takeaways
+
+.pull-left[
+### 1. Document early
+### 2. Use your documentation as a guide
+### 3. Keep documentation updated
+]
+
+.footnote[Source: [meme-arsenal.com](https://www.meme-arsenal.com/en/create/meme/1723091)]
+
+---
+
+class: inverse, middle, center
 
 # Questions?
-
-
-
 
 
