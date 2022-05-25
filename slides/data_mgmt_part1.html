@@ -370,7 +370,7 @@ Intentional or unintentional
 
 Can be things like plagiarism or conflicts of interest or the review process was compromised
 
-Retraction Watch has a searchable data
+Retraction Watch has a searchable database
 
 Tracking the differences between those versions
 ---
@@ -451,15 +451,15 @@ class: inverse
 
 What folder do you look in? What questions do you have?
 
-* 📁 project-a
-  * 📂 Mary's Dissertation
-  * 📂 Entry Files
-  * 📂 From Data Computer
+* 📂 project-a
+  * 📁 Mary's Dissertation
+  * 📁 Entry Files
+  * 📁 From Data Computer
   * 📁 IOA re-entry for Volunteers
   * 📂 project-a
   * 📂 project-a data2
-  * 📁 video coding
-  * 📂 Catherine
+  * 📂 video coding
+  * 📁 Catherine
   * 📁 propensity scoring
   * 📂 Frank's dissertation
   * 📄 Measures Documentation.docx
@@ -563,6 +563,10 @@ Categories to include in your style guide:
 &lt;br&gt;
 
 **This can be created in any file format: PDF, txt, Word, Markdown**
+
+???
+
+Markdown is a text-to-HTML conversion language
   
 ---
 
@@ -570,21 +574,21 @@ class: inverse
 
 # Style Guide - Directory Structure
 
-* 📁 project-new
-  * 📂 documentation
+* 📂 project-new
+  * 📁 documentation
       * 📄 project-new_data-dictionary_v05.xlsx
       * 📄 project-new_codebook_v02.pdf
   * 📁 data
       * 📁 cohort-1
-          * 📁 raw
+          * 📂 raw
               * 📄 c1_stu_svy_download_2020-11-05.csv
-          * 📂 syntax
+          * 📁 syntax
               * 📄 c1_stu_svy_cleaning-script_v01.R
-          * 📁 clean
+          * 📂 clean
               * 📄 c1_stu_svy_clean_v01.csv
   * 📁 tracking
       * 📁 cohort-1
-          * 📂 participant-database
+          * 📁 participant-database
               * 📄 c1_particpant-db_v01.sqlite
 
 ---
@@ -596,7 +600,7 @@ class: inverse
 ### Every document has a file path
 
 * 📂 project-new
-  + 📁 documentation
+  + 📂 documentation
       + 📄 project-new_data-dictionary_v05.xlsx
       + 📄 project-new_codebook_v02.pdf
 
@@ -630,7 +634,7 @@ On Mac:
 
 # Directory Structure - File Paths
 
-Your file paths (absolute paths) live within a home directory
+Your file paths live within a home directory
 
 * If you are storing files on your computer, your home folder is most likely your username. 
   * **Windows**: C:\Users\username
@@ -642,7 +646,7 @@ This is called your absolute path because it starts at the root of your director
 
 For many reasons, not just syntax writing, it's important to think about directory structure in the context of this full file path
 
-It's easy to see that we are working in the Foundations for Success directory (no big deal), but it actually goes deeper than that because that is usually not your highest level directory
+It's easy to see that we are working in the Foundations for Success folder (no big deal), but it actually goes deeper than that because that is usually not the highest level in your directory
 
 It's good to look at this full path because some platforms actually have character limits on how long your path can be. 
 
@@ -687,7 +691,6 @@ Or right click on a document and go to *properties* and then *security*
 
 # Style Guide - Directory Structure
 
---
 
 * Allow you to find files easier
   + Which path is more descriptive?
@@ -771,8 +774,6 @@ class: inverse
 
 ### *W:\Projects\Lab-All-Projects\Lab-Project A\ProjectA DATA2\Demographic Work\Old Files, Probably Good for Nothing - Dont Delete\Extreme Power\OldFiles, Maybe no good*
 
-??? Can anyone tell me what rules this file path is breaking
-
 ---
 
 # Style Guide - Directory Structure - Example
@@ -804,19 +805,19 @@ class: inverse
 # Style Guide - Directory Structure - Example
 
 * 📂 project-new
-  * 📂 data
+  * 📁 data
       * 📁 cohort-1
-          * 📁 student
-              * 📁 assessment
-                  * 📁 raw
+          * 📂 student
+              * 📂 assessment
+                  * 📂 raw
                       * 📄 README_changelog.txt
-                      * 📁 archive
-                  * 📂 syntax
+                      * 📂 archive
+                  * 📁 syntax
                       * 📄 README_changelog.txt
                       * 📁 archive
                   * 📁 clean
                       * 📄 README_changelog.txt
-                      * 📁 archive
+                      * 📂 archive
 
 ---
 
@@ -831,6 +832,7 @@ class: inverse
 ]
 
 .footnote[Source: [PhD Comics](http://phdcomics.com/comics/archive.php?comicid=1531)]
+
 ---
 
 
@@ -1031,7 +1033,7 @@ You have one of two options:
 
 2. Create your own manual versioning
 
-  + By adding a date and/or a version number to your documents you can track the most recent versions of documents
+  + By adding a date and/or a version number to your documents so you can track the most recent versions
       - **I recommend to always manually version your data no matter what**
   + Adding a README to your folders (ex: ReadMe_changelog.txt) where you add comments explaining the updates each time you save a new version
 
@@ -1342,7 +1344,7 @@ As you collect data, account for all relevant metadata in your file name:
 
   * `c1_w1_stu_svy_clean-data_2021-01-10.sav`
   * Because of my style guide, I know this file is cohort 1, wave 1, student, self-report survey
-  * When I go to finally merge my data, I can make my decisions then about how to account for time
+  * When I go to finally merge my data, I can make my decisions then about how to account for time or instrument
   * It's very easy to add these variables or append this information to existing variables at any point
 
 --
@@ -1429,10 +1431,6 @@ Purpose:
 ]
 
 **Can be created in Word, PDF, txt, Markdown**
-
-???
-
-Markdown is a text-to-HTML conversion language
   
 ---
 
@@ -1534,7 +1532,7 @@ If I was going to say what one of THE most important pieces of documentation for
 
 In addition to the data dictionary which we will discuss next
 
-The reason is, every time you think you are done cleaning the data, you are wrong
+The reason is, every time you think you are done cleaning the data, take a deep breath and prepare yourself, because you aren't done
 
 1. Someone will find something wrong or missing in the raw data
 2. Someone will decide that they want to code or name a variable a different way than you already have in your clean data
