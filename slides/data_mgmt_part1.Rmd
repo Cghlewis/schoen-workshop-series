@@ -356,14 +356,14 @@ background-size: cover
 .pull-left[
 Mistake Types and Their Reported Causes
 ```{r, echo = FALSE, out.width = "475px", fig.align='center'}
-knitr::include_graphics("img/serious_cause.PNG")
+knitr::include_graphics("img/serious_cause.png")
 ```
 ] 
 
 .pull-right[
 Mistake Types and Their Reported Outcomes
 ```{r, echo = FALSE, out.width = "475px", fig.align='center'}
-knitr::include_graphics("img/serious_mistake.PNG")
+knitr::include_graphics("img/serious_mistake.png")
 ```
 ]
 
