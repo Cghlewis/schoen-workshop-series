@@ -131,7 +131,7 @@ class: inverse, middle, center
 
   + If anxiety1 was a slider 1-10 in the fall, keep it as a slider 1-10 in the spring 
   
-&lt;img src="img/slider.PNG" width="600px" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/slider.png" width="600px" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -167,7 +167,7 @@ class: inverse, middle, center
 
 .pull-right[
 
-&lt;img src="img/response_opt2.PNG" width="250px" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/response_opt2.png" width="250px" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -265,6 +265,7 @@ A document that tells you:
 .pull-right[
 &lt;img src="img/sat10.PNG" width="100%" height="300%" style="display: block; margin: auto 0 auto auto;" /&gt;
 ]
+
 .footnote[Source: [Pearson](https://www.pearsonassessments.com/store/usassessments/en/Store/Professional-Assessments/Academic-Learning/Comprehensive/Stanford-Achievement-Test-Series-%7C-Tenth-Edition/p/100000415.html)]
 
 ---
@@ -396,7 +397,7 @@ class: center, inverse
 At the most basic level you want to create one table per entity (student table, teacher table, school table).  
 Each table should have a primary and foreign key.
 
-![](img/tables-new.PNG)
+![](img/tables-new.png)
 
 ---
 
@@ -531,17 +532,18 @@ Decisions to be included in a protocol:
   - Dropped in cloud storage
 3. What format will the data be in?
 4. Is there associated documentation?
-]
-.pull-right[
 5. Who will review the data for errors, questions?
   + Missing variables
   + Missing participants
   + Unclear variables
-6. Who will contact the owner for additional information as needed?
-7. Where will additional notes about the data be tracked?
+]
+
+.pull-right[
+6\. Who will contact the owner for additional information as needed?
+7\. Where will additional notes about the data be tracked?
   + Data dictionary
   + ReadMe
-8. Where will the data be stored after it is reviewed and deemed good to go?
+8\. Where will the data be stored after it is reviewed and deemed good to go?
   - ALWAYS in a "raw" data folder following your Style Guide naming conventions
 ]
 
@@ -556,6 +558,10 @@ class: center, middle, inverse
 &gt; &lt;footer&gt;--- Omar Elbabry&lt;/footer&gt;
 
 ---
+
+background-image: url(img/clean.jpg)
+background-size: 40%
+background-position: 90% 65%
 
 # Data Cleaning Plan
 
@@ -580,6 +586,8 @@ Clean data should be:
 --
 
 * Uniform
+
+.footnote[Source: meowguide(https://www.meowguide.com/should-you-wash-your-cat/)]
 
 ---
 
@@ -1064,11 +1072,15 @@ background-size: 80%
 4\. De-identify your data (Names)
   + Read in a roster from your participant database and join on name
   + Drop name
-  
+
+--
+
 5\. Drop all irrelevant columns
   + Example: Metadata collected by Qualtrics
   + You can utilize your data dictionary for this purpose
-  
+
+--
+
 6\. Split columns as needed
   + If a column allowed participants to indicate multiple responses, those responses need to be split out into multiple columns
   
@@ -1096,15 +1108,22 @@ background-size: 80%
 # Data Cleaning Steps
 
 .pull-left[
+
 7\. Rename columns to match your data dictionary
+
+--
 
 8\. Transform/Normalize variables
   + Remove symbols (% or $)
   + Remove white space from strings (" m" and "m")
-  
+
+--
+
 9\. Standardize
   + According to your data dictionary
     + Ex: "school a", "School A", "schA" -&gt; School A
+
+--
 
 10\. Update any variable types as needed
   + Ex: string to numeric
@@ -1131,16 +1150,21 @@ background-size: 80%
 # Data Cleaning Steps
 
 .pull-left[
+
 11\. Recode variables
   + If you know all -99 should be 0 for select all questions
   + Reverse code Likert scale questions
-  
+
+--
+
 12\. Construct any variables as described in the data dictionary
   + Create sum and mean scores
   + Create standardized scores
   + Collapse existing variable/s into a new variable
   + Add variables such as cohort or treatment
-  
+
+--
+
 13\. Add missing values as needed
   + Base this on your data dictionary missing value schema
 ]
@@ -1163,10 +1187,13 @@ background-size: 80%
 # Data Cleaning Steps
 
 .pull-left[
+
 14\. Add metadata following your data dictionary
   + Add variable labels
   + Add value labels
-  
+
+--
+
 15\. Validate data
   + Values out of ranges
   + Variable types not as expected
@@ -1175,7 +1202,9 @@ background-size: 80%
   + Study IDs are all valid
   + Cross validation for impossible values
     - Age &amp; Grade
-  
+
+--
+
 16\. Export clean data to specified format
   + Save in a "clean" folder with the word "clean" associated with it
 ]
@@ -1229,6 +1258,8 @@ background-image: url(img/changelog2.PNG)
 * It is not reproducible
 * It leads to errors
 * It is time consuming
+
+--
 
 **Recommendation**: Clean your data, no matter how small the task, with syntax. While it may seem time consuming up front, it helps you:
 
