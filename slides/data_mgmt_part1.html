@@ -184,6 +184,7 @@ Expectations:
 
 * There’s a lot more to data mgmt. 
 * But we are specifically focusing on how to clean data in a streamlined and organized way
+
 * A great example is the term data dictionary and codebook. 
 * Rectangular variable level file. 
 * Experts across the field also use those terms interchangeably.
@@ -451,14 +452,14 @@ class: inverse
 
 What folder do you look in? What questions do you have?
 
-* 📂 project-a
-  * 📁 Mary's Dissertation
+* 📁 project-a
+  * 📂 Mary's Dissertation
   * 📁 Entry Files
   * 📁 From Data Computer
   * 📁 IOA re-entry for Volunteers
-  * 📂 project-a
-  * 📂 project-a data2
-  * 📂 video coding
+  * 📁 project-a
+  * 📁 project-a data2
+  * 📁 video coding
   * 📁 Catherine
   * 📁 propensity scoring
   * 📂 Frank's dissertation
@@ -579,16 +580,16 @@ class: inverse
       * 📄 project-new_data-dictionary_v05.xlsx
       * 📄 project-new_codebook_v02.pdf
   * 📁 data
-      * 📁 cohort-1
+      * 📂 cohort-1
           * 📂 raw
               * 📄 c1_stu_svy_download_2020-11-05.csv
           * 📁 syntax
               * 📄 c1_stu_svy_cleaning-script_v01.R
-          * 📂 clean
+          * 📁 clean
               * 📄 c1_stu_svy_clean_v01.csv
   * 📁 tracking
       * 📁 cohort-1
-          * 📁 participant-database
+          * 📂 participant-database
               * 📄 c1_particpant-db_v01.sqlite
 
 ---
@@ -806,16 +807,16 @@ class: inverse
 
 * 📂 project-new
   * 📁 data
-      * 📁 cohort-1
-          * 📂 student
-              * 📂 assessment
-                  * 📂 raw
-                      * 📄 README_changelog.txt
-                      * 📂 archive
-                  * 📁 syntax
+      * 📂 cohort-1
+          * 📁 student
+              * 📁 assessment
+                  * 📁 raw
                       * 📄 README_changelog.txt
                       * 📁 archive
-                  * 📁 clean
+                  * 📂 syntax
+                      * 📄 README_changelog.txt
+                      * 📁 archive
+                  * 📂 clean
                       * 📄 README_changelog.txt
                       * 📂 archive
 
@@ -915,7 +916,7 @@ We often do this technique called globbing or wildcard expansion where we grab f
 
 * Pay attention to the number of characters to prevent hitting your path limit
   + Ex: SharePoint has a path limit of 260 characters
-  + This is a real file name created by Qualtrics for a downloaded survey 🤯: `Rural+Center+Montana+Study+(EIS+first)+2020-+Exemplar+Schools_March+19,+2021_07.49.sav`
+  + This is a real file name created by Qualtrics for a downloaded survey 😲: `Rural+Center+Montana+Study+(EIS+first)+2020-+Exemplar+Schools_March+19,+2021_07.49.sav`
 
 ???
 
@@ -1667,7 +1668,7 @@ I see two things I want to ask about
 
 ---
 
-# Data Dictionary - Example
+## Data Dictionary - Example
 
 |measure|scale|var_name|label|type|values|recode|
 |------|--------|--------|-----|----|------|------|
@@ -1684,7 +1685,7 @@ I see two things I want to ask about
 
 ---
 
-# Data Dictionary - Example
+## Data Dictionary - Example
 
 |measure|subscale|var_name|label|type|values|recode|
 |------|--------|--------|-----|----|------|------|

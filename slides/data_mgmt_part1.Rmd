@@ -212,6 +212,7 @@ knitr::include_graphics("img/cat_hand.jpg")
 
 * There’s a lot more to data mgmt. 
 * But we are specifically focusing on how to clean data in a streamlined and organized way
+
 * A great example is the term data dictionary and codebook. 
 * Rectangular variable level file. 
 * Experts across the field also use those terms interchangeably.
@@ -1652,7 +1653,7 @@ I see two things I want to ask about
 
 ---
 
-# Data Dictionary - Example
+## Data Dictionary - Example
 
 |measure|scale|var_name|label|type|values|recode|
 |------|--------|--------|-----|----|------|------|
@@ -1671,7 +1672,7 @@ knitr::include_graphics("img/cip_measure2.PNG")
 
 ---
 
-# Data Dictionary - Example
+## Data Dictionary - Example
 
 |measure|subscale|var_name|label|type|values|recode|
 |------|--------|--------|-----|----|------|------|
