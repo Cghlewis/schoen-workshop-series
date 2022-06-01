@@ -112,7 +112,7 @@ Session 3-6
 
 * Specifically, from data collection to data cleaning – getting us read to clean data in R
 * Internal documentation you need to have in place to plan for and document data cleaning
-* Best practices for creating instruments that export data that is useable
+* Best practices for creating instruments that export data that is usable
 * Tracking data in a way that you can confirm the accuracy of what you are seeing in your data
 * How to capture and store data in a reproducible and reliable way
 * What steps we need to take before we actually clean and validate our data – what do we need to prepare before we start actually writing code
@@ -454,12 +454,12 @@ What folder do you look in? What questions do you have?
 
 * 📂 project-a
   * 📂 Mary's Dissertation
-  * 📁 Entry Files
-  * 📂 From Data Computer
-  * 📂 IOA re-entry for Volunteers
-  * 📂 project-a
-  * 📁 project-a data2
-  * 📂 video coding
+  * 📂 Entry Files
+  * 📁 From Data Computer
+  * 📁 IOA re-entry for Volunteers
+  * 📁 project-a
+  * 📂 project-a data2
+  * 📁 video coding
   * 📁 Catherine
   * 📁 propensity scoring
   * 📁 Frank's dissertation
@@ -579,17 +579,17 @@ class: inverse
   * 📁 documentation
       * 📄 project-new_data-dictionary_v05.xlsx
       * 📄 project-new_codebook_v02.pdf
-  * 📂 data
+  * 📁 data
       * 📂 cohort-1
-          * 📂 raw
+          * 📁 raw
               * 📄 c1_stu_svy_download_2020-11-05.csv
-          * 📂 syntax
+          * 📁 syntax
               * 📄 c1_stu_svy_cleaning-script_v01.R
-          * 📁 clean
+          * 📂 clean
               * 📄 c1_stu_svy_clean_v01.csv
   * 📁 tracking
-      * 📂 cohort-1
-          * 📁 participant-database
+      * 📁 cohort-1
+          * 📂 participant-database
               * 📄 c1_particpant-db_v01.sqlite
 
 ---
@@ -805,18 +805,18 @@ class: inverse
 
 # Style Guide - Directory Structure - Example
 
-* 📁 project-new
+* 📂 project-new
   * 📁 data
       * 📁 cohort-1
-          * 📂 student
-              * 📂 assessment
-                  * 📂 raw
+          * 📁 student
+              * 📁 assessment
+                  * 📁 raw
                       * 📄 README_changelog.txt
-                      * 📂 archive
+                      * 📁 archive
                   * 📂 syntax
                       * 📄 README_changelog.txt
-                      * 📂 archive
-                  * 📂 clean
+                      * 📁 archive
+                  * 📁 clean
                       * 📄 README_changelog.txt
                       * 📁 archive
 
@@ -916,7 +916,7 @@ We often do this technique called globbing or wildcard expansion where we grab f
 
 * Pay attention to the number of characters to prevent hitting your path limit
   + Ex: SharePoint has a path limit of 260 characters
-  + This is a real file name created by Qualtrics for a downloaded survey 🤯: `Rural+Center+Montana+Study+(EIS+first)+2020-+Exemplar+Schools_March+19,+2021_07.49.sav`
+  + This is a real file name created by Qualtrics for a downloaded survey 😲: `Rural+Center+Montana+Study+(EIS+first)+2020-+Exemplar+Schools_March+19,+2021_07.49.sav`
 
 ???
 
@@ -1687,7 +1687,7 @@ I see two things I want to ask about
 
 ## Data Dictionary - Example
 
-|measure|subscale|var_name|label|type|values|recode|
+|measure|scale|var_name|label|type|values|recode|
 |------|--------|--------|-----|----|------|------|
 |cip|Individual Teacher Instructional Practices| CIP_StudWork| Used student work to plan for mathematics instruction | numeric | 1 = Never, 2 = Less than once a month, 3 = 2 or 3 times a month, 4 = Once or twice a week, 5 = Daily | NA |
 |cip|Individual Teacher Instructional Practices| CIP_TeachMat | Examined your teaching materials/assignments in relation to the Math | numeric | 1 = Never, 2 = Less than once a month, 3 = 2 or 3 times a month, 4 = Once or twice a week, 5 = Daily | NA|

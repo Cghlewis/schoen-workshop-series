@@ -138,7 +138,7 @@ knitr::include_graphics("img/r-project.svg")
 
 * Specifically, from data collection to data cleaning – getting us read to clean data in R
 * Internal documentation you need to have in place to plan for and document data cleaning
-* Best practices for creating instruments that export data that is useable
+* Best practices for creating instruments that export data that is usable
 * Tracking data in a way that you can confirm the accuracy of what you are seeing in your data
 * How to capture and store data in a reproducible and reliable way
 * What steps we need to take before we actually clean and validate our data – what do we need to prepare before we start actually writing code
@@ -1674,7 +1674,7 @@ knitr::include_graphics("img/cip_measure2.PNG")
 
 ## Data Dictionary - Example
 
-|measure|subscale|var_name|label|type|values|recode|
+|measure|scale|var_name|label|type|values|recode|
 |------|--------|--------|-----|----|------|------|
 |cip|Individual Teacher Instructional Practices| CIP_StudWork| Used student work to plan for mathematics instruction | numeric | 1 = Never, 2 = Less than once a month, 3 = 2 or 3 times a month, 4 = Once or twice a week, 5 = Daily | NA |
 |cip|Individual Teacher Instructional Practices| CIP_TeachMat | Examined your teaching materials/assignments in relation to the Math | numeric | 1 = Never, 2 = Less than once a month, 3 = 2 or 3 times a month, 4 = Once or twice a week, 5 = Daily | NA|
