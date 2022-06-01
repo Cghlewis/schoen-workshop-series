@@ -677,6 +677,8 @@ Also set up an error-proof data entry protocol
   
 ???
 
+Of course these paper instruments have to be converted into an electronic format for analysis
+
 What should people enter when they encounter missing data
 
 It's usually best to double enter your data. Decide if you want to double enter all of it or a percentage of data.
@@ -805,14 +807,14 @@ Paper Data Options:
 1. Write IDs on forms and also place a label with name on the form that can be removed for de-identification purposes later
   + Double check the ID and name before entering data
 2. Create scannable labels on forms that allow you to scan in information for the correct participant
-p
+
 ???
 
 That way you are not having to enter anything - reducing human error
 
 I realize this is not always possible, you all have projects where you passively consent everyone and so you don't necessarily have IDs assigned before you send forms out into the field
 
-There may be other ways to link IDs pre-emptively, like getting class rosters
+There may be other ways to link IDs preemptively, like getting class rosters and adding all students to your participant tracking database and assigning IDs
 
 But if there are no other options, my only recommendation is that as soon as those forms come back to you with names, you check if those participants already exist in your participant database. If they do, you connect these forms to their existing ID. If they don't already exist, you assign those participants new IDs.
 Then double check those IDs when they are entered in to your data entry system
@@ -940,6 +942,7 @@ background-size: contain
 ???
 
 So as you collect information, you may enter it into a form like this
+
 This could be a form for the student table
 
 ---
@@ -952,6 +955,8 @@ background-size: contain
 
 If you entered in data for several students, the database on the back end might look like this
 
+Here you have 6 students who consented
+
 ---
 
 # Participant Database - Rules
@@ -962,7 +967,7 @@ If you entered in data for several students, the database on the back end might 
 2. **Keep one single source of truth**
   + It's okay to download tables from your participant tracking to use as rosters for data collection purposes, but ONLY make updates to your one source of truth.
     - Track in the participant database
-    - Update in the participant database
+    - Update participant information in the participant database
     - Make notes in the participant database
     
 3. **Track daily during data collection**
@@ -971,13 +976,15 @@ If you entered in data for several students, the database on the back end might 
 
 ???
 
-This is the probably the most important
+Don't do any of these things in any other file
+
+This is the probably the most important rule
 
 If you don't follow this rule, you will no longer have one source of truth
 
 If people who have knowledge about participants, do not have access to this database, such as data collectors in the field, that's okay. Designate a point person who will update the participant database whenever someone learns new information. So if a data collector in the field, learns that a teacher got married and has a new last name, that person contacts the designated person and asks them to update that information in the database.
 
-Every day when a paper forms comes to me, I'm going to check for missing data, duplicate data and out of range data and if everything looks ok, I'm going to track the form as complete
+Say I'm the project coordinator, Every day when a paper forms comes to me, I'm going to check for missing data, duplicate data and out of range data and if everything looks ok, I'm going to track the form as complete
 
 And every day I am going to check my online platforms and see who completed another survey or assessment and track that as complete as well
 
@@ -1028,9 +1035,11 @@ Is it an email, is there another project tool we use to hand off tasks
 
 This data will most likely be entered and then exported. Decisions to be included in a protocol:
 
-1. How will double entered data be checked for data entry errors? Who does the checking?
+1. How will double entered data be checked for data entry errors?
   + Do we have a syntax that creates a report for us
-  + Check that all participants are in the data (Check N against Participant Tracking)
+2.  Who does the checking?
+  + Who runs our double entry syntax?
+  + Who checks that all participants are in the data (Check N against Participant Tracking)?
 2. Who will correct errors and confirm that they are corrected?
 3. Who will download the final raw data?
 4. When will it be downloaded?
@@ -1102,6 +1111,19 @@ Clean data should be:
 
 * Valid
 
+???
+
+valid - data conforms to set of rules (ex data type or range)
+
+accurate - data is correct
+
+complete - not missing necessary info
+
+consistent - does information match across sources (gender, race, birthdate)
+
+uniform - standardized (comes in the same way over time)
+
+
 --
 
 * Accurate
@@ -1120,14 +1142,6 @@ Clean data should be:
 
 .footnote[Source: [meowguide](https://www.meowguide.com/should-you-wash-your-cat/)]
 
-???
-
-valid - data conforms to set of rules (ex data type or range)
-accurate - data is correct
-complete - not missing necessary info
-consistent - does information match across sources (gender, race, birthdate)
-uniform - standardized (comes in the same way over time)
-
 ---
 
 # Data Cleaning Plan
@@ -1140,7 +1154,9 @@ This is distinct from a syntax file where you comment your work or even pseudoco
 
 A data cleaning plan includes no code and is not code or technical skills dependent. 
 
-Anyone from a project coordinator to a programmer should be able to read and understand this file and provide feedback if needed. 
+Anyone from a project coordinator to a programmer should be able to read and understand this file and provide feedback if needed.
+
+This document ensures that everyone agrees on the transformations, as well as helps the data cleaner have a focused plan.
 ]
 
 .pull-right[
@@ -1161,6 +1177,10 @@ Anyone from a project coordinator to a programmer should be able to read and und
 ???
 
 Before we clean the data, we need to develop a data cleaning plan
+
+You still want to do those things (like comment your code)
+
+As opposed to the slight meandering that sometimes happens during data cleaning where there is a lot of trial and error
 
 That's how simple and clear a data cleaning plan is. You might have more details than that, but there is no technical language in here. Anyone can read this and understand the plan
 
@@ -1206,7 +1226,7 @@ Ways to build data literacy:
 
 1. Believe that data errors are inevitable and always be looking for them
 
-2. Know the type of data you are working with (qualitative, quantitative)
+2. Understand types of data you are working with (qualitative, quantitative)
 
 3. Understand the source of where your data comes from
   - Primary sources, secondary sources
@@ -1220,11 +1240,11 @@ Ways to build data literacy:
 
 7. The more data you work with, the more you learn
 
-.footnote[[TDS](https://towardsdatascience.com/what-is-data-literacy-9b5c3032216f)]
+.footnote[Source: [TDS](https://towardsdatascience.com/what-is-data-literacy-9b5c3032216f)]
 
 ???
 
-Ability to read, write, communicate and understand data within context
+It's good to have data literacy which is the ability to read, write, communicate and understand data within context
 
 It really just comes from experience
 
@@ -1248,7 +1268,7 @@ A lot of data literacy relies on domain knowledge, or **ghost knowledge**, infor
 
 These aren't things that are ever spoken out loud. A PI never says, add a time variable or a group variable, I just know that those variables will be necessary for analyses b/c I've worked with these types of data before.
 
-Because this has happened to me in the past and it created several errors when I tried to rename Q12 to gender but Q12 isn't gender anymore in the survey. Q12 is now race.
+This has happened to me in the past and it created several errors when I tried to rename Q12 to gender but Q12 isn't gender anymore in the survey. Q12 is now race because of some sort of reordering in the instrument.
 
 Otherwise I would have just assumed they were missing values
 
@@ -1276,6 +1296,10 @@ The person who cleans the data needs both an understanding of the software used 
 .footnote[Source: [The Verge](https://www.theverge.com/2020/8/6/21355674/human-genes-rename-microsoft-excel-misreading-dates)]
 
 ???
+
+Or did we follow best practices and restrict all of our data entry fields to only our allowable values
+
+If anyone has done much work in Excel, you'll know that Excel tends to love to change values to dates that shouldn't be dates
 
 I don't know if you all remember the story from 2020 where scientists had to rename human genes to stop Excel from misreading them as dates because of the autoformatting that Excel does
 
@@ -1368,6 +1392,8 @@ So exporting that sample data before you send your survey out allows you to get 
 
 Hopefully you considered all of this when you created your data dictionary
 
+Mplus is very restrictive
+
 --
 
 **What software do stakeholders plan to use to analyze data?**
@@ -1386,9 +1412,9 @@ Hopefully you considered all of this when you created your data dictionary
 
 # Stakeholder Knowledge
 
-Prior to the project starting, take time to sit down with PIs, project coordinators, and other stakeholders to ask about and plan for the following questions.
+Prior to the project starting, take time to sit down with PIs, project coordinators, and other stakeholders to ask about and plan for data cleaning.
 
-**You will add all of this information to your documentation (protocols, timelines, data dictionaries, data cleaning plan).**
+**You will add all the information you collect to your documentation (protocols, timelines, data dictionaries, data cleaning plan).**
 
 1. What types of data will you be receiving (surveys, observations, assessments)?
 2. What format will raw data be in (csv, xlsx, spss)?
@@ -1891,7 +1917,9 @@ This is a report created in R using a package called pointblank
 
 This package allows me to enter criteria that I expect for all of my variables and then it checks that all my variables meet those criteria
 
-If I see a green check mark it means the variable is good to go
+Check to see how many cases failed and passed each test
+
+Check mark means the test ran
 
 ---
 
