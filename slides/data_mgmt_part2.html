@@ -816,7 +816,7 @@ I realize this is not always possible, you all have projects where you passively
 
 There may be other ways to link IDs preemptively, like getting class rosters and adding all students to your participant tracking database and assigning IDs
 
-But if there are no other options, my only recommendation is that as soon as those forms come back to you with names, you check if those participants already exist in your participant database. If they do, you connect these forms to their existing ID. If they don't already exist, you assign those participants new IDs.
+But if there are no other options, my only recommendation is that as soon as those forms come back to you with names, you check if those participants already exist in your participant database (so you don't assign them yet another ID). If they do, you connect these forms to their existing ID. If they don't already exist, you assign those participants new IDs.
 Then double check those IDs when they are entered in to your data entry system
 
 ---
@@ -929,8 +929,8 @@ I could probably spend 2 hours alone talking about how to build a participant tr
 
 class: inverse, center, middle
 
-![](img/tables-waves.PNG)
-
+background-image: url(img/tables-waves.PNG)
+background-size: 80%
 
 ---
 
@@ -1199,7 +1199,7 @@ To effectively clean data you need to have an understanding of 5 things:
 
 4. Stakeholder Knowledge
 
-5. Understanding of Data Structure
+5. Data Structure
 
 ]
 
@@ -1214,6 +1214,8 @@ To effectively clean data you need to have an understanding of 5 things:
 
 But in order to write a data cleaning plan, you still need to have an understanding of 5 concepts
 
+Some of these come from experience working in your field and from working with lots of different kinds of data, others you actively collect information on to gain an understanding of
+
 ---
 
 background-image: url(img/data-literacy.png)
@@ -1222,29 +1224,36 @@ background-size: 35%
 
 # Data Literacy
 
-Ways to build data literacy:
+Understanding of the following things:
 
-1. Believe that data errors are inevitable and always be looking for them
+1. Data errors are inevitable and always be looking for them
 
-2. Understand types of data you are working with (qualitative, quantitative)
+2. Types of data you are working with (qualitative, quantitative)
 
-3. Understand the source of where your data comes from
+3. The source of where your data comes from
   - Primary sources, secondary sources
   - Raw or calculated
   
-4. Understand data structure
+4. Data structure
 
-5. Know how to look for patterns and outliers in data
+5. How to use exploratory data analysis to get to know your data
 
-6. Use exploratory data analysis to get to know your data
+6. How to look for patterns and outliers in data
 
-7. The more data you work with, the more you learn
+
+**The more data you work with, the more you become data literate**
 
 .footnote[Source: [TDS](https://towardsdatascience.com/what-is-data-literacy-9b5c3032216f)]
 
 ???
 
-It's good to have data literacy which is the ability to read, write, communicate and understand data within context
+In terms of data cleaning, having data literacy provides you the intuition to make better decisions in your data cleaning processes
+
+Remember last week we talked about how humans are fallible. We need to learn to anticipate mistakes, rather than assume our data will come to us error free.
+
+Including the types of variables you work with (numeric, integer, categorical, string, logical).
+
+Long vs wide format
 
 It really just comes from experience
 
@@ -1255,16 +1264,18 @@ It really just comes from experience
 A lot of data literacy relies on domain knowledge, or **ghost knowledge**, information you only learn from being immersed in a field.
 
 .pull-left[
-1. A broad example: If a researcher plans to collect data over time, I know to start accounting for time some way in the data. Or if researchers are clustering data, I know to start accounting for that cluster in the data.
+1. After working with longitudinal RCT data for years, I learned that if a researcher plans to collect data over time, I know to start accounting for time some way in the data. Or if researchers are clustering data, I know to start accounting for that cluster in the data.
 
-2. A broad example: I know from years of experience and learning hard lessons, that things don't always stay the same. Someone might export their data differently, or someone might change the way a variable is coded without knowing it. I never assume that data will come to me the same way over time.
+2. I know from years of experience and learning hard lessons, that things don't always stay the same. Someone might export their data differently, or someone might change the way a variable is coded without knowing it. I never assume that data will come to me the same way over time.
 ]
 
 .pull-right[
-3\. A specific example: I learned from working with a specific district, that when they sent us discipline data (ex: OSS or ISS referrals) they would leave a cell blank when a student had 0 referrals. I know this from having conversations with them. Using this knowledge, I documented that I need to recode blank referrals to 0.
+3\. I learned from working with a specific district, that when they sent us discipline data (ex: OSS or ISS referrals) they would leave a cell blank when a student had 0 referrals. I know this from having conversations with them. Using this knowledge, I documented that I need to recode blank referrals to 0.
 ]
 
 ???
+
+In addition to coming from experience,
 
 These aren't things that are ever spoken out loud. A PI never says, add a time variable or a group variable, I just know that those variables will be necessary for analyses b/c I've worked with these types of data before.
 
@@ -1281,9 +1292,11 @@ The person who cleans the data needs both an understanding of the software used 
 **Questions to ask about data collection/capture software**
 
 .pull-left[
-* Is the data hand entered? How is the data entered/exported?
+* Is the data hand entered?
   + Should I expect any discrepancies in entry values
       - "m" vs "M"
+  + Or were entry fields restricted to only allowable values
+* What tool is used to enter data? What format is the data exported in?
   + Should I expect any funky formatting (think Excel autocorrect)
 
 ]
@@ -1313,7 +1326,6 @@ And on a personal note, I have seen this kind of bad formatting happen from vari
 
 
 .pull-left[
-**Questions to ask about data collection/capture software**
 
 * Is the data collected through online software?
 
@@ -2012,10 +2024,12 @@ background-size: 40%
 
 # Next Session
 
+**Getting Started with R! Thursday June 16th at 10am EST!**
 
-* Install R and RStudio for [Windows](https://www.youtube.com/watch?v=aPQPdxDSu34)
 
-* Install R and Rstudio for [Mac](https://www.youtube.com/watch?v=LanBozXJjOk)
+* Install R and RStudio 
+  + For [Windows](https://www.youtube.com/watch?v=aPQPdxDSu34)
+  + For [Mac](https://www.youtube.com/watch?v=LanBozXJjOk)
 
 * Complete the free course [Getting Started with R](https://rfortherestofus.com/courses/getting-started/)
 
@@ -2024,6 +2038,9 @@ background-size: 40%
 ???
 
 We will be talking about getting set up with R and RStudio
+
+We will be just getting to know our way around R
+Getting comfortable with the interface and learning what we can do with R
 
 ---
 
