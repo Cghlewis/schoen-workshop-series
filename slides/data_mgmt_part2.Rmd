@@ -1272,7 +1272,9 @@ Understanding of the following things:
 
 In terms of data cleaning, having data literacy provides you the intuition to make better decisions in your data cleaning processes
 
-Remember last week we talked about how humans are fallible. We need to learn to anticipate mistakes, rather than assume our data will come to us error free.
+Remember last week we talked about how humans are fallible. We need to learn to anticipate mistakes, rather than assume our data will come to us error free. 
+
+We also need to assume that we make mistakes in our data cleaning process as well. We hope we don't! But we also need to check that our transformations worked correctly.
 
 Including the types of variables you work with (numeric, integer, categorical, string, logical).
 
