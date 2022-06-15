@@ -2,7 +2,7 @@
 title: "Data Management Overview: Session 2"
 subtitle: "Training for Schoen Research"  
 author: "<br> Crystal Lewis"
-date: '2022-05-26 (updated: `r Sys.Date()`)'
+date: '2022-06-02 (updated: `r Sys.Date()`)'
 output:
   xaringan::moon_reader:
     css: xaringan-themer.css

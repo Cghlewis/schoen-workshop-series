@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data Management Overview: Session 3</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="  Crystal Lewis" />
+    <script src="data_mgmt_part3_files/header-attrs/header-attrs.js"></script>
+    <link href="data_mgmt_part3_files/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="data_mgmt_part3_files/tile-view/tile-view.js"></script>
+    <link href="data_mgmt_part3_files/panelset/panelset.css" rel="stylesheet" />
+    <script src="data_mgmt_part3_files/panelset/panelset.js"></script>
+    <script src="data_mgmt_part3_files/kePrint/kePrint.js"></script>
+    <link href="data_mgmt_part3_files/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+class: inverse, left, middle
+
+background-image: url(img/cover2.png)
+
+# Data Management Overview: Session 3
+## Training for Schoen Research
+
+----
+
+## Crystal Lewis
+
+Slides available on [<svg aria-hidden="true" role="img" viewBox="0 0 496 512" style="height:1em;width:0.97em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>](https://cghlewis.github.io/schoen-workshop-series/)
+
+
+---
+
+# Plan for this series
+
+.pull-left[
+Session 1  
+* ~~Data flow~~  
+* ~~Documentation~~  
+
+&lt;br&gt;
+
+![](img/step5.PNG)
+]
+
+.pull-right[
+Session 2
+* ~~Creating instruments~~
+* ~~Tracking data~~
+* ~~Capturing and storing data~~
+* ~~Preparing to clean and validate data~~
+]
+
+???
+
+Just as a recap, we spent the first two sessions talking about this data management life cycle
+* Starting with creating internal documentation all the way to creating a data cleaning plan
+
+---
+
+# Plan for this series
+
+.pull-left[
+
+Session 3
+* Why R?
+* Getting acclimated with R and RStudio
+* Understanding objects, functions, and packages
+* Code writing best practices
+
+Session 4
+* Packages and functions for data wrangling
+]
+
+.pull-right[
+
+Session 5
+* Setting up a reproducible syntax file
+* Cleaning and validating data with R
+
+Session 6
+* Additional data wrangling with R
+
+&lt;img src="img/r-project.svg" width="300px" style="display: block; margin: auto;" /&gt;
+]
+
+???
+
+For the next 4 sessions we are going to be working with R
+
+Today is not going to be our most exciting day, especially for those who are already R users. But this day is all about getting us all on the same page with our RStudio settings, and using similar terminology and making sure we all grab the basics of code writing. So please bear with me.
+
+Session 5: We will work on cleaning a messy data file from start to finish
+
+Session 6:
+
+Restructuring data
+
+Merging Data 
+
+Writing our own functions
+
+
+---
+
+background-image: url(img/syntax.PNG)
+background-size: contain
+
+???
+
+I wanted to start here and remind us why we are talking about moving to syntax writing and R
+
+Consider the scenario on the left
+
+You are given a raw data file that you are asked to clean
+
+Depending on what program you plan to clean the data in , you might either import the raw data into a program like SPSS or if the data is in like a csv or excel file, you might make a copy of the raw file before you start making any changes to the data
+
+And you do them all by hand - point and click (no syntax)
+
+Then a few weeks later, someone reaches out to tell you they left off 4 participants from the original file, so they downloaded a new file that has everyone
+
+And this could take hours or days to clean again
+
+And now instead of taking hours or days, this takes about 10 seconds
+
+---
+
+background-image: url(img/syntax2.PNG)
+background-size: contain
+
+???
+
+Here's another scenario
+
+You give someone a clean dataset, but you didn't use syntax to clean the data
+
+Your user isn't sure what has or has not been done to the data. 
+
+This helps them decide if everything that needs to be done, has already been done, or if they need to do any further transformations
+
+---
+
+# Why use R for Data Management?
+
+.pull-left[
+* Writing syntax: 
+  - Automates your work
+  - Allows your work to be reproducible
+  - Facilitates collaboration
+  - Allows others to check your work 
+&lt;img src="img/heartyr.gif" width="300px" style="display: block; margin: auto;" /&gt;
+.center[Source: @allison_horst]
+
+]
+
+.pull-right[
+* R specifically:
+
+  - **Free and open source**
+  - Platform independent
+  - Supportive community
+  - Powerful packages that allow us to quickly manipulate data
+  - It integrates well with other languages, file types, and applications
+  - Becoming more ubiquitous in the world of education research
+]
+
+???
+
+For those of you moving over to a scripting language from hand manipulating data in a tool like Excel or SPSS - a reminder that the benefits of using a scripting language as opposed to point and click are...
+  - Automates your work - reduces the burden on you, saves time, also reduces human errors (b/c your machine is doing a lot of the heavy lifting)
+  - Other people can use your script and run your code
+  - You and colleagues can write code together and make decisions together
+  - Did you accidentally leave out a variable in that sum score? Or did you recode a value incorrectly?
+
+For those of you who are already using a scripting language such as Stata, SAS or maybe you are writing scripts in SPSS, reasons to switch to R include......
+  - Open source meaning it is publicly available to anyone, no restrictions on licenses or copies. 
+  - Compatible with Windows, Mac, Unix and Linux platforms
+  - There are endless ways to receive support in the R community (and we will talk about those ways) and the number of people who are willing to help beginners far outnumber anyone who thinks they are too good to help someone just starting out. It's a very friendly community.
+  - And the available packages continue to grow and evolve with the community because anyone in the world can make new packages that can be integrated and used within R. So it is a program that keeps up with the times
+  - Integrates
+      - You can read in files from other programs like SAS, Stata, SPSS
+      - You can connect to APIs to seamlessly and directly pull in data from places like Qualtrics or the Department of Education
+      - You can connect to version control software like Git and GitHub
+      - You can integrate with other programming languages like SQL or Python and run those languages inside of R
+      - You can integrate with databases like Amazon RedShift or Google BigQuery
+      - It's just a very powerful tool
+
+https://techvidvan.com/tutorials/pros-and-cons-of-r/
+
+https://campus.sagepub.com/blog/why-universities-are-switching-to-r-for-social-science
+
+https://www.simplilearn.com/what-is-r-article
+
+https://techvidvan.com/tutorials/pros-and-cons-of-r/
+
+---
+
+.panelset[
+.panel[.panel-name[messy_data]
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; id &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Teach Years &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Teach grade &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; School District ID &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 123 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 12yrs &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; k &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 50_100 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 234 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 15 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 50_100 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 345 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 22.5 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 60_102 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 456 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 4yrs &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 60_102 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 567 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 60_102 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 678 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; .5 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 50_100 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+.panel[.panel-name[cleaning_code]
+
+
+```r
+library(tidyverse)
+library(stringr)
+library(janitor)
+
+clean &lt;- mess %&gt;%
+  # fix names
+  clean_names() %&gt;%
+  # remove "yrs" from teach_years
+  mutate(teach_years = str_remove_all(teach_years, "yrs")) %&gt;% 
+  # make teach_years numeric and round up
+  mutate(teach_years = ceiling(as.numeric(teach_years))) %&gt;%
+  # for teach_grade, recode k to 0 and make it a numeric variable
+  mutate(teach_grade = as.numeric(recode(teach_grade, `k` = "0"))) %&gt;%
+  # separate school and district id
+  separate(school_district_id, into = c("sch_id", "district_id"), sep = "_")
+```
+]
+
+.panel[.panel-name[clean_data]
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; id &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; teach_years &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; teach_grade &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; sch_id &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; district_id &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 123 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 50 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 100 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 234 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 50 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 100 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 345 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 60 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 102 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 456 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 60 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 102 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 567 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 60 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 102 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 678 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 50 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 100 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+]
+
+???
+
+Just to demonstrate the power of R
+
+Messy Data: And you can imagine that if you had hundreds of records, this could take a long time to hand clean
+
+Cleaning Code: But using R, I wrote this cleaning code in probably 5 minutes
+
+Clean Data: And within 5 minutes, I have clean data
+
+And this is going to work on any number of records, whether it's just these 6 rows or 6000 rows. It's still going to take 5 minutes
+
+---
+
+class: inverse, top, center
+
+# What Else Can R Do?
+
+&lt;img src="img/r-package.PNG" width="800px" style="display: block; margin: auto;" /&gt;
+
+Source: [&lt;span style="color: white; "&gt;rviews&lt;/span&gt;](https://rviews.rstudio.com/2019/06/19/a-gentle-intro-to-tidymodels/)
+
+
+???
+
+But another reason to start using R is that you'll find that R is your one stop shop for all things data
+
+You no longer have to switch between Excel (for data wrangling), to SPSS (for some analyses), to MPlus (for other analyses), and back to Excel (for graphing), and to Word for writing reports
+
+---
+
+class: top, center
+
+# Analyze Data
+
+&lt;img src="img/models.PNG" width="800px" height="450px" style="display: block; margin: auto;" /&gt;
+
+.footer[Source: [statisticsglobe](https://statisticsglobe.com/extract-standard-error-t-and-p-value-from-regression-in-r)]
+
+???
+
+So let's cover some of the things that R can do besides help you clean data
+
+You can use R as a simple calculator 
+
+You can use it to calculate descriptive statistics 
+
+Or you can use it for complex models and machine learning
+
+https://www.psychologicalscience.org/observer/why-you-should-become-a-user-a-brief-introduction-to-r
+
+---
+
+class: top, center
+
+# Data Visualization
+
+&lt;img src="img/graphs.jpg" width="800px" height="450px" style="display: block; margin: auto;" /&gt;
+
+.footer[Source: @mohsinramay_]
+
+???
+
+People use it for simple static visualizations to be used in journal articles
+
+But R has been used for elaborate interactive visualizations in publications like the New York Times 
+
+---
+
+class: top, center
+
+# Mapping
+
+&lt;img src="img/map.png" width="700px" height="450px" style="display: block; margin: auto;" /&gt;
+
+.footer[Source: [revolutionanalytics](https://blog.revolutionanalytics.com/2012/02/creating-beautiful-maps-with-r.html)]
+
+???
+
+Again, static or interactive
+
+---
+
+class: top, center
+
+.left-column[
+# Reporting
+]
+
+.right-column[
+&lt;img src="img/psc.gif" width="550px" height="600px" /&gt;
+]
+
+.footer[Source: [RfortheRestofUs](https://rfortherestofus.com/consulting/)]
+
+???
+
+You can also produce visual, descriptive reports like the one here
+
+Or you can create technical reports, documentation (codebooks), or academic publications
+
+---
+
+class: top, center
+
+# Applications
+
+&lt;img src="img/app.PNG" width="600px" height="425px" style="display: block; margin: auto;" /&gt;
+
+Source: [Ashley Edwards](https://wordreadinggrowth.shinyapps.io/exposures_to_mastery/)
+
+???
+
+You can make dashboards and interactive applications
+
+This is an application made in R by someone who I think is at FSU
+
+It has inputs, you update the inputs to change the trajectory here
+
+These apps are a nice way to visually communicate your research findings
+
+---
+
+class: top, center
+
+# Slide Decks
+
+&lt;img src="img/slides.PNG" width="650px" height="475px" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: top, center
+
+# Websites
+
+&lt;img src="img/website.PNG" width="750px" height="475px" style="display: block; margin: auto;" /&gt;
+
+Source: [Meghan Hall](https://meghan.rbind.io/)
+
+???
+
+Including blogs
+
+---
+
+class: top, center
+
+.left-column[
+# CVs
+]
+
+.right-column[
+&lt;img src="img/cv.PNG" width="550px" height="550px" /&gt;
+]
+
+Source: [Rob Hyndman](https://github.com/robjhyndman/CV/blob/master/RobHyndman_1page.pdf)
+
+???
+
+Or resumes
+
+Using the vitae package
+
+---
+
+background-image: url(img/smiling_r_user.jpg)
+background-size: contain
+
+???
+
+Like I said, R can be a one-stop shop for most of your research needs, so hopefully as you become more comfortable using it, you will be smiling too
+
+---
+
+.pull-left[
+
+&lt;img src="img/r.PNG" width="480px" height="415px" style="display: block; margin: auto;" /&gt;
+
+### R is a free, open-source programming language for statistics and data visualization
+]
+
+.pull-right[
+
+![](img/rstud.PNG)
+
+### RStudio is an integrated development environment (IDE) for R
+]
+
+???
+
+So let's talk about getting set up with R
+
+As I am sure you all are familiar with now, there are 2 pieces to get set up
+
+You only NEED R to get things up and running but RStudio is a really nice addition to have
+
+Customizable workbench with all of the tools required to work with R in one place (console, source, plots, workspace, help, history, etc.)
+
+And we'll see what that all means shortly
+
+---
+
+background-image: url(img/dashboard.PNG)
+
+.footnote[Source: [ModernDive](https://moderndive.com/1-getting-started.html#r-rstudio)]
+
+???
+
+If you did David's Getting Started with R course, you probably already saw this analogy
+
+But when you think of the difference between R and RStudio and how they work together
+
+The R language runs your computations, like an engine, while RStudio's interface makes it easier to understand and use the "engine" 
+
+So you could probably drive a car with just the engine, but when you add a dashboard, it covers up and connects to the overwhelming engine and allows you to just drive the car
+
+---
+
+.pull-left[
+
+![](img/justR.PNG)
+]
+
+.pull-right[
+
+&lt;img src="img/justRStud.PNG" width="540px" height="540px" style="display: block; margin: auto;" /&gt;
+]
+
+???
+
+On the left here is R
+
+R does come with a VERY basic GUI for us to use, but it's not great. We don't want to use this.
+
+This is what RStudio desktop looks like. And this is what we'll be working with.
+
+There is also RStudio Cloud which runs in a browser (we aren't going to do that).
+
+You can see here that the R GUI is basically the simplified version of RStudio. 
+
+They both have consoles. 
+
+---
+
+background-image: url(img/rstudio_types.PNG)
+background-size: contain
+
+???
+
+This is just a reminder, that what we are using is RStudio Desktop (Free version)
+We're not using cloud which isn't even shown here because you don't need to download it
+
+---
+
+background-image: url(img/cruella.gif)
+background-size: contain
+
+???
+
+So let's learn how to drive this engine
+
+---
+
+# Disclaimer
+
+&lt;img src="img/r_rollercoaster.png" width="900px" height="500px" style="display: block; margin: auto;" /&gt;
+
+???
+
+But before we jump in, I did want to give a disclaimer
+
+You know that I love my disclaimers
+
+I am not an expert. Many R users tend to go through this lifecycle where they start off, when they first learn R, thinking "how am I ever going to learn any of this."
+
+And then they start to learn stuff and they practice and get confidence and after failing a few times, they eventually are like, hey, I'm awesome at this. 
+
+And then they meet other R users out there in the world and realize they know maybe a fraction of what there is to know about writing code and using R. And they just keep learning anyway because they want to get better at it.
+
+And that's where I am. I'm not an expert. I know how to do data management and it works well for what I do, but I don't know everything and there may be better or smarter ways to do things than what I show you. So if you are an R user, and you have input at any point in this workshop, please chime in! Your feedback and insight is very welcome.
+
+---
+
+class: inverse
+
+# Let's Get to Know R and RStudio
+
+&lt;style&gt;
+
+.exercise {
+
+font-size: 2em;
+font-style: bold
+
+}
+.tan{
+
+color: #CEB888;
+
+}
+&lt;/style&gt;
+
+.exercise[<svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#CEB888;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> .tan[Exercises] <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#CEB888;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>]
+
+### 1. Open R
+
+### 2. Open RStudio
+
+### 3. Find what version of R and RStudio that you have
+
+???
+
+Just a head's up, there is going to be a lot of switching back and forth between slides and RStudio today so just bear with me as I navigate this
+
+1. Why do we care about versions?
+  - Certain functionality may or may not be available depending on the version
+  - Compatibility (if you wrote code in a prior version of R and you try to run it in a new version or vice versa, things may break)
+  - So it's good practice for us to know what version we are working with
+
+2. Does everyone have both R and RStudio downloaded
+  - If no, drop links in the chat to get people started
+  - R: http://cran.wustl.edu/
+  - RStudio: https://www.rstudio.com/products/rstudio/download/#download
+
+3. Open R
+  - Pull up CRAN to show newest version
+
+4. Open RStudio
+  - To get R version: type the functions "R.Version()" or "sessionInfo()" to get R version or look in options or look in top left hand corner
+  - To get RStudio version: Go to Help -&gt; About Rstudio to get RStudio version
+     - In the console you can also type Studio.Version()
+  - There are other ways to get versions, I'm just showing you the point and click ways right now to keep it simple
+
+Questions??
+
+So now we know what version of R we are on, let's go back to the slides for a minute and take a tour of RStudio
+
+---
+
+## Tour of RStudio
+
+&lt;img src="img/panes.PNG" width="800px" height="500px" style="display: block; margin: auto;" /&gt;
+
+???
+
+When you first open R, this is what it should look like
+
+You can arrange the sizes of these panes
+
+You can also minimize these panes
+
+Console: This is the R engine. 
+  - You can run commands here (but be aware that any commands run here will not be saved like they will be in a syntax file which we will talk about shortly). 
+  - The console is also where any non-graphical output from your commands will appear as well as errors or warnings from those commands.
+  - So let's go ahead and type something in our console. 
+  - Remember earlier I said you can use R as a basic calculator: 
+      + 5 + 5 (hit enter to run). 
+      + You don't have to have these spaces around the + but it is encouraged for readability
+      + You can ignore the [1] - it is sort of an index to track the items printed
+  - By default the returned object is merely printed to the screen. It's not saved anywhere.
+  - If you want I want to save it in my environment to use it at any point, I need to assign it to an object.
+  - And I do that using the assignment operator &lt;-
+  - x &lt;- 5 + 5
+  - a &lt;- 5
+  - b &lt;- 1
+  - a + b
+  - sum_ab &lt;- a + b
+  - You might find that some people use an = sign (rather than this arrow). It also works but it is not recommended, and you will almost always see &lt;- so let's stick with that
+
+
+* Environment: An overview of all objects (datasets, variables, lists, functions, etc) that you have imported or created, that are in your current environment. 
+  - You will also see another tab here called history, which is a log of everything you've run. 
+  - The Connections tab allows you to connect to various data sources such as external databases.
+  - You may also have a Tutorial tab which is where you can complete interactive tutorials 
+  - On mine or others' RStudio Desktops, you may see additional tabs such as a Git tab, and that is because they have enabled additional functionality that you might not have enabled yet.
+
+If at any point you want to delete objects from your environment, you can just use this broom.
+
+* Files Pane: 
+  - Files tab lists all external files and directories in the current working directory on your computer. 
+      - When you first start R, you will be in your home directory which is the top-level directory of the R installation being run. RStudio chooses a default home directory. 
+      - If you are unsure what directory you are in, you can look up in the top left of your console. Right now it is stating you are in your "home" directory. 
+      - If you don't know what your home directory is, you can view and/or change your home directory by going to Tools -&gt; Global Options..
+      - Don't worry too much about this. For now, keep your home directory as is. 
+      - Working in the files tab is similar to a file explorer.
+          - You can open, copy, rename, move and delete files in the window.
+          - You can navigate around within that Files pane and explore, but note that you won’t change where you are: even as you click through you’ll still be Home: ~/
+          - And if at any point I want to change my working directory, we have to do some further steps
+      
+* Plots tab: All plots you create in R are displayed here (unless you tell R to display them somewhere else)
+* Packages tab: Lists all packages you have installed on your computer. You can also install new packages and update packages here
+* Help tab: displays R help documentation
+* Viewer tab: displays local web content, such as graphics generated by some packages
+
+Questions??
+
+I'm gonna head back to slides real quick to transition
+
+---
+
+class: inverse
+background-image: url(img/reminders.PNG)
+background-size: 80%
+
+---
+
+## Source Pane
+
+&lt;img src="img/panes2.PNG" width="800px" height="500px" style="display: block; margin: auto;" /&gt;
+
+???
+
+Our 4th pane is the source pane and it really only appears when we open some sort of source (R script, RMarkdown template, etc)
+
+The source pane is for editing, dispatching and saving R code (saving being the key word here). This pane can also display any datasets for viewing that we have read into our environment.
+
+So let's switch back to R:
+  - How to open a syntax file
+      + There are 2 different ways
+  - How to type in a syntax file
+      + 5 + 5
+  - How to run syntax
+      + Highlight and click run
+      + Click in the line and click run
+      + Notice if I put 1 + 4 below and click in there (it will only run this line, not all lines of code)
+      + If I want to run both lines of code, I need to highlight both lines
+  - The other thing to know about working in a syntax file is
+      + that everything inside a syntax file is considered "executable" unless you comment it out
+      + "Add two numbers together" - it will give me an error
+      + It doesn't recognize that I am making a comment for myself
+      + Similar to some of the other stats programs you may have worked with before, you have to denote this as a comment. In R you do that using a pound sign or hash #
+  - How to save syntax
+      + The best thing about a syntax file is, you can save it and re-run it again later
+      + I'll show you 2 ways to save your script
+      + When you save an R script, it will be saved as .R
+
+Questions??
+
+Ok, let's navigate back to the slides again for a recap
+
+---
+
+class: inverse
+background-image: url(img/reminders2.PNG)
+background-size: 80%
+
+---
+
+class: inverse
+
+# Let's Get to Know our Settings
+
+.pull-left[
+
+&lt;/style&gt;
+
+.exercise[<svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#CEB888;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> .tan[Exercises] <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#CEB888;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>]
+
+### Tools -&gt; Global Options
+
+1. General Options
+
+2. Code Options
+
+3. Appearance Options
+
+4. Pane Layout
+
+]
+
+.pull-right[
+
+
+![](img/options.PNG)
+]
+
+???
+
+Now that we understand the general layout of RStudio, let's get to know how we can personalize RStudio a little more
+
+Most of these are personal preferences, but for now we are going to tweak a few things together, to help us get on the same page as beginners. You can always untweak these things later if you don't like the changes
+
+So we are first going to go back to RStudio and go to Tools and then Global Options and we should pull up a window like this
+
+1. In General options
+  + we can see here this is where we can change our default working directory if we wanted to
+  + We can also change our version of R if we want to revert to an older version that we've installed
+  + The one thing we want to change in our general options right now is: untick "Restore .RData into Workspace at startup". 
+      + This prevents loading previously created R objects. This will make starting R quicker and also reduce the chance of getting bugs due to previously created objects. This is a general best practice to untick this box. When we close out RStudio and we reopen later to start a new project, we don't want our old objects to still be there in our environment. We want a clean slate.
+
+2. In Code options
+  + Editing Tab
+      + We want to check the box "Insert matching parens/quotes" - this will help us autocomplete any parenthese or quotes we use and as beginners, this is a helpful tool
+      + Uncheck "Focus console after executing from source"
+          - If you don't uncheck this box, whenever you run code in your syntax file, you cursor when then jump out of your syntax file and down to your console - which is not helpful for what we are trying to do
+  + Display Tab
+      + Check the box for "Rainbow parentheses"
+      
+3. Appearance Options
+  + I'm not going to do anything here but I am going to show you a couple of options
+  + This is where you can zoom if you need your view larger or smaller
+  + You can change the font
+  + You can change the theme (maybe you want dark mode)
+  
+4. Pane Layout
+  + You might want your panes in different locations (I prefer my console in the top right)
+
+Just a head's up, several of these options can also be accessed via the "Code" and "View" tab
+
+If a pane ever disappears, try view, pane, show all panes
+
+Questions??
+
+Ok, back to the slides
+
+---
+
+# Terminology
+
+&lt;style&gt;
+
+.yellow{
+
+color: yellow;
+font-style: bold;
+
+}
+&lt;/style&gt;
+
+
+Everything that exists in R is an **object**
+
+Recall the assignment operator .yellow[`&lt;-`]
+
+
+```r
+x &lt;- 5
+
+y &lt;- 6
+```
+
+Everything that happens is a **function**
+
+Consider the function .yellow[sum]
+
+
+```r
+sum(x, y)
+```
+
+```
+[1] 11
+```
+
+.footnote[Source: [R for the Rest of Us](https://rfortherestofus.com/courses/getting-started/)]
+
+???
+
+Now that we have a lay of the land and we have RStudio set up how we want it, let's start getting an understanding of the terminology we will be using
+
+Which is a base function automatically provided in R
+
+---
+
+# Objects
+
+.pull-left[
+1. There are 6 types of **objects** in R programming
+  + **Vector**
+  
+  + Lists
+  
+  + Matrices
+  
+  + Array
+  
+  + Factors
+  
+  + **Data Frame** (Tibble)
+  
+]
+
+.pull-right[
+
+![](img/objects.PNG)
+]
+
+???
+
+Remember all of your current existing objects can be found in your Environment pane
+
+While all of these objects are important, this is not a heavy programming workshop. I really want to get you all up and running with code to clean your data and so I just want to focus on what is most important for those purposes. 
+
+And for getting set up with data cleaning, the two things I want to cover for now are dataframes and vectors
+
+
+---
+
+# Objects
+
+.pull-left[
+* Data Frame
+  - Simply put, this is your dataset. A two dimensional data structure, where each column is a variable and each row is a case.
+  - In R you can create your own dataframe or read in a dataframe from your computer, a website, or a package.
+  - Tibble is another term you might hear
+      
+
+```r
+data &lt;- data.frame(
+  id = c(123, 234, 456), 
+                   age = c(12, 10, 9))
+
+data
+```
+
+```
+   id age
+1 123  12
+2 234  10
+3 456   9
+```
+]
+
+.pull-right[
+* Vector
+  - This is the simplest object
+  - It consists of one or more elements all of the same type (ex: all numeric, all character)
+  - Think of vector as a variable outside of a dataframe
+  
+
+```r
+id &lt;- c(123, 234, 456)
+
+id
+```
+
+```
+[1] 123 234 456
+```
+]
+
+???
+
+The first type of object is a Dataframe
+  - 99.99% of the time, you'll be reading in a dataframe
+  - You can see here I created my own dataframe for demonstration purposes, but you don't need to worry about that right now. Most often we are reading in datasets that have already been created, we just need to manipulate them
+  - And then the last thing to know about dataframes, is that sometimes instead of dataframes we are working with tibbles, which are just a simplified type of dataframe in R - don't worry too much about that right now, I just want you to be familiar with the terms
+  - So here is what a printed out dataframe would look like in R
+
+
+vector
+  - So here I am making an ID variable (or vector) and filling it with some sample IDs
+  - Notice I created the vector by using the c() function
+  - c() means combine
+  - It's not in a dataframe right now, it's just a stand alone variable
+  - And you'll notice it's not vertical like we expect. It's horizontal. And that's because we haven't put it into a dataframe structure yet. And if I wanted to do that, I would have to use something like this data.frame function.
+  - Again, don't panic about this right now, we are pretty much always going to be working with these dataframe objects
+
+
+---
+
+# Best Practices for Object Naming
+
+.pull-left[
+
+1. No spaces
+
+2. Use all lower case
+
+3. Use underscores to separate words
+
+4. Descriptive
+
+5. Not names of existing functions
+
+6. Don't start with a number
+
+7. No special characters
+
+]
+
+.pull-right[
+
+
+```r
+# Good
+day_one
+day_1
+
+# Bad
+1_day
+DayOne
+day-one
+x
+```
+
+
+```r
+# Bad
+T &lt;- FALSE
+c &lt;- 10
+sum &lt;- x + y
+```
+
+Source: [Advanced R](http://adv-r.had.co.nz/Style.html)
+
+]
+
+???
+
+Much like a style guide for all the data management practices we've already discussed, there are generally agreed upon style guide rules for object naming
+
+Any time you create an object in R using the assignment operator, you have to consider how you will name it. Remember these are just objects within R. This has nothing to do with your actual data or how it will be exported. These names just allow you to work with objects in R (which 9 times out of 10 will be your datasets)
+
+Many of the rules are similar to variable naming that we covered in earlier trainings
+
+2\. R is case sensitive so let's not cause confusion
+
+3\. Remember, - is confused as minus sign
+
+
+---
+
+# Every R Object has a Type and Class
+
+.pull-left[
+
+#### **Type**: How an object is stored in memory
+
+1. Character: **"apple"**, **"12_405"**
+
+2. Double: **2**, **2.5**
+
+3. Integer: **2L**
+
+4. Logical: **TRUE**, **FALSE**
+
+5. Complex: **1+4i**
+
+]
+
+.pull-right[
+
+#### **Class**: The abstract type
+
+1. Character
+
+1. Numeric
+
+1. Integer
+
+1. Factor
+
+1. Date
+
+1. POSIXct
+
+1. Logical
+
+
+]
+
+.footnote[[The Carpentries](https://swcarpentry.github.io/r-novice-inflammation/13-supp-data-structures/)]
+
+???
+
+The other thing to know about objects is that every R object has a type and a class
+
+Type is less concerning for your purposes, but it is sometimes good to know how R stores a variable on the back end
+
+For vectors (aka variables), types you might encounter include:
+  - Character (need to be provided with "" around the text or otherwise R will throw an error)
+  - Double (number with decimals)
+  - Integers are numeric data without decimals (The L tells R to store this number as an integer)
+  - Logical: TRUE or FALSE
+  - Complex: numbers with an imaginary component
+
+Class is how you would typically think of a variable type. How you might use it in your analysis.
+
+For vectors (aka variables), classes you might encounter include:
+  - Factor is essentially a categorical variable where you have assigned order to those categories
+  - Date is a date without time
+  - POSIXct is a date with time
+  
+Other objects besides vectors also have types and class, including dataframes/tibbles and lists
+
+---
+
+# Examples of Type and Class
+
+.pull-left[
+
+```r
+# Numeric vector
+
+age &lt;- c(12, 14)
+
+class(age)
+```
+
+```
+[1] "numeric"
+```
+
+```r
+typeof(age)
+```
+
+```
+[1] "double"
+```
+]
+
+.pull-right[
+
+
+```r
+# Factor
+
+grade_level &lt;- as.factor(c("k", "1", "2"))
+
+class(grade_level)
+```
+
+```
+[1] "factor"
+```
+
+```r
+typeof(grade_level)
+```
+
+```
+[1] "integer"
+```
+
+```r
+levels(grade_level)
+```
+
+```
+[1] "1" "2" "k"
+```
+]
+
+???
+
+Numeric vector:
+
+Even though there are no decimals in this variable, we didn't tell R to record this as an integer, we didn't use that L
+
+---
+
+# Examples of Type and Class
+
+
+```r
+# Dataframe
+
+data &lt;- data.frame(
+  id = c(123, 234, 456), 
+                   age = c(12, 10, 9))
+
+print(data)
+```
+
+```
+   id age
+1 123  12
+2 234  10
+3 456   9
+```
+
+```r
+class(data)
+```
+
+```
+[1] "data.frame"
+```
+
+```r
+typeof(data)
+```
+
+```
+[1] "list"
+```
+
+---
+
+# Functions
+
+.pull-left[
+
+**Option 1:**
+
+Write your own function
+
+
+```r
+my_sum &lt;- function(x,y){
+  x + y
+}
+
+my_sum(x=1, y=2)
+```
+
+```
+[1] 3
+```
+
+]
+
+.pull-right[
+
+**Option 2:**
+
+Use an existing function (calling a function)
+
+
+```r
+x &lt;- 1
+y &lt;- 2
+
+sum(x, y)
+```
+
+```
+[1] 3
+```
+]
+
+.center[Anatomy of a function call]
+
+```r
+function_name(arguments)
+
+mean(x, na.rm = FALSE) # x is an R object
+class(x) # x is an R object
+```
+
+
+???
+
+Functions are a piece of code written to carry out a specified task 
+
+They are what make all of your data transformations happen.
+
+Every function has one or more arguments
+  + The parameters provided to a function to perform that operation
+
+This argument already has a default input of FALSE
+
+False means, you don't want it to create a mean if there are NAs. 
+
+If it's true it means you want to calculate a mean, even if there are NAs in the variable. 
+
+If you want this to stay false (keep the default), you don't even have to acknowledge the argument at all when you call the function.
+
+---
+
+# <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> Let's Practice Some Base R Functions <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+
+| Task  |  Function   | Arguments   |
+|-------|------------|-------|
+|combine elements |   `c` | objects to be concatenated |
+|check the class of an object | `class` | an R object |
+|check the length of a vector | `length` | object | 
+|mean of values | `mean`  | an R object, na.rm|
+|create a data frame | `data.frame` | value |
+|check internal structure of an object | `str`| object |
+
+&lt;br&gt;
+&lt;br&gt;
+
+???
+
+Base R meaning, these functions just came ready and pre-installed for you
+
+Functions take inputs and return outputs. The arguments are the inputs.
+
+These arguments might have defaults, like we saw above with the sum argument (na.rm = FALSE)
+
+Let's try out these functions
+
+- numeric vector
+  + If you want to be reminded what the arguments are for a function, you can type ?function_name in your console
+  + test_score &lt;- c(20, 30, 40, NA)
+  + Check the class 
+  + Check the length
+  + Get the mean
+      - Let's keep the default for the na.rm argument, which is false, and see what happens. Any guesses?
+
+- numeric vector
+  + id &lt;- c(10,11,12,13)
+  + Another way to create this numeric variable since the IDs are in a sequence is use the colon operator
+  + id2 &lt;- 10:13
+  + Check the class of id and id2
+  
+- character vector
+  + fav_color &lt;- c("green", "black", "blue", "violet")
+      + Remember when we create character variables we have to use these quotation marks, otherwise, R is going to be looking for an object named Green
+  + Get class
+
+- character vector
+  + grade_level &lt;- c(k, 1, 2, 1)
+    - What will happen if I try to create my vector like this?
+        + You have to put "" around letters/words (you'll get an error b/c R is looking for an object named k)
+  + grade_level &lt;- c("k", 1, 2, 1)
+    - What do you think the class will be?
+    - R will create a resulting vector with a type/mode that can most easily accommodate all the elements it contains.
+
+- create a data frame
+  + sch_data &lt;- data.frame(
+  id, grade_level, test_score, fav_color
+  )
+  + And if we click on it, we can see how all of our vectors/variables have now been added to a data frame
+  
+- Last let's check the class and structure of the data frame
+  + class(sch_data)
+  + str(sch_data)
+
+---
+class: inverse
+
+# Packages
+
+Packages are a collection of functions.
+
+They are written by a worldwide community of R users and can be downloaded for free from the internet.
+
+&lt;img src="img/packages.PNG" width="600px" height="300px" style="display: block; margin: auto;" /&gt;
+
+.footnote[Source: [&lt;span style="color: white;"&gt;Modern Dive&lt;/span&gt;](https://moderndive.com/1-getting-started.html#r-rstudio)]
+
+???
+
+So now we are familiar with some base R functions, but most of the time when we are cleaning data, we aren't using base functions, we are using functions from a package.
+
+If you did the Getting Started with R course, you've probably seen this analogy
+
+You can think of packages like apps you download onto your phone, that provide additional functionality
+
+---
+
+# Packages
+
+.pull-left[
+#### A huge collection of packages are hosted on the internet
+1. CRAN
+  + A central repository supported by the R Foundation
+  + **C**omprehensive **R** **A**rchive **N**etwork
+  + These packages must meet certain quality standards, and are regularly tested
+  + Anyone can submit their package to CRAN and have it published for broad use
+  + https://cran.r-project.org/
+
+#### You may also find packages in other places
+2. Bioconductor
+3. GitHub
+4. Your own personal computer or network drive
+]
+
+.pull-right[
+![](img/cran.PNG)
+]
+
+???
+
+Most of the ones we will use are on CRAN
+
+Click on website
+
+---
+
+# How to Access Packages
+
+.pull-left[
+#### Step 1: Install: Do only once
+
+Either install a package through code
+
+
+```r
+install.packages("package_name")
+```
+
+Or install manually
+
+&lt;img src="img/install.PNG" width="600px" height="275px" /&gt;
+
+]
+
+.pull-right[
+#### Step 2: Load: Do every time you start R
+
+
+```r
+library(package_name)
+
+library(stringr)
+library(dplyr)
+library(readr)
+library(haven)
+```
+]
+
+???
+
+Assuming your package is on CRAN, which all the packages we will use for data cleaning are, then there are 2 ways to install a package
+
+When you install these packages, they will be stored somewhere on your machine
+
+R will choose a default. You can change this default if you want. My default is to store in my documents folder in a folder called R
+
+This step of installing you only have to do once
+
+Even though we have the package installed on our computer, each time we open R and want to use that package, we have to load that package into our environment to tell R we want to use that package.
+
+So, every time we close out R and start a new R session, we will need to library our package again if we need to use those functions
+
+Oftentimes we will be using multiple packages and we need to library each package each time we open R. 
+
+So here is an example of calling 4 packages
+
+The order of calling the packages, doesn't really matter
+
+---
+
+class: inverse
+
+# Getting Help
+
+If you want to understand a package, you have several options:
+
+.pull-left[
+Review the documentation.
+
+![](img/documentation.PNG)
+]
+
+.pull-right[
+Type .white[`?package_name`] in your console
+
+![](img/help.PNG)
+
+]
+
+???
+
+If your package is on CRAN, there will be documentation.
+
+You can usually find it by just googling the package name
+
+And all of the functions I plan to teach you should have ample documentation as well as vignettes available to help walk you through how to use any functions in the package.
+
+Similar to how we typed ?function_name in the console earlier
+
+
+---
+
+class: inverse
+
+# Getting Help in General
+
+.pull-left[
+
+Google is your friend
+
+![](img/google.gif)
+
+]
+
+.pull-right[
+
+Turn to the supportive community
+
+![](img/get_help.jpg)
+
+Source: [&lt;span style="color: white;"&gt;Shannon Pileggi&lt;/span&gt;](https://www.pipinghotdata.com/)
+
+]
+
+???
+
+Getting help in general, if you don't know how to use a function, or you get an error, you don't remember how to do something in R? 
+
+1.
+Google it. That is probably what 90% of people who code do.
+
+Google: how to rename a variable in R
+
+2.
+You can always search for answers on Stack Overflow and if you are a brave soul, you can actually ask questions on there, but that can be a little intimidating
+
+If you are on Twitter, there is an extremely supportive community of R users on there who are always willing to help when you have questions
+
+RStudio has their own community where you can find help 
+
+If you are a Slack user, there are R slack channels that you can join to ask questions
+
+And like I mentioned in workshop 1, there are also subgroups, like R-Ladies that hold periodic workshops that are free and open to everyone to attend and R-Ladies also has their own Slack channel for asking questions
+
+---
+
+class: inverse
+
+# Restart R Session
+
+.pull-left[
+![](img/shut-down-press-button.gif)
+]
+
+.pull-right[
+
+![](img/restart.PNG)
+]
+
+???
+
+If you are getting an error that you can't solve in all the other ways mentioned above
+
+---
+
+# <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> Let's Use our First Package <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+
+.pull-left[
+1. Open a script
+
+2. Install a package
+  + `readr`
+  
+3. Library a package
+  + `library(readr)`
+  
+4. Use a function from that package
+  + `read_csv()`
+  + To read in this seattle pet names data from a website: https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-03-26/seattle_pets.csv
+]
+
+.pull-right[
+
+
+```r
+# Install readr package
+
+install.packages("readr")
+
+# Library package
+
+library(readr)
+
+# Read in data using readr and assign to an object
+
+pet_names &lt;- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-03-26/seattle_pets.csv")
+```
+
+]
+
+???
+
+Reminder that there are usually multiple functions in a package.
+
+Here we are just using one function.
+
+Bring up readr documentation to show functions
+
+
+---
+
+# General Code Writing Best Practices
+
+
+1. Comment your code
+  + Comments begin with `#` and a space
+  + Comments should explain what and why something is happening
+
+
+```r
+# Load raw data
+
+# Drop duplicates cases from raw data
+```
+
+2\. Add sections to further refine your comments and make your file more searchable
+  + Sections can be added by using 4 dashes after your comment `----`
+  + You can also add sections by going to 
+      - Code -&gt; Insert Section
+
+
+```r
+# Load raw data ----
+
+# (1) Read in the data
+
+# (2) Review the data
+```
+
+???
+
+But real quick, because we are going to open a syntax file up to use our first package, let's talk about some best practices for code writing
+
+Show sections in an R script
+
+---
+
+# General Code Writing Best Practices
+
+3\. Use spacing
+  + Place spacing around all operators (**except** the colon)
+  + Do not put spaces inside or outside parentheses for regular function calls
+
+
+```r
+# Good
+average &lt;- mean(feet / 12 + inches, na.rm = TRUE)
+x &lt;- 1:10
+mean(x, na.rm = TRUE)
+
+# Bad
+average&lt;-mean(feet/12+inches,na.rm=TRUE)
+x &lt;- 1 : 10
+mean (x, na.rm = TRUE)
+mean( x, na.rm = TRUE )
+```
+
+---
+
+# General Code Writing Best Practices
+
+4\. Function-indent long lines
+  + Strive to limit your code to 80 characters per line 
+  + If a function call is too long, place each argument on its own line
+  
+
+```r
+do_something_very_complicated(
+  something = "that",
+  requires = many,
+  arguments = "some of which may be long"
+)
+```
+
+.footnote[Source: [Tidyverse Style Guide](https://style.tidyverse.org/syntax.html) and [Advanced R](http://adv-r.had.co.nz/Style.html)]
+
+???
+
+1\. Install readr package ----
+
+install.packages("readr")
+
+Now that we have installed a package this way, let's never do it again. And the reason is, if you add this to your script, now every time you run your script, you are going to re-install this package. We don't want to do that.
+
+For now we can # it
+
+But I prefer either installing in console, or using point and click
+
+2\. Library package ----
+
+library(readr)
+
+3\. ?readr, ?read_csv - what are the arguments?
+- the biggest one is to enter a file as a string
+- check examples
+
+4\. Show what the csv file looks like - click link
+
+5\. Read in data using readr and assign to an object
+
+pet_names &lt;- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-03-26/seattle_pets.csv")
+
+6\. Review the data
+
+double click
+str(pet_names)  
+names(pet_names)  
+print(pet_names)  
+head(pet_names)  
+
+7\. Reminder
+
+This is just an object in R. Any manipulations we do to the data are not being done to the actual file outside of R! We are never touching the raw file on our computer or on the internet or wherever the file came from. That's the beauty of this syntax writing. If we mess up any of our manipulations, it doesn't matter. We can go back to our original raw file and start again.
+
+The only way we can get our manipulated, cleaned up data back out is to export a new file out.
+
+
+---
+
+# Shortcuts
+
+| Task  |  Windows   | Mac   |
+|-------|------------|-------|
+|Run current line of code | `Ctrl + Enter` |  `Cmd + Return` |
+|Run all lines of code | ` Ctrl + A + Enter` | `Cmd + A + Enter` |
+|Code completion | `Tab` | `Tab`|
+|Insert assignment operator | `Alt + -` | `Option + -` |
+|Insert pipe operator | `Ctrl + Shift + M` | `Cmd + Shift + M` |
+|Comment or uncomment a line | `Ctrl + Shift + C` | `Cmd + Shift + C`|
+|Restart R Session | `Ctrl + Shift + F10` | `Cmd + Shift + F10`
+|Multi-line cursor| `Alt + click and drag` | `Option + click and drag`|
+|Previous command in console | `up-arrow` | `up-arrow` |
+
+???
+
+Code completion: if you have a function or object loaded in your environment, R will start to recognize those terms as you are typing it and it will autocomplete if you press tab
+
+---
+
+# <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> Let's Practice Shortcuts <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+
+&lt;img src="img/shortcuts.PNG" width="600px" height="500px" style="display: block; margin: auto;" /&gt;
+
+.footnote[Source: [Zenkit](https://zenkit.com/en/blog/shortcuts-for-all/)]
+
+---
+
+class: inverse, center, middle
+
+# Questions?
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "rainbow",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
