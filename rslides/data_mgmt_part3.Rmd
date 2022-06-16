@@ -452,28 +452,6 @@ Including blogs
 
 ---
 
-class: top, center
-
-.left-column[
-# CVs
-]
-
-.right-column[
-```{r, echo = FALSE, out.width = "550px", out.height= "550px"}
-knitr::include_graphics("img/cv.PNG")
-```
-]
-
-Source: [Rob Hyndman](https://github.com/robjhyndman/CV/blob/master/RobHyndman_1page.pdf)
-
-???
-
-Or resumes
-
-Using the vitae package
-
----
-
 background-image: url(img/smiling_r_user.jpg)
 background-size: contain
 
@@ -772,8 +750,6 @@ class: inverse
 # Let's Get to Know our Settings
 
 .pull-left[
-
-</style>
 
 .exercise[`r fontawesome::fa("question", fill = "#CEB888")` .tan[Exercises] `r fontawesome::fa("question", fill = "#CEB888")`]
 
@@ -1118,15 +1094,14 @@ typeof(age)
 
 ```{r}
 
-# Factor
+# Date
 
-grade_level <- as.factor(c("k", "1", "2"))
+birth_date <- as.Date(c("2005-01-14", 
+                        "2006-07-22"))
 
-class(grade_level)
+class(birth_date)
 
-typeof(grade_level)
-
-levels(grade_level)
+typeof(birth_date)
 
 ```
 ]
@@ -1136,6 +1111,10 @@ levels(grade_level)
 Numeric vector:
 
 Even though there are no decimals in this variable, we didn't tell R to record this as an integer, we didn't use that L
+
+Date:
+
+R stores it as days since Jan 1, 1970
 
 ---
 
@@ -1195,33 +1174,52 @@ sum(x, y)
 ```
 ]
 
-.center[Anatomy of a function call]
-```{r, eval = FALSE}
-
-function_name(arguments)
-
-mean(x, na.rm = FALSE) # x is an R object
-class(x) # x is an R object
-
-```
-
-
 ???
 
 Functions are a piece of code written to carry out a specified task 
 
 They are what make all of your data transformations happen.
 
-Every function has one or more arguments
+---
+
+# Anatomy of a Function Call
+
+<style>
+
+.large {
+
+font-size: 2em;
+font-style: bold;
+
+}
+
+</style>
+
+.center[.large[**function_name(arguments)**]]
+
+.pull-left[
+![](img/class.PNG)
+]
+
+.pull-right[
+![](img/mean.PNG)
+]
+
+???
+
+Every function contains one or more arguments
   + The parameters provided to a function to perform that operation
+  
+The first function, has one argument
 
-This argument already has a default input of FALSE
+The second function has more than one argument
+  + The first argument is x which should be an object again
+  + The second argument is na.rm and has a default input of FALSE
 
-False means, you don't want it to create a mean if there are NAs. 
-
-If it's true it means you want to calculate a mean, even if there are NAs in the variable. 
-
-If you want this to stay false (keep the default), you don't even have to acknowledge the argument at all when you call the function.
+Arguments can also have defaults.
+  + In this case, the default is False which means if there are NAs in your variable, a mean will not be calculated. 
+  + If you change it to true, it means you want to calculate a mean, even if there are NAs in the variable. 
+  + If you want this to stay false (keep the default), you don't even have to acknowledge the argument at all when you call the function.
 
 ---
 
@@ -1229,11 +1227,11 @@ If you want this to stay false (keep the default), you don't even have to acknow
 
 | Task  |  Function   | Arguments   |
 |-------|------------|-------|
-|combine elements |   `c` | objects to be concatenated |
-|check the class of an object | `class` | an R object |
+|combine elements |   `c` | objects |
+|check the class of an object | `class` | object |
 |check the length of a vector | `length` | object | 
-|mean of values | `mean`  | an R object, na.rm|
-|create a data frame | `data.frame` | value |
+|get the mean of values | `mean`  | object, na.rm|
+|create a data frame | `data.frame` | vectors of the same length |
 |check internal structure of an object | `str`| object |
 
 <br>

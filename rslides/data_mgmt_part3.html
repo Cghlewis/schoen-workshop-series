@@ -483,26 +483,6 @@ Including blogs
 
 ---
 
-class: top, center
-
-.left-column[
-# CVs
-]
-
-.right-column[
-&lt;img src="img/cv.PNG" width="550px" height="550px" /&gt;
-]
-
-Source: [Rob Hyndman](https://github.com/robjhyndman/CV/blob/master/RobHyndman_1page.pdf)
-
-???
-
-Or resumes
-
-Using the vitae package
-
----
-
 background-image: url(img/smiling_r_user.jpg)
 background-size: contain
 
@@ -791,8 +771,6 @@ class: inverse
 # Let's Get to Know our Settings
 
 .pull-left[
-
-&lt;/style&gt;
 
 .exercise[<svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#CEB888;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> .tan[Exercises] <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#CEB888;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>]
 
@@ -1155,31 +1133,24 @@ typeof(age)
 
 
 ```r
-# Factor
+# Date
 
-grade_level &lt;- as.factor(c("k", "1", "2"))
+birth_date &lt;- as.Date(c("2005-01-14", 
+                        "2006-07-22"))
 
-class(grade_level)
+class(birth_date)
 ```
 
 ```
-[1] "factor"
-```
-
-```r
-typeof(grade_level)
-```
-
-```
-[1] "integer"
+[1] "Date"
 ```
 
 ```r
-levels(grade_level)
+typeof(birth_date)
 ```
 
 ```
-[1] "1" "2" "k"
+[1] "double"
 ```
 ]
 
@@ -1188,6 +1159,10 @@ levels(grade_level)
 Numeric vector:
 
 Even though there are no decimals in this variable, we didn't tell R to record this as an integer, we didn't use that L
+
+Date:
+
+R stores it as days since Jan 1, 1970
 
 ---
 
@@ -1271,32 +1246,52 @@ sum(x, y)
 ```
 ]
 
-.center[Anatomy of a function call]
-
-```r
-function_name(arguments)
-
-mean(x, na.rm = FALSE) # x is an R object
-class(x) # x is an R object
-```
-
-
 ???
 
 Functions are a piece of code written to carry out a specified task 
 
 They are what make all of your data transformations happen.
 
-Every function has one or more arguments
+---
+
+# Anatomy of a Function Call
+
+&lt;style&gt;
+
+.large {
+
+font-size: 2em;
+font-style: bold;
+
+}
+
+&lt;/style&gt;
+
+.center[.large[**function_name(arguments)**]]
+
+.pull-left[
+![](img/class.PNG)
+]
+
+.pull-right[
+![](img/mean.PNG)
+]
+
+???
+
+Every function contains one or more arguments
   + The parameters provided to a function to perform that operation
+  
+The first function, has one argument
 
-This argument already has a default input of FALSE
+The second function has more than one argument
+  + The first argument is x which should be an object again
+  + The second argument is na.rm and has a default input of FALSE
 
-False means, you don't want it to create a mean if there are NAs. 
-
-If it's true it means you want to calculate a mean, even if there are NAs in the variable. 
-
-If you want this to stay false (keep the default), you don't even have to acknowledge the argument at all when you call the function.
+Arguments can also have defaults.
+  + In this case, the default is False which means if there are NAs in your variable, a mean will not be calculated. 
+  + If you change it to true, it means you want to calculate a mean, even if there are NAs in the variable. 
+  + If you want this to stay false (keep the default), you don't even have to acknowledge the argument at all when you call the function.
 
 ---
 
@@ -1304,11 +1299,11 @@ If you want this to stay false (keep the default), you don't even have to acknow
 
 | Task  |  Function   | Arguments   |
 |-------|------------|-------|
-|combine elements |   `c` | objects to be concatenated |
-|check the class of an object | `class` | an R object |
+|combine elements |   `c` | objects |
+|check the class of an object | `class` | object |
 |check the length of a vector | `length` | object | 
-|mean of values | `mean`  | an R object, na.rm|
-|create a data frame | `data.frame` | value |
+|get the mean of values | `mean`  | object, na.rm|
+|create a data frame | `data.frame` | vectors of the same length |
 |check internal structure of an object | `str`| object |
 
 &lt;br&gt;
