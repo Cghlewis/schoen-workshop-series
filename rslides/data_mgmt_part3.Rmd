@@ -576,6 +576,17 @@ And that's where I am. I'm not an expert. I know how to do data management and i
 
 ---
 
+background-image: url(img/struggle.png)
+background-size: contain
+
+???
+
+Another note, for some of you beginners, this might all seem really foreign to you. 
+
+But stick with it, ask questions whenever you get lost, practice, and I promise it will come to you
+
+---
+
 class: inverse
 
 # Let's Get to Know R and RStudio
