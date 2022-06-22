@@ -2360,16 +2360,16 @@ data %&gt;%
 data %&gt;%
   mutate(new variable =
            case_when(
-             logical condition ~ a value,
-             TRUE ~ another value
+             condition ~ value,
+             TRUE ~ value
            ))
 ```
 
-* some logical argument = a logical condition, usually comparing a variable to a value or another variable
+* condition = a logical condition, usually comparing a variable to a value or another variable
 
 * `~` = "then replace with" 
 
-* a value = character, numeric, NA, date value, or an existing variable
+* value = character, numeric, NA, date value, or an existing variable
 
 * `TRUE` = "if it doesn't meet the criteria already given then"
 
