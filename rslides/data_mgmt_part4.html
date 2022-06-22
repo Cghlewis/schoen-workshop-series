@@ -1,0 +1,2940 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data Management Overview: Session 4</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="  Crystal Lewis" />
+    <script src="data_mgmt_part4_files/header-attrs/header-attrs.js"></script>
+    <link href="data_mgmt_part4_files/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="data_mgmt_part4_files/tile-view/tile-view.js"></script>
+    <link href="data_mgmt_part4_files/panelset/panelset.css" rel="stylesheet" />
+    <script src="data_mgmt_part4_files/panelset/panelset.js"></script>
+    <script src="data_mgmt_part4_files/kePrint/kePrint.js"></script>
+    <link href="data_mgmt_part4_files/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+class: inverse, left, middle
+
+background-image: url(img/cover2.png)
+
+# Data Management Overview: Session 4
+## Training for Schoen Research
+
+----
+
+## Crystal Lewis
+
+Slides available on [<svg aria-hidden="true" role="img" viewBox="0 0 496 512" style="height:1em;width:0.97em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>](https://cghlewis.github.io/schoen-workshop-series/)
+
+---
+
+# Plan for this series
+
+.pull-left[
+
+Session 3
+* ~~Why R?~~
+* ~~Getting acclimated with R and RStudio~~
+* ~~Understanding objects, functions, and packages~~
+* ~~Code writing best practices~~
+
+Session 4
+* Packages and functions for data wrangling
+]
+
+.pull-right[
+
+Session 5
+* Setting up a reproducible syntax file
+* Cleaning and validating data with R
+
+Session 6
+* Additional data wrangling with R
+
+&lt;img src="img/r-project.svg" width="300px" style="display: block; margin: auto;" /&gt;
+]
+
+???
+
+Last week we got set up with R and RStudio and started to get familiar with writing code
+
+Today we will be learning a ton of different functions that can be used for data wrangling
+
+Session 5: We will work on cleaning a messy data file from start to finish - may or may not get to data validation
+
+Our last session will be covering more complicated topics like restructuring and merging data, as well as any thing else we still haven't covered by that point
+
+
+---
+
+class: inverse, center, middle
+
+# Recap
+
+???
+
+Because we have many beginners in this group, I did want to spend some time recapping what we covered last week before we move on
+
+---
+
+background-image: url(img/where_to_code.PNG)
+
+???
+
+When you write your code, you want to write it here (in a syntax file), not down here in the console
+
+You can save your syntax, you can't save code in the console
+
+As soon as you close RStudio and start a new session, everything in your console goes away
+
+
+---
+
+.pull-left[
+
+## Not assigned to an object
+
+![](img/output.PNG)
+]
+
+.pull-right[
+
+## Assigned to an object
+
+![](img/object.PNG)
+]
+
+???
+
+When you write code in your syntax, you use the run button to run your syntax or the shortcut Ctrl + Enter or Cmd + Enter to run your code
+
+When you run the code, the code you ran + the output (if there is any) will appear in the console
+
+If you ran code that you assigned to an object. You won't see output in the console. You'll just see the object appear in the environment
+
+---
+
+# Recap Objects
+
+.pull-left[Everything that exists in R is an **object**]
+
+.pull-right[We create objects in R by using the **&lt;-**]
+
+.pull-left[
+* Data Frame/Tibble
+      
+
+```r
+data &lt;- data.frame(
+  id = c(123, 234, 456), 
+                   age = c(12, 10, 9))
+
+data
+```
+
+```
+   id age
+1 123  12
+2 234  10
+3 456   9
+```
+]
+
+.pull-right[
+* Vector
+  
+
+```r
+test_score &lt;- c(10, 20, 15)
+
+test_score
+```
+
+```
+[1] 10 20 15
+```
+
+```r
+x &lt;- 5
+
+x
+```
+
+```
+[1] 5
+```
+]
+
+???
+
+...
+
+Objects allow us to manipulate things in R (like a dataset or a variable)
+
+If we don't assign things to objects, we can't do much besides just view things in the console
+
+The two objects we care most about right now are 
+* dataframes (can also be called tibbles) which are like your datasets, made up of rows and columns
+* vectors which are like your variables and they are made up of one or more elements all of the same type.
+  + Here, test_score is a vector consisting of 3 all numeric elements. 
+  + And x is a vector consisting of 1 numeric element. 
+  + It doesn't matter if it has one element or 1,000 elements, it's still a vector as long as they are all of the same type.
+
+There are other types of objects such as lists but I don't want to confuse everyone with that right now so we will stick with these two objects
+
+---
+
+# Object Type and Class
+
+.pull-left[
+
+1. **Type**: How an object is stored in memory
+2. **Class**: The abstract type
+  * Character
+  * Numeric
+  * Integer
+  * Factor
+  * Date
+  * POSIXct
+  * Logical
+
+]
+
+.pull-right[
+
+#### As a user, we care about **CLASS**
+
+1. Certain functions require objects to be of a particular class
+  * Ex: The `mean()` function requires an R object that is numeric, logical or date. It cannot work with an object that is character.
+2. Class is how we see and interact with the object
+
+]
+
+.pull-left[
+
+
+```r
+birth_date &lt;- as.Date(c("2005-01-14", 
+                        "2006-07-22"))
+
+typeof(birth_date)
+```
+
+```
+[1] "double"
+```
+]
+
+.pull-right[
+
+
+```r
+class(birth_date)
+```
+
+```
+[1] "Date"
+```
+
+
+]
+
+
+???
+
+Objects have 2 attributes. Type and class
+
+Type is how R stores an object most efficiently. It is not necessarily how we see and interact with an object.
+
+Class is how we see and interact with an object
+
+Class and type don't always match.
+* See here that birth_date has a type of numeric but a class of date
+
+That's ok. Again, we don't have to know the ins and outs of type, as users we only care about class. Class matters because many functions only take vectors of specific class. So we need to know our class. For example the mean function cannot take vectors whose class is character.
+
+---
+
+# Recap Functions
+
+.pull-left[
+
+Everything that happens is a **function**
+
+Anatomy of a function: **function_name(arguments)**
+
+Typically your first argument is to declare an **object**
+  - There may be additional arguments that take statements like TRUE or FALSE or a number
+
+Type`?functionname` in console to learn more about a function
+
+]
+
+.pull-right[
+
+Ex: `head(x = object, n = integer)`
+
+
+
+
+```r
+head(x = data, head = 3L)
+```
+
+```
+   id age
+1 123  12
+2 234  10
+3 456   9
+```
+
+
+]
+
+???
+
+While everything that exists in R is an object, everything that happens to an object in R is a function
+
+
+---
+
+
+# Recap Functions
+
+.pull-left[
+
+`c(objects)`
+
+```r
+# create numeric vector
+test_score &lt;- c(20, 30, 40, NA)
+
+#create numeric vector
+id &lt;- c(10, 11, 12, 13)
+
+# create character vector
+fav_color &lt;- c("green", "black", 
+               "blue", "violet")
+
+# create character vector
+grade_level &lt;- c("k", 1, 2, 1)
+```
+
+]
+
+.pull-right[
+
+`class(object)`  
+`length(object)`  
+`mean(object, na.rm = FALSE)`
+
+```r
+# check class of test_score
+class(test_score)
+
+# check length of test_score
+length(test_score)
+
+# get mean of test_score, remove NA values
+mean(test_score, na.rm = TRUE)
+```
+
+]
+
+
+???
+
+Last week we used the c() or concatenate function to create 4 vectors or variables 
+
+Then we used the class function to get the class of our test_score variable. The argument for the class function was to include any object. So we included the object test_score. The class was numeric.
+
+Then we used the length function to see how many values we had in our test_score variable. The length was 4.
+
+And last we got the mean of our test_score variable. 
+
+There were two arguments for the function mean. 
+  + The first was to say what object we want the mean for (it has to be a numeric, logical or date object - it can't be character or factor), we chose test_score. 
+  + The second argument was to say whether or not we wanted to calculate the mean if there were NA (or missing values) in our object. 
+  + If we left the default of na.rm = FALSE, then when we ran the function, we actually didn't get an error, we got NA. 
+  + But when we changed the argument to na.rm = TRUE, we got the mean of test_score after removing the NA value.
+
+---
+
+# Recap Functions
+
+.pull-left[
+
+```r
+id
+```
+
+```
+[1] 10 11 12 13
+```
+
+```r
+grade_level
+```
+
+```
+[1] "k" "1" "2" "1"
+```
+
+```r
+test_score
+```
+
+```
+[1] 20 30 40 NA
+```
+
+```r
+fav_color
+```
+
+```
+[1] "green"  "black"  "blue"   "violet"
+```
+]
+
+.pull-right[
+
+```r
+# create a data frame
+sch_data &lt;- data.frame(id, grade_level, 
+                       test_score, fav_color)
+```
+
+
+```
+  id grade_level test_score fav_color
+1 10           k         20     green
+2 11           1         30     black
+3 12           2         40      blue
+4 13           1         NA    violet
+```
+
+
+```r
+str(sch_data)
+```
+
+```
+*'data.frame':	4 obs. of  4 variables:
+ $ id         : num  10 11 12 13
+ $ grade_level: chr  "k" "1" "2" "1"
+ $ test_score : num  20 30 40 NA
+ $ fav_color  : chr  "green" "black" "blue" "violet"
+```
+]
+
+
+???
+
+Last, we created a data frame or a dataset by binding all of our variables together using the data.frame function. We included our id, grade_level, test_score and fav_color variable. And we created a data frame called sch_data.
+
+We learned that each variable/vector needed to have the same number of elements in it, or the data.frame function would not work
+
+Then we used the str() function which also called for an argument of object. And we included our data frame. And it gave us the structure of the dataframe. It told us it was in fact a data frame. And that it had 4 variables and 4 rows. And it also tells us what class all of our variables are.
+
+---
+
+class: inverse
+
+.left-column[
+# Recap Packages
+]
+
+.right-column[
+![](img/readr.PNG)
+]
+
+???
+
+We learned that packages are a collection of functions.
+
+People from all over the world create packages to provide people additional functionality outside of what is already provided in base R.
+
+The package we checked out last week was the readr package
+
+---
+
+class: inverse
+
+.left-column[
+# Recap Packages
+]
+
+.right-column[
+![](img/read_csv.PNG)
+]
+
+
+???
+
+
+The readr package has 6 functions in it
+
+Last week we used the read_csv function to read in a dataset that is freely available on the internet
+
+---
+
+class: inverse
+
+.pull-left[
+
+
+&lt;img src="img/seattle.PNG" width="650px" height="500px" /&gt;
+]
+
+.pull-right[
+
+&lt;img src="img/csv_file2.PNG" width="650px" height="500px" /&gt;
+]
+
+
+???
+
+It was the Seattle pet names dataset. It was available on GitHub and it had 7 variables in it. 
+
+It was a csv file that looked like this. We could have downloaded this file and saved it to our computer and read the data in. But one nice thing about csv files is, you can also read them from a website if they are posted on the internet. Which this one is.
+
+---
+
+class: inverse
+
+.pull-left[
+
+```r
+# Install readr package
+# Never do this again
+
+install.packages("readr")
+
+# Library package
+
+library(readr)
+
+# Read in data using readr and 
+# assign to an object
+
+pet_names &lt;- read_csv(
+  "https://raw.githubusercontent.com/
+  rfordatascience/tidytuesday/master/
+  data/2019/2019-03-26/seattle_pets.csv")
+```
+]
+
+.pull-right[
+![](img/read_csv_args.PNG)
+
+]
+???
+
+So our code to read in the dataset looked like this
+
+We installed the readr package. Remember that we only have to install packages one time. Then they exist on our machine forever. So you never have to do this again.
+
+After we installed the package this way, I said, in the future you would not want to write the installation into your syntax because now it will run every time you run your syntax. It's better to install packages by typing this into your console or using the drop down menu in your files pane.
+
+Next we loaded the package by typing library(readr). Remember, every time we start up R we have to do this. If we close out R and start a new session, R will not remember we want to use this package.
+
+And then the last thing we did was use our read_csv function. Remember there were a ton of arguments for this function. Right now we kept all the defaults and only entered something for the main argument, which is to enter a path to a file. The path needed to be in the form of a string so we needed to put it in quotation marks.
+
+We read the file into an object called pet_names
+
+---
+
+background-image: url(img/pet_names.PNG)
+
+class: inverse
+
+???
+
+After we read the data in, the object pet_names appeared in our enviornment
+
+We have to bring the dataset into R to interact with it. But remember this is just a copy of the data.
+
+Anything we do to this object is not actually happening to the real dataset. It's only happening in R. It's not like Excel where we are opening the actual dataset and making changes to it.
+
+This is just a copy of the dataset inside of R. And it stays in R unless we export it. Which is what we will typically do after we do all of our data cleaning manipulations. We will export a clean version of our dataset, without ever touching the raw, uncleaned version. That's the beauty of using syntax and using R.
+
+---
+
+# Recap Packages
+
+
+
+
+```r
+names(pet_names)
+```
+
+```
+[1] "license_issue_date" "license_number"     "animals_name"      
+[4] "species"            "primary_breed"      "secondary_breed"   
+[7] "zip_code"          
+```
+
+
+```r
+head(pet_names)
+```
+
+```
+# A tibble: 6 x 7
+  license_issue_date license_number animals_name species primary_breed          
+  &lt;chr&gt;              &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;                  
+1 November 16 2018   8002756        Wall-E       Dog     Mixed Breed, Medium (u~
+2 November 11 2018   S124529        Andre        Dog     Terrier, Jack Russell  
+3 November 21 2018   903793         Mac          Dog     Retriever, Labrador    
+4 November 23 2018   824666         Melb         Cat     Domestic Shorthair     
+5 December 30 2018   S119138        Gingersnap   Cat     Domestic Shorthair     
+6 December 16 2018   S138529        Cody         Dog     Retriever, Labrador    
+*# ... with 2 more variables: secondary_breed &lt;chr&gt;, zip_code &lt;chr&gt;
+```
+
+
+???
+
+We then used a few functions to get to know our dataset
+
+We used the names function to see what variable names are in our data
+
+We used the head function to review the first 6 rows of our data, but you'll see here that our screen wasn't big enough to print out all the variables so it says here that we are missing 2 more variables that couldn't print out
+
+---
+
+# Recap Packages
+
+
+```r
+str(pet_names)
+```
+
+```
+*spec_tbl_df [52,519 x 7] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ license_issue_date: chr [1:52519] "November 16 2018" "November 11 2018" "November 21 2018" "November 23 2018" ...
+ $ license_number    : chr [1:52519] "8002756" "S124529" "903793" "824666" ...
+ $ animals_name      : chr [1:52519] "Wall-E" "Andre" "Mac" "Melb" ...
+ $ species           : chr [1:52519] "Dog" "Dog" "Dog" "Cat" ...
+ $ primary_breed     : chr [1:52519] "Mixed Breed, Medium (up to 44 lbs fully grown)" "Terrier, Jack Russell" "Retriever, Labrador" "Domestic Shorthair" ...
+ $ secondary_breed   : chr [1:52519] "Mix" "Dachshund, Standard Wire Haired" NA NA ...
+ $ zip_code          : chr [1:52519] "98108" "98117" "98136" "98117" ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   license_issue_date = col_character(),
+  ..   license_number = col_character(),
+  ..   animals_name = col_character(),
+  ..   species = col_character(),
+  ..   primary_breed = col_character(),
+  ..   secondary_breed = col_character(),
+  ..   zip_code = col_character()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; 
+```
+
+???
+
+We used the str function to explore the structure of our data
+
+You'll see here that the class of the pet_names object is a tibble (similar to a data frame) with 52,519 rows and 7 variables
+
+And the class of all of our variables in this data are character
+
+You can ignore all this attr spec stuff, this happens because we are reading in a csv. It doesn't really matter to us right now.
+
+---
+
+# Recap Packages
+
+
+```r
+print(pet_names)
+```
+
+```
+*# A tibble: 52,519 x 7
+   license_issue_date license_number animals_name species primary_breed         
+*   &lt;chr&gt;              &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;   &lt;chr&gt;                 
+ 1 November 16 2018   8002756        Wall-E       Dog     Mixed Breed, Medium (~
+ 2 November 11 2018   S124529        Andre        Dog     Terrier, Jack Russell 
+ 3 November 21 2018   903793         Mac          Dog     Retriever, Labrador   
+ 4 November 23 2018   824666         Melb         Cat     Domestic Shorthair    
+ 5 December 30 2018   S119138        Gingersnap   Cat     Domestic Shorthair    
+ 6 December 16 2018   S138529        Cody         Dog     Retriever, Labrador   
+ 7 October 04 2017    580652         Millie       Dog     Terrier, Boston       
+ 8 August 09 2018     S142558        Sebastian    Cat     Domestic Shorthair    
+ 9 August 20 2018     S142546        Madeline     Cat     Domestic Shorthair    
+10 December 08 2018   S123830        Cleo         Cat     Domestic Shorthair    
+# ... with 52,509 more rows, and 2 more variables: secondary_breed &lt;chr&gt;,
+#   zip_code &lt;chr&gt;
+```
+
+???
+
+We also used the print function which allowed us to print out the first 10 rows of data. It's similar to the head function.
+
+But you'll notice that both print and head both tell us some structural information about our object as well
+
+R is always making sure you know what you are working with it. It's very helpful.
+
+---
+
+# Recap Packages
+
+
+```r
+View(pet_names)
+```
+
+![](img/view.PNG)
+
+???
+
+We also learned that if we typed View with a capital V in our syntax or console, this function pulls up the dataset in a viewing window where we can actually scroll around and sort our data. We'll use this more today. Remember it has to be capital V because this function was created with a capital letter V and R is case sensitive. 
+
+You cannot edit the data in this view, but it allows us to interact with the data in ways that might seem familiar, like in Excel.
+
+We can also view our data by just double clicking on the object it in our environment.
+
+
+---
+
+class: middle, center
+background-image: url(img/packages2.jpg)
+background-size: cover
+
+# .white[Packages]
+
+???
+
+Ok, enough recap. Let's get into the new fun stuff!
+
+Today we are covering different packages (and functions) that will be helpful for data wrangling
+
+One of the powerful, and also challenging things about R, is that there are many ways to accomplish the same task
+
+When I first started R, this was one of the most confusing parts. I struggled trying to understand which packages/functions to use for each task
+
+So my hope today is to give you an arsenal of packages and functions that you can use for many of the common types of data wrangling issues you will encounter
+
+---
+
+class: center
+
+# Tidyverse
+
+
+**An opinionated collection of R packages designed for data science**
+
+**All packages share an underlying design philosophy, grammar, and data structures**
+
+![](img/dplyr.png) ![](img/haven.png) ![](img/stringr.png)
+
+.left[.footnote[Source: [Tidyverse packages](https://www.tidyverse.org/packages/)]]
+
+???
+
+...
+
+These are just a few of the many packages associated with the Tidyverse
+
+If you are a current R user, you may have an opinion about the tidyverse method. You may love it or hate it. People seem to have very strong opinions about it. I love it and teach it because I think it is a much more approachable method to learning coding in R than the base R method, which is basically using R exactly as intended.
+
+https://github.com/rstudio/hex-stickers
+
+---
+
+# Benefits to Tidyverse
+
+.pull-left[
+
+1. &lt;span style = 'font-size: 150%;'&gt;<svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></svg>&lt;/span&gt; Consistency
+
+2. &lt;span style = 'font-size: 150%;'&gt;<svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>&lt;/span&gt; Intuitive
+
+3. &lt;span style = 'font-size: 150%;'&gt;<svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm160-14.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"/></svg>&lt;/span&gt; Great documentation!
+
+4. &lt;span style = 'font-size: 150%;'&gt;<svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm173.696 119.559l-63.399 63.399c-10.987-18.559-26.67-34.252-45.255-45.255l63.399-63.399a218.396 218.396 0 0 1 45.255 45.255zM256 352c-53.019 0-96-42.981-96-96s42.981-96 96-96 96 42.981 96 96-42.981 96-96 96zM127.559 82.304l63.399 63.399c-18.559 10.987-34.252 26.67-45.255 45.255l-63.399-63.399a218.372 218.372 0 0 1 45.255-45.255zM82.304 384.441l63.399-63.399c10.987 18.559 26.67 34.252 45.255 45.255l-63.399 63.399a218.396 218.396 0 0 1-45.255-45.255zm302.137 45.255l-63.399-63.399c18.559-10.987 34.252-26.67 45.255-45.255l63.399 63.399a218.403 218.403 0 0 1-45.255 45.255z"/></svg>&lt;/span&gt; Great, supportive community!
+
+5. &lt;span style = 'font-size: 150%;'&gt;<svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M288 39.056v16.659c0 10.804 7.281 20.159 17.686 23.066C383.204 100.434 440 171.518 440 256c0 101.689-82.295 184-184 184-101.689 0-184-82.295-184-184 0-84.47 56.786-155.564 134.312-177.219C216.719 75.874 224 66.517 224 55.712V39.064c0-15.709-14.834-27.153-30.046-23.234C86.603 43.482 7.394 141.206 8.003 257.332c.72 137.052 111.477 246.956 248.531 246.667C393.255 503.711 504 392.788 504 256c0-115.633-79.14-212.779-186.211-240.236C302.678 11.889 288 23.456 288 39.056z"/></svg>&lt;/span&gt; It has an entire ecosystem
+
+]
+
+.pull-right[
+
+&lt;img src="img/tidyverse.PNG" width="650px" height="400px" style="display: block; margin: auto;" /&gt;
+]
+
+.footnote[Source: [rviews](https://rviews.rstudio.com/2017/06/08/what-is-the-tidyverse/)]
+
+
+???
+
+Consistency: Remember earlier I said one of the difficult things about R is that there are multiple ways to do the same thing. However, with the tidyverse, it kind of wrangles those infinite options in, and now you can just focus on packages and functions associated with the tidyverse. It helps my head not explode.
+
+Intuitive: We will talk about this more in the next slide, but a lot of times when you are wanting to work with objects using base R, the way you have to work with them is not intuitive to me. However, the way you work with objects in tidyverse IS intuitive to me and I think it will hopefully be intuitive to you as well.
+
+Documentation: All of the tidyverse packages have excellent documentation. I never worry that when I look up a tidyverse function, I am going to have no idea how to use that function.
+
+Community: The community is amazing. Everyone who works on building the tidyverse and everyone who uses the tidyverse are all very friendly people who want R to be accessible to everyone, not just super users. I have found that sometimes the base R community can be a little unapproachable, especially for beginners.
+
+Ecosystem: It also provides an ecosystem for the entire research process. Although we are only focusing on the circled parts for this workshop.
+
+---
+
+# Tidy Evaluation
+
+.center[
+If a vector/variable exists within a data frame (or tibble) there are two ways **base R** gives you to work with that variable
+
+
+```
+# A tibble: 3 x 3
+     id test_score grade_level
+  &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+1   123        350           3
+2   234        380           4
+3   345        290           3
+```
+]
+
+.pull-left[
+
+1. Standard Evaluation
+
+
+```r
+sch_data[["test_score"]]
+```
+
+```
+[1] 350 380 290
+```
+
+
+
+```r
+sch_data[ , 2]
+```
+
+
+
+```r
+sch_data[ , "test_score"]
+```
+
+
+]
+
+.pull-right[
+
+2\. Non-standard Evaluation
+
+
+```r
+sch_data$test_score
+```
+
+```
+[1] 350 380 290
+```
+]
+
+???
+
+Let's talk about another reason I like the tidyverse
+
+...
+
+In the first method, standard evaluation, you have to pass the variable as a string, in quotes, through double brackets on each side to grab the variable from the data frame
+* You can also select variables using single brackets and this row, column format
+  + Everything before the column is a row, everything after is a column
+  + In this first example, we are grabbing a variable based on its index (number)
+  + In the second example, we are grabbing a variable based on its name
+
+Your second option is non-standard evaluation, where you grab the variables by using this $ in conjunction with the name of the data frame
+
+Don't panic if this is all very confusing, we are going to try to not use these methods
+
+---
+
+# Tidy Evaluation
+
+.center[In comes, a 3rd option, **tidy evaluation**.]
+
+.center[Tidy evaluation is a special type of non-standard evaluation used throughout the tidyverse.]
+
+.pull-left[
+
+3\. Tidy Evaluation - Data Masking &amp; Tidy Selection
+
+
+```r
+select(sch_data, test_score, grade_level)
+```
+
+```
+# A tibble: 3 x 2
+  test_score grade_level
+       &lt;dbl&gt;       &lt;dbl&gt;
+1        350           3
+2        380           4
+3        290           3
+```
+]
+
+.pull-right[
+Compare this to base R
+
+
+```r
+sch_data[ , c("test_score", "grade_level")]
+```
+
+```
+# A tibble: 3 x 2
+  test_score grade_level
+       &lt;dbl&gt;       &lt;dbl&gt;
+1        350           3
+2        380           4
+3        290           3
+```
+]
+
+???
+
+...
+
+Tidy Evaluation removes the need for using the the brackets and quotes or the $. Any packages/functions that use tidy evaluation allow you to just simply call your data frame and also your variable with no quotes
+
+Here we are using the function "select" and we are selecting the variables test_score and grade_level from the data frame sch_data
+
+---
+
+# Tidy Evaluation
+
+.center[Filter our dataset to cases where **test_score** is greater than 300 and **grade_level** is 3]
+
+.pull-left[
+Tidy Evaluation
+
+
+```r
+filter(sch_data, test_score &gt; 300 
+       &amp; grade_level == 3)
+```
+
+```
+# A tibble: 1 x 3
+     id test_score grade_level
+  &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+1   123        350           3
+```
+]
+
+.pull-right[
+
+Base R
+
+
+```r
+sch_data[sch_data$test_score &gt; 300 
+         &amp; sch_data$grade_level == 3, ]
+```
+
+```
+# A tibble: 1 x 3
+     id test_score grade_level
+  &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+1   123        350           3
+```
+]
+
+???
+
+Here's another example where we compare tidy evaluation to base R
+
+You can see that tidy evaluation requires less typing and it's more clear
+
+---
+
+# The Pipe Operator
+
+
+.pull-left[
+
+![](img/pipe.png)
+]
+
+.pull-right[
+
+Without the pipe
+
+```r
+sch_data &lt;- read_csv("school_data.csv")
+
+sch_data2 &lt;- select(sch_data, id, test_score)
+
+sch_data3 &lt;- filter(sch_data2, 
+                    test_score &gt; 300)
+```
+
+With the pipe
+
+
+```r
+sch_data &lt;- read_csv("school_data.csv") %&gt;%
+  select(id, test_score) %&gt;%
+  filter(test_score &gt; 300)
+```
+
+
+]
+
+.footnote[Source: [magrittr package](https://magrittr.tidyverse.org/)]
+
+???
+
+The tidyverse also has special operator called a pipe operator. It comes from the package magrittr.
+
+This pipe allows us to forward a value or a result of a function, into the next function.
+
+The operator has two aims: decrease development time and improve readability and maintainability of code
+
+Let's look at our example
+
+Notice I only have to call my data one time. And I only have to create an object one time. 
+
+---
+
+# The Pipe Operator
+
+.pull-left[
+
+```r
+data_frame %&gt;%
+  function1 %&gt;%
+  function2 %&gt;%
+  function3 %&gt;%
+```
+]
+
+.pull-right[
+
+
+```r
+use_this_data %&gt;%
+  then_do_this %&gt;%
+  then_do_something_else %&gt;%
+  then_do_another_thing
+```
+
+]
+
+.center[
+Objects you create in a step, can be used in later steps
+
+```r
+sch_data %&gt;%
+  mutate(new_test_score = test_score + 200) %&gt;%
+  filter(new_test_score &gt; 500)
+```
+
+```
+# A tibble: 2 x 4
+     id test_score grade_level new_test_score
+  &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;
+1   123        350           3            550
+2   234        380           4            580
+```
+]
+
+-----
+
+&lt;style&gt;
+
+.purple{
+
+color: purple;
+
+}
+&lt;/style&gt;
+
+.center[.purple[SIDE NOTE: There is a new native pipe operator that looks like this `**|&gt;**`]]
+
+???
+
+Again, the pipe operator allows you to chain several functions together rather than writing them separately
+
+
+---
+
+class: inverse, middle, center
+
+# Data Cleaning Functions
+
+???
+
+We are going to cover a TON of data cleaning functions today
+
+It is going to feel overwhelming
+
+My intention is not for you to memorize all of the functions that I show you today
+
+My intention is to show you that they exist and these types of transformations are possible and you can ALWAYS come back to these slides any time you run into a data wrangling problem, and see what function we used to solve the problem
+
+---
+
+
+# Files for Today
+
+.left-column[
+In our practice folder we have:
+
+1. .R "install packages" syntax file
+1. 4 .R "example functions" syntax files with pre-filled code
+1. data dictionary
+1. .csv data file
+1. .xlsx data file
+1. .sav data file
+
+]
+
+.right-column[
+
+Data Files are 5 x 6
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; SurveyDate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; id &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; consent &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; dist_sch_name &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; degree &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; yrs teach &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2022-05-15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1234 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kirkwood - Nipher Middle School &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 5 yrs &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2022-05-15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1234 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2022-05-16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1235 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Webster - Webster Groves High School &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2022-05-17 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1236 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kirkwood - Nipher Middle &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1 year &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 2022-05-17 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1237 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+???
+
+First, did everyone get the zip folder with the files?
+
+Second, did everyone unzip the folder and save to your desktop?
+
+Third, did everyone run the packages_to_install file?
+
+---
+
+class: center, inverse
+
+# Data Dictionary
+
+
+![](img/dictionary.PNG)
+
+???
+
+The dictionary should tell you some general information about what exists in your data and how we might want to transform our data
+
+---
+
+# Functions for Data Cleaning
+
+.pull-left[
+
+**Read in data**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|read in csv file | readr | read_csv |
+|read in xlsx file | readxl | read_excel |
+|read in sav file | haven | read_sav |
+
+**Set relative path**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|check working directory | base | getwd |
+|set relative path | here | here |
+|set relative path | fs | path |
+
+]
+
+.pull-right[
+
+**Rename variables**
+
+|Task | Package | Function |
+|---------|-----------|-----------|
+|rename variables | dplyr | rename |
+|rename all variables | purrr | set_names|
+|concatenate to variable names | dplyr | rename_with |
+
+**Review data**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|review data structure | base |str|
+|transposed printed data | dplyr | glimpse |
+|summarize data | base | summary |
+|table variables | janitor | tabyl|
+
+]
+
+???
+
+Ok, let's learn how to do our first 4 transformations in R
+
+We are going to go through examples of each of these transformations
+
+---
+
+# Read in Data
+
+.panelset[
+.panel[.panel-name[read_csv]
+
+
+```r
+read_csv(file = "file_name.csv", skip = 1, col_names = TRUE, na = "-99")
+```
+
+* file = file name (including path if necessary) as a string
+
+* skip = Number of lines to skip before reading in data
+
+* col_names = Either TRUE or FALSE, if TRUE the first row of the input will be used as column names. If FALSE, column names will be generated automatically: X1, X2, X3, etc.
+
+* na = Character vector of strings to interpret as missing values
+
+]
+
+.panel[.panel-name[read_excel]
+
+
+```r
+read_excel(path = "file_name.xlsx", sheet = "Sheet 1", 
+                   skip = 1, col_names = TRUE, na = "-99")
+```
+
+* path = file name (including path if necessary) as a string
+
+* sheet = Sheet to read. Either a string (name of sheet), or an integer (position of sheet).
+
+* skip = Minimum number of rows to skip before reading anything
+
+* col_names = Either TRUE or FALSE, TRUE to use the first row as column names, FALSE to get default names
+
+* na = Character vector of strings to interpret as missing values. By default readxl treats blanks cells as missing.
+
+]
+
+.panel[.panel-name[read_sav]
+
+
+```r
+read_sav(file = "file_name.sav", skip = 1, user_na = TRUE)
+```
+
+* file = file name (including path if necessary) as a string
+
+* skip = Number of lines to skip before reading data
+
+* user_na = Either TRUE or FALSE, if TRUE variables with user defined missing values will be read in as labelled objects. If FALSE, user-defined missing values will be converted to NA.
+
+]
+]
+
+???
+
+We have seen this function before, but we are going to learn a few more arguments for this function
+
+It will encode those values as NA
+
+Pull up a PSPP file to show
+
+---
+
+# Create Absolute Paths
+
+.pull-left[
+When you open your syntax file to read in your data, if your working directory is not set to where your data file is, you will need to designate a path for your computer to find your data file.
+
+You can find your working directory by typing `getwd()` in your console
+
+
+```r
+getwd()
+```
+
+
+```r
+"C:/Users/Crystal/Desktop/schoen_example_files"
+```
+
+]
+
+.pull-right[
+
+In R, paths should be created with "/"
+  - Note this is different than the "\" that Windows uses
+
+For example, an absolute path to my `tch_survey.csv` file:
+
+Windows: 
+"C:\Users\Crystal\Desktop\schoen_example_files\
+data\tch_survey.csv"
+
+R: 
+"C:/Users/Crystal/Desktop/schoen_example_files/
+data/tch_survey.csv"
+
+R: 
+"C:\\\Users\\\Crystal\\\Desktop\\\schoen_example_files\\\
+data\\\tch_survey.csv"
+]
+
+???
+
+The examples we just reviewed all assumed that the data files exist in the same folder as our working directory. So all we had to do was enter the name of the file because R knew exactly where to look for the data files.
+
+When you open up an existing syntax file, typically your working directory will be wherever that syntax file lives.
+
+If our data files are not in the same folder as our syntax, for example they are one level deeper in a folder called "data", then we will need to designate a path so that R knows how to find our data files
+
+You can find your working directory by typing getwd() in your console
+
+...
+
+If we copy and paste our path from Windows into R it will not work
+
+The backslash is an "escape" character in R and so R does not interpret it as part of our path
+
+We will need to either change all of our forward slashes to back slashes or add double back slashes to escape our backslash
+
+And then I could use this full, absolute path in my read_csv function or my read_excel function
+
+
+---
+
+# Create Relative Paths
+
+The problems with absolute paths include:
+
+1. If you share files, other users will not have the same directory structure as you, so they will need to recreate the file path
+2. If you alter your directory structure, you will need to rewrite your paths
+3. If you copy and paste file paths from Windows, you will need to fix all of your backslashes
+  - Some paths can be very long and this leaves a lot of room for error
+
+.center[In come "**relative paths**"]
+
+.pull-left[
+
+![](img/directory.PNG)
+]
+
+.pull-right[
+
+"C:/Users/Crystal/Desktop/schoen_example_files"
+
+My relative path starts at the top of this working directory (or the root directory)
+
+`"./data/tch_survey.csv"`
+
+]
+
+Source: [ExcelQuick](https://excelquick.com/r-programming/importing-data-absolute-and-relative-file-paths-in-r/)
+
+???
+
+...
+
+Right now, my syntax file lives within this folder (schoen_example_files) and so that will be my working directory
+
+And my relative path starts at the top of this working directory (or root directory)
+
+So instead of typing that full path out, I can add one dot to indicate that my path should start at my current root directory
+
+But I actually want to get rid of these slashes all together so I want to introduce 2 functions we are going to use to build relative paths
+
+https://ytakemon.github.io/2019-10-22-R-BCCRC/02-filedir/
+
+---
+
+# Relative Paths
+
+.panelset[
+.panel[.panel-name[here]
+
+
+```r
+here()
+
+read_csv(file = here("data", "tch_survey.csv"))
+```
+
+`"C:/Users/Crystal/Desktop/schoen_example_files"`
+
+&lt;br&gt;
+
+If your file is outside of your working directory, you can navigate up using `..`
+  * Ex: My data file is in "C:/Users/Crystal/Desktop/other_project/tch_survey.csv"
+
+I can go up one folder to the "Desktop" folder and then build my path from there
+
+
+```r
+read_csv(file = here("..", "other_project", "tch_survey.csv"))
+```
+
+
+]
+
+.panel[.panel-name[path]
+
+
+```r
+path_wd()
+
+read_csv(file = path(".", "data", "tch_survey.csv"))
+```
+
+`"C:/Users/Crystal/Desktop/schoen_example_files"`
+
+&lt;br&gt;
+
+If your file is outside of your working directory, you can navigate up using `..`
+  * Ex: My data file is in "C:/Users/Crystal/Desktop/other_project/tch_survey.csv"
+
+I can go up one folder to the "Desktop" folder and then build my path from there
+
+
+```r
+read_csv(file = path("..", "other_project", "tch_survey.csv"))
+```
+
+]
+]
+
+???
+
+If you type here() it will show you your current working directory
+
+And once you know you are in the correct working directory, you can build a path structure from there by just listing the folders and files you need within that root directory
+
+
+---
+
+# Name variables
+
+.panelset[
+.panel[.panel-name[rename]
+
+Formula is `new name = old name`
+
+
+```r
+data %&gt;%
+  rename(new name = old name)
+```
+
+If the old name has spaces in it, you need to surround the name in backticks ` `
+
+
+```r
+data %&gt;%
+  rename(tch_gender = x1, tch_race = `teacher race`)
+```
+
+
+]
+
+.panel[.panel-name[set_names]
+
+
+The number of names must equal the number of variables in the data frame, in the same order
+
+Names must be in ""
+
+
+```r
+data %&gt;%
+  set_names("new name 1", "new name 2", "new name 3")
+```
+]
+
+.panel[.panel-name[rename_with]
+
+.pull-left[
+
+
+```r
+data %&gt;% 
+  rename_with(~ function, variables)
+```
+
+* `~` = as a function of
+
+* function = any function you want to use to rename your variables
+
+* variables = any variables you want to rename with your function
+
+]
+
+.pull-right[
+A common function to include is `paste0` which is a base function
+
+This transformation below would add `_1819` to the end of variable names
+
+The `.` means paste my variable name **first**, then add my string.
+
+
+```r
+data %&gt;% 
+  rename_with(~ paste0(., "_1819"), 
+              c(variable1, variable2))
+```
+
+]
+]
+]
+
+???
+
+1. rename
+So now that we have read our data in, one thing we might want to do is rename our variables
+
+The first thing I want to point out here is that we are introducing that pipe operator. And we are going to see it for almost every function from here on out.
+
+It will always be in this format, where we start by calling our data frame and then we pipe that data into a function
+
+Any variable name with spaces need to be surrounded by back ticks. R cannot handle spaces in variable names.
+
+
+2. rename_with
+
+This one is a lot more complicated to use, but I think it's a really helpful one to show you because as we know, there are many times when we need to concatenate time to our variable names when we merge data over time and this is the most efficient way to do that
+
+And what the paste0 function does is concatenates two things together
+
+And what's great is, no matter if you have 2 variables or 2000 variables, I can concatenate time to all of my variables in 2 seconds
+
+---
+
+# Review Data
+
+Data
+
+.panelset[
+.panel[.panel-name[str]
+
+
+```r
+data %&gt;%
+  str()
+```
+
+```
+'data.frame':	3 obs. of  2 variables:
+ $ id : num  123 234 456
+ $ age: num  12 10 9
+```
+
+
+```
+tibble [5 x 6] (S3: tbl_df/tbl/data.frame)
+ $ start_date   : chr [1:5] "2022-05-15" "2022-05-15" "2022-05-16" "2022-05-17" ...
+ $ tch_id       : num [1:5] 1234 1234 1235 1236 1237
+ $ consent      : num [1:5] 1 NA 1 1 2
+ $ dist_sch_name: chr [1:5] "Kirkwood - Nipher Middle School" "" "Webster - Webster Groves High School" "Kirkwood - Nipher Middle" ...
+ $ degree       : num [1:5] 1 NA 2 6 NA
+ $ yrs_teach    : chr [1:5] "5 yrs" "" "4" "1 year" ...
+```
+
+]
+.panel[.panel-name[glimpse]
+
+
+```r
+data %&gt;%
+  glimpse()
+```
+
+
+```
+Rows: 5
+Columns: 6
+$ start_date    &lt;chr&gt; "2022-05-15", "2022-05-15", "2022-05-16", "2022-05-17", ~
+$ tch_id        &lt;dbl&gt; 1234, 1234, 1235, 1236, 1237
+$ consent       &lt;dbl&gt; 1, NA, 1, 1, 2
+$ dist_sch_name &lt;chr&gt; "Kirkwood - Nipher Middle School", "", "Webster - Webste~
+$ degree        &lt;dbl&gt; 1, NA, 2, 6, NA
+$ yrs_teach     &lt;chr&gt; "5 yrs", "", "4", "1 year", ""
+```
+
+]
+
+.panel[.panel-name[summary]
+
+.pull-left[
+
+```r
+data %&gt;%
+  summary()
+```
+]
+
+.pull-right[
+
+```
+  start_date            tch_id        consent     dist_sch_name     
+ Length:5           Min.   :1234   Min.   :1.00   Length:5          
+ Class :character   1st Qu.:1234   1st Qu.:1.00   Class :character  
+ Mode  :character   Median :1235   Median :1.00   Mode  :character  
+                    Mean   :1235   Mean   :1.25                     
+                    3rd Qu.:1236   3rd Qu.:1.25                     
+                    Max.   :1237   Max.   :2.00                     
+                                   NA's   :1                        
+     degree     yrs_teach        
+ Min.   :1.0   Length:5          
+ 1st Qu.:1.5   Class :character  
+ Median :2.0   Mode  :character  
+ Mean   :3.0                     
+ 3rd Qu.:4.0                     
+ Max.   :6.0                     
+ NA's   :2                       
+```
+
+]
+]
+
+.panel[.panel-name[tabyl]
+
+.pull-left[
+
+```r
+data %&gt;%
+  tabyl(variable name)
+```
+
+
+```
+ degree n percent valid_percent
+      1 1     0.2     0.3333333
+      2 1     0.2     0.3333333
+      6 1     0.2     0.3333333
+     NA 2     0.4            NA
+```
+
+]
+
+.pull-right[
+
+
+```r
+data %&gt;%
+  tabyl(variable1, variable2)
+```
+
+
+```
+                        dist_sch_name 1 2 6 NA_
+                                      0 0 0   2
+             Kirkwood - Nipher Middle 0 0 1   0
+      Kirkwood - Nipher Middle School 1 0 0   0
+ Webster - Webster Groves High School 0 1 0   0
+```
+
+]
+]
+]
+
+???
+
+1. str
+
+You get the structure of your data frame as well as the structure of each variable
+
+2. glimpse 
+
+A transposed version of print. Allows you to see the number of rows and columns as well as the class of your variables. Much more simplified look at your data
+
+3. summary
+
+Gives you descriptive statistics of your variables
+
+4. tabyl
+
+Gives you counts of your variables 
+
+You can table one variable or two variables to get a cross tab
+
+---
+
+class: center, middle
+
+# <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> Let's Practice <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+
+---
+
+# Functions for Data Cleaning
+
+.pull-left[
+
+**Find and remove duplicates**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|find duplicates| janitor | get_dupes |
+|remove duplicates | dplyr | distinct |
+
+**Filter data**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|filter rows of data | dplyr | filter |
+
+]
+
+.pull-right[
+
+**Select variables**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|select variables | dplyr | select |
+
+**Create new variables**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|create new variable|dplyr | mutate|
+]
+
+---
+
+# Remove duplicates
+
+.panelset[
+.panel[.panel-name[find-duplicates]
+
+An example identifier variable would be a student or teacher id
+
+
+```r
+data %&gt;%
+  get_dupes(identifier variable)
+```
+
+
+```
+# A tibble: 2 x 7
+  tch_id dupe_count start_date consent dist_sch_name            degree yrs_teach
+   &lt;dbl&gt;      &lt;int&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt; &lt;chr&gt;    
+1   1234          2 2022-05-15       1 "Kirkwood - Nipher Midd~      1 "5 yrs"  
+2   1234          2 2022-05-15      NA ""                           NA ""       
+```
+
+]
+
+.panel[.panel-name[remove-duplicates]
+
+.pull-left[
+
+
+```r
+data %&gt;%
+  distinct(identifier variable, 
+           .keep_all = TRUE)
+```
+
+* .keep_all = TRUE means that I want to keep all of my variables in the data
+
+Using distinct will keep the first instance and drop all remaining duplicates. 
+
+Depending on how your data is organized, this may not be what you want.
+]
+
+.pull-right[
+
+Consider using the `arrange` function from the `dplyr` package to arrange the data how you want before dropping the duplicates
+
+For example, if date was collected, you may want to arrange by descending date to keep the most recent case 
+
+
+```r
+data %&gt;%
+  arrange(tch_id, desc(date)) %&gt;%
+  distinct(tch_id, .keep_all = TRUE)
+```
+]
+]
+]
+
+???
+
+To find duplicates you can use this function get_dupes
+
+An example identifier variable would be a student or teacher id, and it would print out the duplicate rows
+
+And then when you want to remove those duplicates, you can use the distinct function
+
+
+
+---
+
+# Filter data
+
+.panelset[
+.panel[.panel-name[filter-operators]
+
+.pull-left[
+Filtering/Comparison operators include 
+ - `&gt;`
+ - `&lt;`
+ - `&gt;=`
+ - `&lt;=`
+ - `==`
+ - `!` or `!=`
+ - `%in%`
+ - `between`
+]
+
+.pull-right[
+Logical operators used to filter on multiple columns:
+
+|Operator|Meaning          |
+|--------|-----------------|
+| &amp;#124;   | AND/OR          |
+|  &amp;     | AND             |
+| ,      | AND             |
+| xor    | OR (not both)   |
+]
+]
+
+.panel[.panel-name[filter-numeric]
+
+.pull-left[
+
+
+
+```r
+data %&gt;%
+  filter(logical expression)
+```
+]
+
+.pull-right[
+Here you would use a variable in your data and a comparison operator
+
+
+```r
+data %&gt;%
+  filter(numeric variable == 1)
+```
+
+
+```r
+data %&gt;%
+  filter(numeric variable &gt;= 50)
+```
+]
+
+]
+
+.panel[.panel-name[filter-character]
+
+.pull-left[
+I can also filter on non-numeric variables
+
+
+```r
+data %&gt;%
+  filter(logical expression)
+```
+]
+
+.pull-right[
+
+
+```r
+data %&gt;%
+  filter(character variable == "some name")
+```
+
+
+```r
+data %&gt;%
+  filter(character variable %in% 
+           c("some name", "some other name"))
+```
+
+]
+]
+
+.panel[.panel-name[filter-na]
+
+I can filter based on NA values
+
+The function `is.na` is a base function that returns either TRUE or FALSE which the filter function uses to determine who to filter on
+
+
+```r
+data %&gt;%
+  filter(!is.na(variable))
+```
+
+]
+
+.panel[.panel-name[filter-multiple-vars]
+
+I can also filter using multiple variables
+
+
+```r
+data %&gt;%
+  filter(variable1 == 1 &amp; variable2 == 5)
+```
+
+
+```r
+data %&gt;%
+  filter(variable1 == "some text" | variable2 == "other text")
+```
+
+]
+]
+
+???
+
+Here we use ==, rather than just = because these are logical operators. We are comparing values and seeing if they are equal (TRUE) or not equal (FALSE), in order to decide if that row will be kept in the dataset
+
+You can also filter on non-numeric variables, the logic will look similar
+
+---
+
+# Select Variables
+
+.panelset[
+.panel[.panel-name[select-to-keep]
+
+You can either select the variables you want to keep 
+
+
+```r
+data %&gt;%
+  select(variable1:variable3)
+```
+
+
+```r
+data %&gt;%
+select(variable1, variable2, variable3)
+```
+
+
+]
+
+.panel[.panel-name[select-to-remove]
+
+Or select the variables you want to remove (using "-")
+
+
+```r
+data %&gt;%
+  select(-variable5)
+```
+
+
+```r
+data %&gt;%
+  select(-c(variable5, variable6, variable7))
+```
+
+]
+
+.panel[.panel-name[select-with-tidy-select]
+
+You can also select variables using selection helpers.
+
+These include: `starts_with`, `ends_with`, and `contains`.
+
+
+```r
+data %&gt;%
+  select(contains("bmtl"))
+```
+
+
+```r
+data %&gt;%
+  select(ends_with("_1819"))
+```
+
+]
+]
+
+???
+
+These are special statements within the tidyverse that help you do things quicker and more efficiently
+
+---
+
+# Create new variables
+
+.pull-left[
+
+Any time you want to create a new variable within a data frame, you use `mutate`
+
+This may be creating an entirely new variable or it may be recalculating, transforming, or recoding an existing variable
+
+
+```r
+data %&gt;%
+  mutate(new variable name = 
+           a constant or some expression)
+```
+
+* `new variable name` = this can either be a completely new name, or you can use an existing name and write over the existing variable
+
+]
+
+.pull-right[
+
+
+```r
+data %&gt;%
+  mutate(cohort = 1)
+```
+
+
+```r
+data %&gt;%
+  mutate(age_months = age_years*12)
+```
+
+
+```r
+data %&gt;%
+  mutate(sch_name = recode(
+    sch_name, 
+    `nipher middle school` = "Nipher Middle"))
+  ))
+```
+
+]
+
+---
+
+class: center, middle
+
+# <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> Let's Practice <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+
+---
+
+# Functions for Data Cleaning
+
+.pull-left[
+
+**Edit strings in variables**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|remove strings | stringr | str_remove_all |
+|replace strings | stringr | str_replace_all |
+
+**Change class**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|change to numeric | base | as.numeric |
+|change to character| base | as.characater|
+|change to date|lubridate|several functions|
+
+]
+
+.pull-right[
+
+**Split variables**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|separate into more than one variable | tidyr | separate |
+
+**Recode variables**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|recode a variable|dplyr | recode|
+|conditional operator to regroup/recode a variable|dplyr|case_when|
+|conditional function to regroup/recode a variable|dplyr|if_else
+]
+
+---
+
+# Edit Strings in Variables
+
+.panelset[
+.panel[.panel-name[str_remove]
+
+.pull-left[
+
+This function is used to remove strings in variables
+
+
+```r
+data %&gt;%
+  mutate(new variable name = 
+           str_remove_all(variable, 
+                          pattern))
+```
+
+* variable = the variable that has the string/s we want to remove
+* pattern = any pattern you want removed from a variable (could be words, symbols, or numbers)
+
+]
+
+.pull-right[
+
+
+```r
+data %&gt;%
+  mutate(variable1 = 
+           str_remove_all(
+             variable1, pattern = "$"))
+```
+
+]
+]
+
+.panel[.panel-name[str_replace]
+
+.pull-left[
+This function is used to replace strings in variables
+
+
+```r
+data %&gt;%
+  mutate(new variable name = 
+           str_replace_all(
+             variable, pattern, 
+             replacement))
+```
+
+* variable = the variable that has the string/s we want to replace
+
+* pattern = any pattern you want to replace in a variable
+
+* replacement = what you want to replace the pattern with
+]
+
+.pull-right[
+
+
+
+```r
+data %&gt;%
+  mutate(variable1 = 
+           str_replace_all(
+             variable1, pattern = "yr",
+             replacement = "YEAR"))
+```
+
+]
+]
+]
+
+???
+
+Remember that we have to use mutate because we are transforming a variable and we have to write that transformation into a new variable
+
+
+---
+
+# Change class
+
+.panelset[
+.panel[.panel-name[class-numeric]
+
+
+```r
+data %&gt;%
+  mutate(new variable = as.numeric(character variable))
+```
+
+Note: If your character variable still has character values in it (letters, symbols, spaces), those values will be coded to NA when you change the class to numeric. You should deal with those values before recoding to numeric.
+
+]
+
+.panel[.panel-name[class-character]
+
+
+
+```r
+data %&gt;%
+  mutate(new variable = as.character(numeric variable))
+```
+
+]
+
+.panel[.panel-name[class-date]
+
+.pull-left[
+
+`lubridate` has many functions to deal with character variables whose class needs to be date. 
+
+A few of those include:
+
+`mdy()` : The character variable is in the format of month-day-year
+
+`ymd()` : The character variable is in the format of year-month-day
+
+`dmy()` : The character variable is in the format of day-month-year
+]
+
+
+```r
+data %&gt;%
+  mutate(new variable = function(character date))
+```
+
+If our date variable had values like "03-22-2022" then we could use `mdy()`
+
+
+```r
+data %&gt;%
+  mutate(date = mdy(date))
+```
+
+]
+]
+
+???
+
+Say I have a character variable and I want to convert it to numeric, I can use mutate to create a new variable and then use the function as. numeric to transform my existing character variable
+
+Changing variables to dates can be a little more complicated because there is no one catch-all way to do this. It more so depends on how your existing variable is formatted
+
+
+---
+
+# Split Variables
+
+.pull-left[
+Sometimes a variable contains more than one piece of information and needs to be split into 2 or more variables
+
+
+```r
+data %&gt;%
+  separate(variable, 
+           into,
+           sep)
+```
+
+* into = what will the new variable names be after your variable is split
+
+* sep = what separates the pieces of information
+
+The default is to remove the input column after separating. If you do not want this, you can add the argument `remove = FALSE`
+]
+
+.pull-right[
+
+```r
+data %&gt;%
+  separate(city_state,
+           into = c("city", "state"),
+           sep = ",")
+```
+
+]
+
+???
+
+This is a special circumstance where we don't have to use mutate because we aren't creating a new variable. We are splitting a variable into multiple variables and we will name those new variables within the separate function.
+
+---
+
+# Recode Variables
+
+.panelset[
+.panel[.panel-name[recode]
+
+.pull-left[
+The formula for `recode` is `old value = new value`
+
+The old value is a named value. If it is a number it needs to be surrounded in backticks.
+
+Any value you do not recode will be copied over as is.
+
+```r
+data %&gt;%
+  mutate(new variable = 
+           recode(variable, 
+                  old value = new value))
+```
+]
+
+.pull-right[
+
+
+```r
+data %&gt;%
+  mutate(variable1_r = 
+           recode(variable1, `2` = 0))
+```
+
+
+```r
+data %&gt;%
+  mutate(variable2 = recode(variable2, 
+                            f = "free",
+                            r = "reduced"))
+```
+
+]
+]
+.panel[.panel-name[case_when]
+
+.pull-left[
+
+
+```r
+data %&gt;%
+  mutate(new variable =
+           case_when(
+             logical condition ~ a value,
+             TRUE ~ another value
+           ))
+```
+
+* some logical argument = a logical condition, usually comparing a variable to a value or another variable
+
+* `~` = "then replace with" 
+
+* a value = character, numeric, NA, date value, or an existing variable
+
+* `TRUE` = "if it doesn't meet the criteria already given then"
+
+]
+
+.pull-right[
+
+```r
+data %&gt;%
+  mutate(school_name =
+    case_when(
+      school_name == 
+        "sch a" ~ 
+        "School A", 
+      school_name == 
+        "schoola" ~
+        "School A"
+      TRUE ~ school_name
+    )
+  )
+```
+
+]
+]
+
+.panel[.panel-name[if_else]
+
+.pull-left[
+
+
+```r
+data %&gt;%
+  mutate(new variable = 
+           if_else(condition, true, false))
+```
+
+* condition = a logical condition, usually comparing a variable to a value or another variable
+
+* true = if the condition is true, use this value
+
+* false = if the condition is false, use this value
+
+]
+
+.pull-right[
+
+
+```r
+data %&gt;%
+  mutate(collapsed_variable = 
+           if_else(variable == 5, 0, 1))
+```
+
+]
+]
+]
+
+???
+
+1. recode
+
+Note that this is the opposite of the formula we saw for rename earlier. So it gets quite confusing.
+
+2. case_when
+
+This is much more complicated to understand as a beginner than using recode, but it is way more efficient and powerful if you can wrap your head around it
+
+3. if_else
+
+This is similar to case_when, but should only be used when there is really only like one criteria to recode. Otherwise, use recode or case_when
+
+---
+
+
+class: center, middle
+
+# <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> Let's Practice <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+
+---
+
+# Functions for Data Cleaning
+
+.pull-left[
+
+**Recode NAs**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|recode to NA | dplyr | na_if |
+|recode NA to a value | tidyr | replace_na |
+
+**Add value labels**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|add value labels | labelled | set_value_labels |
+|review value labels| labelled | val_labels|
+|add labelled missing values|labelled|set_na_values|
+|review missing value labels | labelled | na_values|
+
+]
+
+.pull-right[
+
+**Add variable labels**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|add variable labels | labelled | set_variable_labels|
+|review variable labels | labelled | var_label |
+
+**Export data**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|export csv | readr | write_csv|
+|export xlsx| openxlsx|write.xlsx|
+|export sav | haven | write_sav
+
+]
+
+---
+
+# Recode NA
+
+.panelset[
+.panel[.panel-name[recode-to-na]
+
+.pull-left[
+
+```r
+data %&gt;%
+  na_if(value)
+```
+
+* value = the value you want to replace with NA
+
+This function as is will apply to the entire data frame
+]
+
+.pull-right[
+If you want to only apply this to certain variables, then you need to use the `across` function from `dplyr` to select variables
+
+
+```r
+data %&gt;%
+  mutate(across(c(variable1:variable3), 
+                na_if, -999))
+```
+]
+]
+
+.panel[.panel-name[replace-na]
+
+.pull-left[
+
+```r
+data %&gt;% 
+  mutate(variable = replace_na(
+    variable, value))
+```
+
+* value = a value to replace NA with
+]
+
+.pull-right[
+
+```r
+data %&gt;%
+  mutate(iss = replace_na(iss, 0))
+```
+
+You can also replace NA values for multiple variables using the function `across` from the `dplyr` package.
+
+
+```r
+data %&gt;% 
+  mutate(across(c(variable1:variable10), 
+                ~ replace_na(., -999))
+```
+
+* `~` = as a function of
+* `.` = The dot means, refer to the variables referenced earlier for where to replace the NAs
+
+]
+]
+]
+
+???
+
+Sometimes we might want to recode a certain value to NA
+
+replace_na: I'm not sure if you remember me talking a while back ago, how sometimes a certain district would send me a file of ISS counts for students and when a student had no ISS referrals, they would leave the cell blank, this is a way for me to take care of that
+
+---
+
+# Add Value Labels
+
+.panelset[
+.panel[.panel-name[add-value-labels]
+
+.pull-left[
+Value labels are helpful if you are exporting to a software that can support them, such as SPSS
+
+
+```r
+data %&gt;% 
+  set_value_labels(
+  variable = c("label1" = value, 
+               "label2" = value))
+```
+
+
+```r
+data %&gt;%
+  set_value_labels(
+    q1 = c( "no" = 0, "yes" = 1),
+    q2 = c("no" = 0, "yes" = 1)
+  )
+```
+
+
+]
+
+.pull-right[
+You can review your value labels
+
+
+```r
+data %&gt;% 
+  val_labels()
+```
+
+```
+$q1
+ no yes 
+  0   1 
+
+$q2
+ no yes 
+  0   1 
+```
+]
+]
+
+.panel[.panel-name[set-missing-values]
+
+.pull-left[
+Setting missing values are helpful if you are exporting to a program that can support them, like SPSS
+
+If you have missing values like -99 or -98, those will not be recognized as missing values in programs like SPSS unless you label them as missing values before exporting
+
+Be aware that R will not consider your labelled missing values as NA when conducting calculations
+
+
+```r
+data %&gt;% 
+  set_na_values(Variable = value)
+```
+]
+
+.pull-right[
+
+You can have one or more values labelled as missing
+
+
+```r
+data %&gt;%
+  set_na_values(variable1 = c(-97, -98))
+```
+
+
+You can review your missing value labels
+
+
+
+
+```r
+data %&gt;%
+  na_values()
+```
+
+```
+$variable1
+[1] -97 -98
+
+$variable2
+NULL
+```
+
+]
+]
+]
+
+---
+
+# Add Variable Labels
+
+Variable labels can be very helpful if you are exporting your data to a program that supports them, like SPSS
+
+
+```r
+data %&gt;%
+  set_variable_labels(variable = "label")
+```
+
+You can review variable labels
+
+
+
+
+
+```r
+data %&gt;%
+  var_label()
+```
+
+```
+$variable1
+[1] "Why does my dog stare at me?"
+
+$variable2
+[1] "Is my dog happy?"
+```
+
+---
+
+# Export Data
+
+.panelset[
+.panel[.panel-name[export-csv]
+
+
+```r
+write_csv(object, file)
+```
+
+* object name = the final data frame or tibble to be exported
+
+* file = the path to write the file to (which includes the name and extension of your file)
+
+Same as when we imported data, if you are not exporting your file to your working directory, you will need to include your path in the file argument.
+
+
+```r
+write_csv(data, here("data", "my-data-clean.csv"))
+```
+]
+
+.panel[.panel-name[export-xlsx]
+
+
+```r
+write.xlsx(object, file)
+```
+
+* object name = the final data frame or tibble to be exported
+
+* file = the path to write the file to (which includes the name and extension of your file)
+
+Same as when we imported data, if you are not exporting your file to your working directory, you will need to include your path in the file argument.
+
+
+```r
+write.xlsx(data, here("data", "my-data-clean.xlsx"))
+```
+]
+.panel[.panel-name[export-sav]
+
+
+```r
+write_sav(object, path)
+```
+
+* object name = the final data frame or tibble to be exported
+
+* path = the path to write the file to (which includes the name and extension of your file)
+
+Same as when we imported data, if you are not exporting your file to your working directory, you will need to include your path in the file argument.
+
+Bonus: When you export labelled data to SPSS using `write_sav` it will export your variable and value labels as well as your missing values into the file
+
+
+```r
+write_sav(data, here("data", "my-data-clean.sav"))
+```
+
+]
+]
+---
+
+class: center, middle
+
+# <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> Let's Practice <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+
+---
+
+# Function Conflicts
+
+There may be times with you have one or more packages loaded that contain functions of the same name. 
+
+This can cause conflicts where you are using a function from the wrong package.
+
+----
+
+.pull-left[
+Example:
+
+The function `summarize()` exists in 2 packages:
+1. `plyr`
+2. `Hmisc`
+
+Which package you are using depends on the order of how they were loaded.
+
+]
+
+.pull-right[
+
+To deal with this issue, you may sometimes see the use of `pkg::function` to be explicit about which package you want your function to come from.
+
+`Hmisc::summarize()`
+
+You can read more about this by typing `help("::")` in your console
+]
+
+---
+
+class: inverse, middle, center
+
+Questions?
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "rainbow",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

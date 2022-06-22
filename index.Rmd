@@ -15,3 +15,6 @@ knitr::opts_chunk$set(echo = TRUE)
   
 * [**Data Management Overview: Session 3**](rslides/data_mgmt_part3.html)  
 *June 16th, 2022*
+
+* [**Data Management Overview: Session 4**](rslides/data_mgmt_part4.html)  
+*June 23rd, 2022*
