@@ -2019,7 +2019,7 @@ data %&gt;%
 
 ```r
 data %&gt;%
-  select(-c(variable4, variable5, variabl67))
+  select(-c(variable4, variable5, variable6))
 ```
 
 ]
@@ -2431,7 +2431,7 @@ data %&gt;%
         "School A", 
       school_name == 
         "schoola" ~
-        "School A"
+        "School A",
       TRUE ~ school_name
     )
   )
