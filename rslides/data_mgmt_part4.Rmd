@@ -1217,7 +1217,8 @@ getwd()
 
 ```{r, eval = FALSE}
 
-"C:/Users/Crystal/Desktop/schoen_example_files"
+"C:/Users/Crystal/Desktop/
+schoen_example_files"
 
 ```
 
@@ -1259,7 +1260,7 @@ If we copy and paste our path from Windows into R it will not work
 
 The backslash is an "escape" character in R and so R does not interpret it as part of our path
 
-We will need to either change all of our forward slashes to back slashes or add double back slashes to escape our backslash
+We will need to either change all of our back slashes to forward slashes or add double back slashes to escape our backslash
 
 And then I could use this full, absolute path in my read_csv function or my read_excel function
 
@@ -1302,7 +1303,7 @@ Right now, my syntax file lives within this folder (schoen_example_files) and so
 
 And my relative path starts at the top of this working directory (or root directory)
 
-So instead of typing that full path out, I can add one dot to indicate that my path should start at my current root directory
+So if I wanted to make a relative path, instead of typing that full path out, I can add one dot to indicate that my path should start at my current root directory
 
 But I actually want to get rid of these slashes all together so I want to introduce 2 functions we are going to use to build relative paths
 
@@ -1371,7 +1372,7 @@ read_csv(file = path("..", "other_project", "tch_survey.csv"))
 
 ???
 
-If you type here() it will show you your current working directory
+If you type here() with nothing inside, it will show you your current working directory - using the function this way is synonymous with getwd() that we saw earlier 
 
 And once you know you are in the correct working directory, you can build a path structure from there by just listing the folders and files you need within that root directory
 
@@ -1461,6 +1462,9 @@ data %>%
 ???
 
 1. rename
+
+This is a function you can use to rename one or more variables
+
 So now that we have read our data in, one thing we might want to do is rename our variables
 
 The first thing I want to point out here is that we are introducing that pipe operator. And we are going to see it for almost every function from here on out.
@@ -1469,10 +1473,13 @@ It will always be in this format, where we start by calling our data frame and t
 
 Any variable name with spaces need to be surrounded by back ticks. R cannot handle spaces in variable names.
 
+2. set_names
+
+You would use this function to rename ALL of your variables
 
 2. rename_with
 
-This one is a lot more complicated to use, but I think it's a really helpful one to show you because as we know, there are many times when we need to concatenate time to our variable names when we merge data over time and this is the most efficient way to do that
+This one is a lot more complicated to use, but I think it's a really helpful one to show you because as we know, there are many times when we need to concatenate time to our variable names and this is the most efficient way to do that
 
 And what the paste0 function does is concatenates two things together
 
@@ -1487,7 +1494,7 @@ Data
 .panelset[
 .panel[.panel-name[str]
 
-```{r}
+```{r, eval = FALSE}
 
 data %>%
   str()
@@ -1594,7 +1601,7 @@ You get the structure of your data frame as well as the structure of each variab
 
 2. glimpse 
 
-A transposed version of print. Allows you to see the number of rows and columns as well as the class of your variables. Much more simplified look at your data
+A transposed version of print. Allows you to see the number of rows and columns as well as the class of your variables. Much more simplified look at your data compared to a function like str()
 
 3. summary
 
@@ -1648,6 +1655,10 @@ class: center, middle
 |create new variable|dplyr | mutate|
 ]
 
+???
+
+Ok, let's learn 4 more transformations we can do in R
+
 ---
 
 # Remove duplicates
@@ -1660,7 +1671,7 @@ An example identifier variable would be a student or teacher id
 ```{r, eval = FALSE}
 
 data %>%
-  get_dupes(identifier variable)
+  get_dupes(identifier variable/s)
 
 ```
 
@@ -1681,7 +1692,7 @@ svy %>%
 ```{r, eval = FALSE}
 
 data %>%
-  distinct(identifier variable, 
+  distinct(identifier variable/s, 
            .keep_all = TRUE)
 
 ```
@@ -1802,7 +1813,7 @@ data %>%
 ```{r, eval = FALSE}
 
 data %>%
-  filter(character variable == "some name")
+  filter(character variable == "some string")
 
 ```
 
@@ -1810,7 +1821,8 @@ data %>%
 
 data %>%
   filter(character variable %in% 
-           c("some name", "some other name"))
+           c("some string", 
+             "some other string"))
 
 ```
 
@@ -1855,9 +1867,17 @@ data %>%
 
 ???
 
+...
+
+1. filter-numeric
+
 Here we use ==, rather than just = because these are logical operators. We are comparing values and seeing if they are equal (TRUE) or not equal (FALSE), in order to decide if that row will be kept in the dataset
 
+2. filter-character
+
 You can also filter on non-numeric variables, the logic will look similar
+
+You can imagine this might be school name
 
 ---
 
@@ -1892,14 +1912,14 @@ Or select the variables you want to remove (using "-")
 ```{r, eval = FALSE}
 
 data %>%
-  select(-variable5)
+  select(-variable4)
 
 ```
 
 ```{r, eval = FALSE}
 
 data %>%
-  select(-c(variable5, variable6, variable7))
+  select(-c(variable4, variable5, variabl67))
 
 ```
 
@@ -1929,6 +1949,8 @@ data %>%
 ]
 
 ???
+
+...
 
 These are special statements within the tidyverse that help you do things quicker and more efficiently
 
@@ -2023,9 +2045,13 @@ class: center, middle
 |Task | Package | Function |
 |-----|---------|----------|
 |recode a variable|dplyr | recode|
-|conditional operator to regroup/recode a variable|dplyr|case_when|
+|conditional function to regroup/recode a variable|dplyr|case_when|
 |conditional function to regroup/recode a variable|dplyr|if_else
 ]
+
+???
+
+Time for 4 more transformations
 
 ---
 
@@ -2053,6 +2079,8 @@ data %>%
 ]
 
 .pull-right[
+
+The pattern must be in quotes
 
 ```{r, eval = FALSE}
 
@@ -2090,6 +2118,7 @@ data %>%
 
 .pull-right[
 
+The pattern and replacement must be in quotes
 
 ```{r, eval = FALSE}
 
@@ -2106,6 +2135,8 @@ data %>%
 ]
 
 ???
+
+...
 
 Remember that we have to use mutate because we are transforming a variable and we have to write that transformation into a new variable
 
@@ -2162,7 +2193,7 @@ data %>%
 
 ```
 
-If our date variable had values like "03-22-2022" then we could use `mdy()`
+If our character date variable had values like "03-22-2022" then we could use `mdy()`
 
 ```{r, eval = FALSE}
 
@@ -2171,15 +2202,31 @@ data %>%
 
 ```
 
+```{r, echo = FALSE}
+
+tibble::tribble(~date, "03-22-2022", "04-15-2022") %>%
+  mutate(date = lubridate::mdy(date))
+
+```
+
 ]
 ]
 
 ???
 
+1. class-numeric:
+
 Say I have a character variable and I want to convert it to numeric, I can use mutate to create a new variable and then use the function as. numeric to transform my existing character variable
+
+2. class-date:
 
 Changing variables to dates can be a little more complicated because there is no one catch-all way to do this. It more so depends on how your existing variable is formatted
 
+Notice that after we ran the mdy() function, our date variable looks like this now: YYYY-MM-DD
+
+And that is because date variables are always formatted as YYYY-MM-DD
+
+The mdy() only told R the format that our character date variable was in so it knew how to interpret it. Once the character variable is transformed to a date, it will appear in the R date format of YYYY-MM-DD
 
 ---
 
@@ -2217,6 +2264,8 @@ data %>%
 ]
 
 ???
+
+...
 
 This is a special circumstance where we don't have to use mutate because we aren't creating a new variable. We are splitting a variable into multiple variables and we will name those new variables within the separate function.
 
@@ -2407,6 +2456,10 @@ class: center, middle
 
 ]
 
+???
+
+These are our last 4 transformations for today
+
 ---
 
 # Recode NA
@@ -2433,10 +2486,15 @@ If you want to only apply this to certain variables, then you need to use the `a
 ```{r, eval = FALSE}
 
 data %>%
-  mutate(across(c(variable1:variable3), 
-                na_if, -999))
+  mutate(across(c(variable1:variable3),  
+                ~na_if(., -999))
 
 ```
+
+* `~` = as a function of
+* `.` = refer to the variables referenced earlier for where to replace with NAs
+
+
 ]
 ]
 
@@ -2451,7 +2509,6 @@ data %>%
 
 ```
 
-* value = a value to replace NA with
 ]
 
 .pull-right[
@@ -2473,7 +2530,8 @@ data %>%
 ```
 
 * `~` = as a function of
-* `.` = The dot means, refer to the variables referenced earlier for where to replace the NAs
+
+* `.` = refer to the variables referenced earlier for where to replace the NAs
 
 ]
 ]
@@ -2481,9 +2539,15 @@ data %>%
 
 ???
 
+na_if:
+
 Sometimes we might want to recode a certain value to NA
 
-replace_na: I'm not sure if you remember me talking a while back ago, how sometimes a certain district would send me a file of ISS counts for students and when a student had no ISS referrals, they would leave the cell blank, this is a way for me to take care of that
+replace_na: 
+
+Sometimes we might want to recode NAs to certain values that have meaning to us
+
+I'm not sure if you remember me talking a while back ago, how sometimes a certain district would send me a file of ISS counts for students and when a student had no ISS referrals, they would leave the cell blank, this is a way for me to take care of that
 
 ---
 
@@ -2588,6 +2652,10 @@ data %>%
 ]
 ]
 ]
+
+???
+
+Show SPSS example file
 
 ---
 
@@ -2726,4 +2794,4 @@ You can read more about this by typing `help("::")` in your console
 
 class: inverse, middle, center
 
-Questions?
+# Questions?
