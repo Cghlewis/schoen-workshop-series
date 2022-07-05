@@ -1,0 +1,2253 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data Management Overview: Session 5</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="  Crystal Lewis" />
+    <script src="data_mgmt_part5_files/header-attrs/header-attrs.js"></script>
+    <link href="data_mgmt_part5_files/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="data_mgmt_part5_files/tile-view/tile-view.js"></script>
+    <link href="data_mgmt_part5_files/panelset/panelset.css" rel="stylesheet" />
+    <script src="data_mgmt_part5_files/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+class: inverse, left, middle
+
+background-image: url(img/cover2.png)
+
+# Data Management Overview: Session 5
+## Training for Schoen Research
+
+----
+
+## Crystal Lewis
+
+Slides available on [<svg aria-hidden="true" role="img" viewBox="0 0 496 512" style="height:1em;width:0.97em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>](https://cghlewis.github.io/schoen-workshop-series/)
+
+---
+
+# Plan for this series
+
+.pull-left[
+
+Session 3
+* ~~Why R?~~
+* ~~Getting acclimated with R and RStudio~~
+* ~~Understanding objects, functions, and packages~~
+* ~~Code writing best practices~~
+
+Session 4
+* ~~Packages and functions for data wrangling~~
+]
+
+.pull-right[
+
+Session 5
+* Packages and functions for data wrangling cont.
+* Setting up a reproducible syntax file
+* Cleaning and validating data with R
+
+Session 6
+* Additional data wrangling with R
+
+&lt;img src="img/r-project.svg" width="300px" style="display: block; margin: auto;" /&gt;
+]
+
+???
+
+Last week we started learning functions to read in and wrangle our data
+
+Today we are going to do some recap of last week and then pick up where we left off since we didn't finish going through all of our functions
+
+And then last we will have a chance to write a short data cleaning script from scratch and learn some tips that will help make our work reproducible
+
+
+Next week we will cover more complicated topics like restructuring and merging data, as well as any thing else we still haven't covered by that point
+
+---
+
+# Recap Tidy Evaluation
+
+.center[Most of the functions we are learning come from the Tidyverse (an opinionated collection of packages)
+
+One great reason to use the Tidyverse is that most of the functions use **Tidy Evaluation**
+
+Tidy evaluation allows us to simplify the way we grab and manipulate variables/vectors within datasets]
+
+&lt;br&gt;
+
+.pull-left[
+
+Tidy Evaluation: Select variables
+
+
+```r
+select(sch_data, test_score, grade_level)
+```
+
+]
+
+.pull-right[
+Base R: Select variables
+
+
+```r
+sch_data[ , c("test_score", "grade_level")]
+```
+]
+
+???
+
+Last week we talked about how ...
+
+Notice here, using Tidy Evaluation, if I wanted to select certain variables I would first call the dataframe, then name any variables I want to keep. No quotes needed.
+
+But if we had to use Base R, there is a somewhat more complicated way to work with columns involving brackets and quotes, and this row, column format.
+
+And so we can see that Tidy Evaluation simplifies things for us
+
+---
+
+# Recap Pipe Operator
+
+The pipe, **%&gt;%**, which comes from the `magrittr` package, allows us to forward an object or a result of a function, into the next function
+
+.pull-left[
+
+Without the pipe: 
+  + More steps
+  + The data frame is called multiple times
+  + Have to create multiple objects
+
+
+```r
+sch_data2 &lt;- select(sch_data, id, test_score)
+
+sch_data_final &lt;- filter(sch_data2, 
+                    test_score &gt; 300)
+```
+
+
+]
+
+.pull-right[
+
+With the pipe: 
+  + Less steps
+  + The data frame is only called once
+  + The data frame is pulled out the function and becomes the first step in the process
+  + Only need to create one object
+
+
+```r
+sch_data_final &lt;- sch_data %&gt;%
+  select(id, test_score) %&gt;%
+  filter(test_score &gt; 300)
+```
+
+]
+
+???
+
+The other thing we introduced was the pipe operator
+
+...
+
+Without the pipe, if we wanted to select and filter variables from a data frame (called sch_data), we would first use the select function, and then within the function call the data frame and the variables we wanted to select, and then read the results into an object
+
+We would then have to start a new line where we would use the filter function, and we would call the new data frame within this function, apply our filter, and then read that result back out into another object and so on
+
+With the pipe, we pull the data frame out of the function and use it as our first input, followed by any other functions we want to perform on that data frame
+
+You can see here, we only have to call the data frame once, at the top, and then that dataframe flows through any future steps we add
+
+And using this method, we only have to create one object, not multiple
+
+---
+
+# Recap Reading in Data
+
+Read in a csv
+
+
+```r
+read_csv(
+* file =
+    "file_name.csv")
+```
+
+
+Read in an xlsx
+
+
+```r
+read_excel(
+* path =
+    "file_name.xlsx")
+```
+
+Read in an sav
+
+
+
+```r
+read_sav(
+* file =
+    "file_name.sav")
+```
+
+
+???
+
+Last week we also talked about several functions, the first ones we covered were functions to read in your data
+
+The first step to any data cleaning process is most likely going to be to read in some raw data file
+
+Unlike programs like Excel, we can't just open the data file in R
+
+We have to load the data into R to work with it. But remember this is just a copy of the data. Anything we do to the data in R is not actually happening to the raw file on your computer.
+
+And if we want to save any of the changes we make to the data in R, we have to export a copy of the data back out to a folder on our computer
+
+So last week we learned 3 functions we can use to read in data
+
+One function was to read in csv files, one to read in Excel files, and one was to read in SPSS files
+
+We learned several arguments for each of these functions, but the thing I wanted to point out today, that I think was a point of confusion last session, was that each of these functions have a different name for their file or path argument
+
+...
+
+All of these functions come from different packages, and the authors just happened to name the arguments different things
+
+---
+
+# Naming Arguments
+
+It is a good practice to name arguments, especially as beginners, but many times we don't need to name our first argument
+
+.pull-left[
+
+![](img/read_csv_args.PNG)
+
+]
+
+.pull-right[
+
+Before:
+
+
+```r
+read_csv(file = "file_name.csv", 
+         col_names = FALSE, skip = 2)
+```
+
+With the **file = ** removed:
+
+
+```r
+read_csv("file_name.csv", 
+         col_names = FALSE, skip = 2)
+```
+
+]
+
+???
+
+To reduce confusion, you can just remove the name of path/file argument from our import functions since the arguments are different across each function
+
+...
+
+R has a system to cleverly guess which argument you are referring to
+
+First it looks for named arguments
+
+If you didn't name an argument, it goes by order of arguments
+
+You will see throughout my examples, I don't always name the first argument, because it's usually assumed
+
+So notice for read_csv, file is the first argument
+
+And you can see in my second example here, I am no longer naming the first argument, I only named the subsequent arguments for clarity. So it's totally fine to remove the name for the first argument, R will know what's going on.
+
+---
+
+# Recap Working Directory
+
+.center[**What is a working directory?**]
+
+.center[Default location where R will look for files you want to load and where it will put any files you save or export. You usually want this to be your top folder level (ex: schoen_example_files)].
+
+
+.center[**How can we check our working directory?**]
+
+.pull-left[
+
+![](img/working_directory.PNG)
+
+]
+
+.pull-right[
+
+
+```r
+getwd()
+```
+
+`"C:/Users/Crystal/Desktop/schoen_example_files"`
+
+]
+
+???
+
+..
+
+You can think of it as, which folder are you working in?
+
+All of our import examples assumed that the data we wanted to read in was in our working directory.
+
+How do I know that, because I only put the name of the file, I did not put any additional information to tell R where to look, like dig deeper into another folder where the data exists
+
+
+---
+
+# Recap Changing your Working Directory
+
+.pull-left[
+
+**Option 1:**
+
+Use `setwd()` function to change your working directory
+
+Reminders:
+  + You cannot use `\` in R. They will need to be changed to `/`
+  + The path must be in ""
+
+
+```r
+setwd("C:/Users/Crystal/Desktop/
+      schoen_example_files")
+```
+
+]
+
+.pull-right[
+
+**Option 2:**
+
+![](img/set_wd.PNG)
+]
+
+???
+
+If when you check your working directory, you are not in the top level folder you want to be in (ex: Schoen Example Files), there are several ways you can change your working directory
+
+Which is the default that Windows uses
+
+
+---
+
+class: center, inverse
+
+# Recap Navigating to your data files
+
+AWESOME! ⭐ We are in the correct working directory now (our top level folder).
+
+But what if our data is not in the same folder as our working directory?
+
+&lt;img src="img/rel_path.PNG" width="600px" style="display: block; margin: auto;" /&gt;
+
+???
+
+Which is typically what happens, you don't usually throw everything (syntax, data, output) all into the same folder. 
+
+Our data files in our Schoen Example Files folder are one path deeper in a "data" folder. How do we tell R to grab our files from this folder when we import data?
+
+---
+
+# Recap Absolute vs Relative Paths
+
+.pull-left[
+
+**Option 1: Absolute full file path**
+
+Issues:
+  + You will need to change all `\` to `/` 
+  + If other people use your syntax, they will need to change this file path
+
+
+```r
+svy_csv &lt;- read_csv(
+  "C:/Users/Crystal/Desktop/
+  schoen_example_files/data/tch_survey.csv")
+```
+
+On Windows: Right click on file -&gt; Properties -&gt; Security -&gt; Object name
+
+]
+
+.pull-right[
+
+**Option 2: Relative file path**
+
+Last week we learned about the `path` function from the `fs` package
+  + You build paths starting at your current working directory, then add any folders or files below that
+  + `.` means your current working directory
+  + `..` means go back one level from your current working directory
+
+
+```r
+svy_csv &lt;- read_csv(
+  path(".", "data","tch_survey.csv"))
+```
+
+]
+
+???
+
+Leaves room for error, also just a pain
+
+Not reproducible
+
+Option 2 which is what is recommended for both reproducibility and for reducing errors
+
+We also learned about the here function but people were having issues with that function so we are just ignoring that for now
+
+---
+
+# Recap Functions
+
+.pull-left[
+
+**Read in data**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|read in csv file | readr | read_csv |
+|read in xlsx file | readxl | read_excel |
+|read in sav file | haven | read_sav |
+
+**Set relative path**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|check working directory | base | getwd |
+|set relative path | fs | path |
+
+]
+
+.pull-right[
+
+**Rename variables**
+
+|Task | Package | Function |
+|---------|-----------|-----------|
+|rename variables | dplyr | rename |
+|rename all variables | purrr | set_names|
+|modify variable names | dplyr | rename_with |
+
+**Review data**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|review data structure | base |str|
+|transposed printed data | dplyr | glimpse |
+|summarize data | base | summary |
+|table variables | janitor | tabyl|
+
+]
+
+
+???
+
+I want to quickly review the other functions we covered last session. I'm not going to go into much detail, but I just want to remind everyone what functions we have covered already.
+
+I want to say 2 reminders, as I go through these functions, I do not expect you to memorize each of these functions, what package they come from, or what all the arguments are
+
+To this day, I still do not remember every function and I forget the arguments ALL the time
+
+But what I do want you to get out of this overview, is an understanding that these transformations are possible and that functions do exist to make them happen. Once you have that understanding, you can always go back to these slides to look up the functions or you can even just google, R function to rename variables and you will find these functions
+
+The second reminder I want to draw your attention to, is the fact that it is important to remember that each of these functions come from a package. And that if you try to use a function and it gives you an error, like, can't find this function, it's because you probably forgot to load the package. Remember last session I said, each time you open R, the first thing you need to do is "library" all of the packages you need for your functions.
+
+You can see in these tables, I always list what package each function comes from. You don't have to memorize this, you can come back to this table at any point.
+
+---
+
+# Name variables
+
+.panelset[
+.panel[.panel-name[rename]
+
+Formula is `new name = old name`
+
+
+```r
+data %&gt;%
+  rename(new_name = old_name)
+```
+
+If the old name has spaces in it, you need to surround the name in backticks ` `
+
+
+```r
+data %&gt;%
+  rename(tch_gender = x1, tch_race = `teacher race`)
+```
+
+
+]
+
+.panel[.panel-name[set_names]
+
+
+The number of names must equal the number of variables in the data frame, in the same order
+
+Names must be in ""
+
+
+```r
+data %&gt;%
+  set_names("new_name1", "new_name2", "new_name3")
+```
+]
+
+.panel[.panel-name[rename_with]
+
+.pull-left[
+
+
+```r
+data %&gt;% 
+  rename_with(~ function, variables)
+```
+
+* `~` = as a function of
+
+* function = any function you want to use to rename your variables
+
+* variables = any variables you want to rename with your function
+
+]
+
+.pull-right[
+A common function to include is `paste0` which is a base function
+
+This transformation below would add `_1819` to the end of variable names
+
+The `.` means paste my variable name **first**, then add my string.
+
+
+```r
+data %&gt;% 
+  rename_with(~ paste0(., "_1819"), 
+              c(variable1, variable2))
+```
+
+]
+]
+]
+
+???
+
+1. rename
+
+This is a function you can use to rename one or more variables
+
+The formula was new name = old name
+
+Any variable name with spaces need to be surrounded by back ticks. R cannot handle spaces in variable names.
+
+This was also where we first introduced the pipe operator. And talked about how we will always use the pipe in this format. Where we start by calling our data frame and then we pipe that data into a function
+
+
+2\. set_names
+
+You would use this function to rename ALL of your variables
+
+The number of variable names you provide must equal the number of variables in your data frame, and they must be in the same order
+
+Names must be in ""
+
+
+3\. rename_with
+
+This one is good for modifying variable names. A particular use case for this one was, when you need to concatenate something like time to your variable names.
+
+In our example we used the base R paste0 within our rename_with function, to concatenate the year _1819 to the end of our variable names.
+
+
+---
+
+# Review Data
+
+Data
+
+.panelset[
+.panel[.panel-name[str]
+
+
+```r
+data %&gt;%
+  str()
+```
+
+
+```
+tibble [5 x 6] (S3: tbl_df/tbl/data.frame)
+ $ start_date   : chr [1:5] "2022-05-15" "2022-05-15" "2022-05-16" "2022-05-17" ...
+ $ tch_id       : num [1:5] 1234 1234 1235 1236 1237
+ $ consent      : num [1:5] 1 NA 1 1 2
+ $ dist_sch_name: chr [1:5] "Kirkwood - Nipher Middle School" "" "Webster - Webster Groves High School" "Kirkwood - Nipher Middle" ...
+ $ degree       : num [1:5] 1 NA 2 6 NA
+ $ yrs_teach    : chr [1:5] "5 yrs" "" "4" "1 year" ...
+```
+
+]
+.panel[.panel-name[glimpse]
+
+
+```r
+data %&gt;%
+  glimpse()
+```
+
+
+```
+Rows: 5
+Columns: 6
+$ start_date    &lt;chr&gt; "2022-05-15", "2022-05-15", "2022-05-16", "2022-05-17", ~
+$ tch_id        &lt;dbl&gt; 1234, 1234, 1235, 1236, 1237
+$ consent       &lt;dbl&gt; 1, NA, 1, 1, 2
+$ dist_sch_name &lt;chr&gt; "Kirkwood - Nipher Middle School", "", "Webster - Webste~
+$ degree        &lt;dbl&gt; 1, NA, 2, 6, NA
+$ yrs_teach     &lt;chr&gt; "5 yrs", "", "4", "1 year", ""
+```
+
+]
+
+.panel[.panel-name[summary]
+
+.pull-left[
+
+```r
+data %&gt;%
+  summary()
+```
+]
+
+.pull-right[
+
+```
+  start_date            tch_id        consent     dist_sch_name     
+ Length:5           Min.   :1234   Min.   :1.00   Length:5          
+ Class :character   1st Qu.:1234   1st Qu.:1.00   Class :character  
+ Mode  :character   Median :1235   Median :1.00   Mode  :character  
+                    Mean   :1235   Mean   :1.25                     
+                    3rd Qu.:1236   3rd Qu.:1.25                     
+                    Max.   :1237   Max.   :2.00                     
+                                   NA's   :1                        
+     degree     yrs_teach        
+ Min.   :1.0   Length:5          
+ 1st Qu.:1.5   Class :character  
+ Median :2.0   Mode  :character  
+ Mean   :3.0                     
+ 3rd Qu.:4.0                     
+ Max.   :6.0                     
+ NA's   :2                       
+```
+
+]
+]
+
+.panel[.panel-name[tabyl]
+
+.pull-left[
+
+```r
+data %&gt;%
+  tabyl(variable name)
+```
+
+
+```
+ degree n percent valid_percent
+      1 1     0.2     0.3333333
+      2 1     0.2     0.3333333
+      6 1     0.2     0.3333333
+     NA 2     0.4            NA
+```
+
+]
+
+.pull-right[
+
+
+```r
+data %&gt;%
+  tabyl(variable1, variable2)
+```
+
+
+```
+                        dist_sch_name 1 2 6 NA_
+                                      0 0 0   2
+             Kirkwood - Nipher Middle 0 0 1   0
+      Kirkwood - Nipher Middle School 1 0 0   0
+ Webster - Webster Groves High School 0 1 0   0
+```
+
+]
+]
+]
+
+???
+
+1. str
+
+You get the structure of your data frame as well as the structure of each variable
+
+2\. glimpse 
+
+A transposed version of print. Allows you to see the number of rows and columns as well as the class of your variables. Much more simplified look at your data compared to a function like str()
+
+3\. summary
+
+Gives you descriptive statistics of your variables
+
+4\. tabyl
+
+Gives you counts of your variables 
+
+You can table one variable or two variables to get a cross tab
+
+---
+
+class: center, middle
+
+# <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> Let's Practice This Again <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+
+---
+
+# Recap Functions
+
+.pull-left[
+
+**Find and remove duplicates**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|find duplicates| janitor | get_dupes |
+|remove duplicates | dplyr | distinct |
+
+**Filter data**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|filter rows of data | dplyr | filter |
+
+]
+
+.pull-right[
+
+**Select variables**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|select variables | dplyr | select |
+
+**Create new variables**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|create new variable|dplyr | mutate|
+]
+
+---
+
+# Remove duplicates
+
+.panelset[
+.panel[.panel-name[find-duplicates]
+
+An example identifier variable would be a student or teacher id
+
+
+```r
+data %&gt;%
+  get_dupes(identifier variable/s)
+```
+
+
+```
+# A tibble: 2 x 7
+  tch_id dupe_count start_date consent dist_sch_name            degree yrs_teach
+   &lt;dbl&gt;      &lt;int&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt; &lt;chr&gt;    
+1   1234          2 2022-05-15       1 "Kirkwood - Nipher Midd~      1 "5 yrs"  
+2   1234          2 2022-05-15      NA ""                           NA ""       
+```
+
+]
+
+.panel[.panel-name[remove-duplicates]
+
+.pull-left[
+
+
+```r
+data %&gt;%
+  distinct(identifier variable/s, 
+           .keep_all = TRUE)
+```
+
+* .keep_all = TRUE means that I want to keep all of my variables in the data
+
+Using distinct will keep the first instance and drop all remaining duplicates. 
+
+Depending on how your data is organized, this may not be what you want.
+]
+
+.pull-right[
+
+Consider using the `arrange` function from the `dplyr` package to arrange the data how you want before dropping the duplicates
+
+For example, if date was collected, you may want to arrange by descending date to keep the most recent case 
+
+
+```r
+data %&gt;%
+  arrange(tch_id, desc(date)) %&gt;%
+  distinct(tch_id, .keep_all = TRUE)
+```
+]
+]
+]
+
+???
+
+To find duplicates you can use this function get_dupes
+
+An example identifier variable would be a student or teacher id, and it would print out the duplicate rows
+
+And then when you want to remove those duplicates, you can use the distinct function
+
+You can simply list the identifier variable you want to remove duplicates for
+
+Reminder to use the .keep_all = TRUE argument for this function, the default of this function is false and it basically drops all of your variables except your identifier variable, which is not helpful for our purposes
+
+I also mentioned that using distinct keeps the first instance of an identifier and drops all remaining cases. If this is not what you want, maybe you want to keep the most recent instance of the duplicate, you can use the arrange function to order your data in the way you want before dropping duplicates.
+
+
+---
+
+# Filter data
+
+.panelset[
+.panel[.panel-name[filter-operators]
+
+.pull-left[
+Filtering/Comparison operators include 
+ - `&gt;`
+ - `&lt;`
+ - `&gt;=`
+ - `&lt;=`
+ - `==`
+ - `!` or `!=`
+ - `%in%`
+ - `between`
+]
+
+.pull-right[
+Logical operators used to filter on multiple columns:
+
+|Operator|Meaning          |
+|--------|-----------------|
+| &amp;#124;   | AND/OR          |
+|  &amp;     | AND             |
+| ,      | AND             |
+| xor    | OR (not both)   |
+]
+]
+
+.panel[.panel-name[filter-numeric]
+
+.pull-left[
+
+
+
+```r
+data %&gt;%
+  filter(logical expression)
+```
+]
+
+.pull-right[
+Here you would use a variable in your data and a comparison operator
+
+
+```r
+data %&gt;%
+  filter(numeric variable == 1)
+```
+
+
+```r
+data %&gt;%
+  filter(numeric variable &gt;= 50)
+```
+]
+
+]
+
+.panel[.panel-name[filter-character]
+
+.pull-left[
+I can also filter on non-numeric variables
+
+
+```r
+data %&gt;%
+  filter(logical expression)
+```
+]
+
+.pull-right[
+
+
+```r
+data %&gt;%
+  filter(character variable == "some string")
+```
+
+
+```r
+data %&gt;%
+  filter(character variable %in% 
+           c("some string", 
+             "some other string"))
+```
+
+]
+]
+
+.panel[.panel-name[filter-na]
+
+I can filter based on NA values
+
+The function `is.na` is a base function that returns either TRUE or FALSE which the filter function uses to determine who to filter on
+
+
+```r
+data %&gt;%
+  filter(!is.na(variable))
+```
+
+]
+
+.panel[.panel-name[filter-multiple-vars]
+
+I can also filter using multiple variables
+
+
+```r
+data %&gt;%
+  filter(variable1 == 1 &amp; variable2 == 5)
+```
+
+
+```r
+data %&gt;%
+  filter(variable1 == "some text" | variable2 == "other text")
+```
+
+]
+]
+
+???
+
+We talked about filtering data based on certain criteria. There were several comparison operators you can use to filter data. Most of these are straightforward but
++ Remember that we can't use = in filtering, we have to use == (because in filtering we are using logical comparisons and == provides a true/false statement)
++ ! means "not" and != means not equal to
++ %in% means "within"
+
+And if you are filtering on more than one column, you can use these operators to separate between multiple variables
+
+We learned that you can use the filter function with any type of variable
+
+Numeric
+
+Character
+
+You can filter on NA values
+
+And you can filter using multiple variables
+
+
+---
+
+# Select Variables
+
+.panelset[
+.panel[.panel-name[select-to-keep]
+
+You can either select the variables you want to keep 
+
+
+```r
+data %&gt;%
+  select(variable1:variable3)
+```
+
+
+```r
+data %&gt;%
+select(variable1, variable2, variable3)
+```
+
+
+]
+
+.panel[.panel-name[select-to-remove]
+
+Or select the variables you want to remove (using "-")
+
+
+```r
+data %&gt;%
+  select(-variable4)
+```
+
+
+```r
+data %&gt;%
+  select(-c(variable4, variable5, variable6))
+```
+
+]
+
+.panel[.panel-name[select-with-tidy-select]
+
+You can also select variables using selection helpers.
+
+These include: `starts_with`, `ends_with`, and `contains`.
+
+
+```r
+data %&gt;%
+  select(contains("bmtl"))
+```
+
+
+```r
+data %&gt;%
+  select(ends_with("_1819"))
+```
+
+]
+]
+
+???
+
+We covered how to select variables
+
+We learned we can select the variables we want (either by listing them out explicitly or using the : if they are in sequential order)
+
+We learned we can remove the variables we don't want by adding a negative sign in front of them
+
+And we learned that there are special statements within the tidyverse, called selection helpers, that help you do things quicker and more efficiently. So if we want to grab all variables with the word bmtl in them, we can use the selection helper "contains" to grab just those variables. You can imagine if we had 50 bmtl variables, not all in sequential order, using these selection helpers could save us a lot of time.
+
+
+---
+
+# Create new variables
+
+.pull-left[
+
+Any time you want to create a new variable within a data frame, you use `mutate`
+
+This may be creating an entirely new variable or it may be recalculating, transforming, or recoding an existing variable
+
+
+```r
+data %&gt;%
+  mutate(new variable name = 
+           a constant or some expression)
+```
+
+* `new variable name` = this can either be a completely new name, or you can use an existing name and write over the existing variable
+
+]
+
+.pull-right[
+
+
+```r
+data %&gt;%
+  mutate(cohort = 1)
+```
+
+
+```r
+data %&gt;%
+  mutate(age_months = age_years*12)
+```
+
+
+```r
+data %&gt;%
+  mutate(sch_name = recode(
+    sch_name, 
+    `nipher middle school` = "Nipher Middle"))
+  ))
+```
+]
+
+???
+
+We learned that to create a new variable, we need to use this function mutate
+
+And the word create is used loosely. We also use mutate when we are recalculating, transforming or recoding an existing variable.
+
+In our examples here we created an entirely new cohort variable (where the cohort is equal to 1 for everyone)
+
+We also used mutate to create a new variable where we multiply an existing variable by 12
+
+And then we created the variable sch_name which wrote over our existing sch_name variable. Someone misspelled a school name in the old variable so we recoded that school name to the correct spelling
+
+---
+
+class: center, middle
+
+# <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> Let's Practice This Again <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+
+---
+
+# Recap Functions
+
+.pull-left[
+
+**Edit strings in variables**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|remove strings | stringr | str_remove_all |
+|replace strings | stringr | str_replace_all |
+
+**Change class**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|change to numeric | base | as.numeric |
+|change to character| base | as.characater|
+|change to date|lubridate|several functions|
+
+]
+
+.pull-right[
+
+**Split variables**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|separate into more than one variable | tidyr | separate |
+
+**Recode variables**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|recode a variable|dplyr | recode|
+|conditional function to regroup/recode a variable|dplyr|case_when|
+|conditional function to regroup/recode a variable|dplyr|if_else
+]
+
+???
+
+And then the last functions we covered at the very end of our last session were these. So I may take a little more time to cover these again.
+
+---
+
+# Edit Strings in Variables
+
+.panelset[
+.panel[.panel-name[str_remove]
+
+.pull-left[
+
+This function is used to remove strings in variables
+
+
+```r
+data %&gt;%
+  mutate(new variable name = 
+           str_remove_all(variable, 
+                          pattern))
+```
+
+* variable = the variable that has the string/s we want to remove
+* pattern = any pattern you want removed from a variable (could be words, symbols, or numbers)
+
+]
+
+.pull-right[
+
+The pattern must be in quotes
+
+
+```r
+data %&gt;%
+  mutate(variable1 = 
+           str_remove_all(
+             variable1, pattern = "$"))
+```
+
+]
+]
+
+.panel[.panel-name[str_replace]
+
+.pull-left[
+This function is used to replace strings in variables
+
+
+```r
+data %&gt;%
+  mutate(new variable name = 
+           str_replace_all(
+             variable, pattern, 
+             replacement))
+```
+
+* variable = the variable that has the string/s we want to replace
+
+* pattern = any pattern you want to replace in a variable
+
+* replacement = what you want to replace the pattern with
+]
+
+.pull-right[
+
+The pattern and replacement must be in quotes
+
+
+```r
+data %&gt;%
+  mutate(variable1 = 
+           str_replace_all(
+             variable1, pattern = "yr",
+             replacement = "YEAR"))
+```
+
+]
+]
+]
+
+???
+
+...
+
+Remember that we have to use mutate because we are transforming a variable and we have to write that transformation into a new variable
+
+
+---
+
+# Change class
+
+.panelset[
+.panel[.panel-name[class-numeric]
+
+
+```r
+data %&gt;%
+  mutate(new variable = as.numeric(character variable))
+```
+
+Note: If your character variable still has character values in it (letters, symbols, spaces), those values will be coded to NA when you change the class to numeric. You should deal with those values before recoding to numeric.
+
+]
+
+.panel[.panel-name[class-character]
+
+
+
+```r
+data %&gt;%
+  mutate(new variable = as.character(numeric variable))
+```
+
+]
+
+.panel[.panel-name[class-date]
+
+.pull-left[
+
+`lubridate` has many functions to deal with character variables whose class needs to be date. 
+
+A few of those include:
+
+`mdy()` : The character variable is in the format of month-day-year
+
+`ymd()` : The character variable is in the format of year-month-day
+
+`dmy()` : The character variable is in the format of day-month-year
+]
+
+
+```r
+data %&gt;%
+  mutate(new variable = function(character date))
+```
+
+If our character date variable had values like "03-22-2022" then we could use `mdy()`
+
+
+```r
+data %&gt;%
+  mutate(date = mdy(date))
+```
+
+
+```
+# A tibble: 2 x 1
+  date      
+  &lt;date&gt;    
+1 2022-03-22
+2 2022-04-15
+```
+
+]
+]
+
+???
+
+1. class-numeric:
+
+Say I have a character variable and I want to convert it to numeric, I can use mutate to create a new variable and then use the function as. numeric to transform my existing character variable
+
+2\. class-date:
+
+Changing variables to dates can be a little more complicated because there is no one catch-all way to do this. It more so depends on how your existing variable is formatted
+
+Notice that after we ran the mdy() function, our date variable looks like this now: YYYY-MM-DD
+
+And that is because date variables are always formatted as YYYY-MM-DD
+
+The mdy() only told R the format that our character date variable was in so it knew how to interpret it. Once the character variable is transformed to a date, it will appear in the R date format of YYYY-MM-DD
+
+---
+
+# Split Variables
+
+.pull-left[
+Sometimes a variable contains more than one piece of information and needs to be split into 2 or more variables
+
+
+```r
+data %&gt;%
+  separate(variable, 
+           into,
+           sep)
+```
+
+* into = what will the new variable names be after your variable is split
+
+* sep = what separates the pieces of information
+
+The default is to remove the input column after separating. If you do not want this, you can add the argument `remove = FALSE`
+]
+
+.pull-right[
+
+```r
+data %&gt;%
+  separate(city_state,
+           into = c("city", "state"),
+           sep = ",")
+```
+
+]
+
+???
+
+...
+
+This is a special circumstance where we don't have to use mutate because we aren't creating a new variable. We are splitting a variable into multiple variables and we will name those new variables within the separate function.
+
+---
+
+# Recode Variables
+
+.panelset[
+.panel[.panel-name[recode]
+
+.pull-left[
+The formula for `recode` is `old value = new value`
+
+The old value is a named value. If it is a number it needs to be surrounded in backticks.
+
+Any value you do not recode will be copied over as is.
+
+```r
+data %&gt;%
+  mutate(new variable = 
+           recode(variable, 
+                  old value = new value))
+```
+]
+
+.pull-right[
+
+
+```r
+data %&gt;%
+  mutate(variable1_r = 
+           recode(variable1, `2` = 0))
+```
+
+
+```r
+data %&gt;%
+  mutate(variable2 = recode(variable2, 
+                            f = "free",
+                            r = "reduced"))
+```
+
+]
+]
+.panel[.panel-name[case_when]
+
+.pull-left[
+
+
+```r
+data %&gt;%
+  mutate(new variable =
+           case_when(
+             condition ~ value,
+             TRUE ~ value
+           ))
+```
+
+* condition = a logical condition, usually comparing a variable to a value or another variable
+
+* `~` = "then replace with" 
+
+* value = character, numeric, NA, date value, or an existing variable
+
+* `TRUE` = "if it doesn't meet the criteria already given then"
+
+]
+
+.pull-right[
+
+```r
+data %&gt;%
+  mutate(school_name =
+    case_when(
+      school_name == 
+        "sch a" ~ 
+        "School A", 
+      school_name == 
+        "schoola" ~
+        "School A",
+      TRUE ~ school_name
+    )
+  )
+```
+
+]
+]
+
+.panel[.panel-name[if_else]
+
+.pull-left[
+
+
+```r
+data %&gt;%
+  mutate(new variable = 
+           if_else(condition, true, false))
+```
+
+* condition = a logical condition, usually comparing a variable to a value or another variable
+
+* true = if the condition is true, use this value
+
+* false = if the condition is false, use this value
+
+]
+
+.pull-right[
+
+
+```r
+data %&gt;%
+  mutate(collapsed_variable = 
+           if_else(variable == 5, 0, 1))
+```
+
+]
+]
+]
+
+???
+
+1. recode
+
+...
+
+Note that this is the opposite of the formula we saw for rename earlier. So it gets quite confusing.
+
+2\. case_when
+
+This is much more complicated to understand as a beginner than using recode, but it is way more efficient and powerful if you can wrap your head around it
+
+3\. if_else
+
+This is similar to case_when, but should only be used when there is really only like one criteria to recode. Otherwise, use recode or case_when
+
+---
+
+class: center, middle
+
+# <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> Let's Practice <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+
+---
+
+# Functions for Data Cleaning
+
+.pull-left[
+
+**Recode NAs**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|recode to NA | dplyr | na_if |
+|recode NA to a value | tidyr | replace_na |
+
+**Add value labels**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|add value labels | labelled | set_value_labels |
+|review value labels| labelled | val_labels|
+|add labelled missing values|labelled|set_na_values|
+|review missing value labels | labelled | na_values|
+
+]
+
+.pull-right[
+
+**Add variable labels**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|add variable labels | labelled | set_variable_labels|
+|review variable labels | labelled | var_label |
+
+**Export data**
+
+|Task | Package | Function |
+|-----|---------|----------|
+|export csv | readr | write_csv|
+|export xlsx| openxlsx|write.xlsx|
+|export sav | haven | write_sav
+
+]
+
+???
+
+These are the last 4 functions we ran out of time to cover last session
+
+---
+
+
+# Recode NA
+
+.panelset[
+.panel[.panel-name[recode-to-na]
+
+.pull-left[
+
+```r
+data %&gt;%
+  na_if(value)
+```
+
+* value = the value you want to replace with NA
+
+This function as is will apply to the entire data frame
+]
+
+.pull-right[
+If you want to only apply this to certain variables, then you need to use the `across` function from `dplyr` to select variables
+
+
+```r
+data %&gt;%
+  mutate(across(c(variable1:variable3),  
+                ~na_if(., -999))
+```
+
+* `~` = as a function of
+* `.` = refer to the variables referenced earlier for where to replace with NAs
+
+
+]
+]
+
+.panel[.panel-name[replace-na]
+
+.pull-left[
+
+```r
+data %&gt;% 
+  mutate(variable = replace_na(
+    variable, value))
+```
+
+]
+
+.pull-right[
+
+```r
+data %&gt;%
+  mutate(iss = replace_na(iss, 0))
+```
+
+You can also replace NA values for multiple variables using the function `across` from the `dplyr` package.
+
+
+```r
+data %&gt;% 
+  mutate(across(c(variable1:variable10), 
+                ~ replace_na(., -999))
+```
+
+* `~` = as a function of
+
+* `.` = refer to the variables referenced earlier for where to replace the NAs
+
+]
+]
+]
+
+???
+
+1. na_if:
+
+Sometimes we might want to recode a certain value to NA
+
+2\. replace_na: 
+
+Sometimes we might want to recode NAs to certain values that have meaning to us
+
+...
+
+I'm not sure if you remember me talking a while back ago, how sometimes a certain district would send me a file of ISS counts for students and when a student had no ISS referrals, they would leave the cell blank, this is a way for me to take care of that
+
+---
+
+# Add Value Labels
+
+.panelset[
+.panel[.panel-name[add-value-labels]
+
+.pull-left[
+Value labels are helpful if you are exporting to a software that can support them, such as SPSS
+
+
+```r
+data %&gt;% 
+  set_value_labels(
+  variable = c("label1" = value, 
+               "label2" = value))
+```
+
+
+```r
+data %&gt;%
+  set_value_labels(
+    q1 = c( "no" = 0, "yes" = 1),
+    q2 = c("no" = 0, "yes" = 1)
+  )
+```
+
+
+]
+
+.pull-right[
+You can review your value labels
+
+
+```r
+data %&gt;% 
+  val_labels()
+```
+
+```
+$q1
+ no yes 
+  0   1 
+
+$q2
+ no yes 
+  0   1 
+```
+]
+]
+
+.panel[.panel-name[set-missing-values]
+
+.pull-left[
+Setting missing values are helpful if you are exporting to a program that can support them, like SPSS
+
+If you have missing values like -99 or -98, those will not be recognized as missing values in programs like SPSS unless you label them as missing values before exporting
+
+Be aware that R will not consider your labelled missing values as NA when conducting calculations
+
+
+```r
+data %&gt;% 
+  set_na_values(Variable = value)
+```
+]
+
+.pull-right[
+
+You can have one or more values labelled as missing
+
+
+```r
+data %&gt;%
+  set_na_values(variable1 = c(-97, -98))
+```
+
+
+You can review your missing value labels
+
+
+
+
+```r
+data %&gt;%
+  na_values()
+```
+
+```
+$variable1
+[1] -97 -98
+
+$variable2
+NULL
+```
+
+]
+]
+]
+
+???
+
+Show SPSS example file
+
+---
+
+# Add Variable Labels
+
+Variable labels can be very helpful if you are exporting your data to a program that supports them, like SPSS
+
+
+```r
+data %&gt;%
+  set_variable_labels(variable = "label")
+```
+
+You can review variable labels
+
+
+
+
+
+```r
+data %&gt;%
+  var_label()
+```
+
+```
+$variable1
+[1] "Why does my dog stare at me?"
+
+$variable2
+[1] "Is my dog happy?"
+```
+
+---
+
+# Export Data
+
+.panelset[
+.panel[.panel-name[export-csv]
+
+
+```r
+write_csv(object, file)
+```
+
+* object name = the final data frame or tibble to be exported
+
+* file = the path to write the file to (which includes the name and extension of your file)
+
+Same as when we imported data, if you are not exporting your file to your working directory, you will need to include your path in the file argument.
+
+Notice I am using the `path` function from the `fs` package again to create a relative path to where I want to export my data
+
+
+```r
+write_csv(data, path(".", "data", "my-data-clean.csv"))
+```
+
+]
+
+
+.panel[.panel-name[export-xlsx]
+
+
+```r
+write.xlsx(object, file)
+```
+
+* object name = the final data frame or tibble to be exported
+
+* file = the path to write the file to (which includes the name and extension of your file)
+
+Same as when we imported data, if you are not exporting your file to your working directory, you will need to include your path in the file argument.
+
+Notice I am using the `path` function from the `fs` package again to create a relative path to where I want to export my data
+
+
+
+```r
+write.xlsx(data, path(".", "data", "my-data-clean.xlsx"))
+```
+
+]
+.panel[.panel-name[export-sav]
+
+
+```r
+write_sav(object, path)
+```
+
+* object name = the final data frame or tibble to be exported
+
+* path = the path to write the file to (which includes the name and extension of your file)
+
+Same as when we imported data, if you are not exporting your file to your working directory, you will need to include your path in the "path" argument.
+
+Notice I am using the `path` function from the `fs` package again to create a relative path to where I want to export my data
+
+
+```r
+write_sav(data, path(".", "data", "my-data-clean.sav"))
+```
+
+Bonus: When you export labelled data to SPSS using `write_sav` it will export your variable and value labels as well as your missing values into the file
+
+]
+]
+
+---
+
+class: center, middle
+
+# <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> Let's Practice <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+
+---
+
+# Reproducible Data Cleaning Workflow
+
+.pull-left[
+
+**Preliminary Steps before Syntax Creation:**
+
+1. Have your data cleaning plan ready
+
+1. Have your data dictionary ready
+
+1. Set up a consistent folder structure according to your Style Guide
+
+1. Name your files consistently and according to your Style Guide
+
+
+]
+
+.pull-right[
+
+**Tips for a Reproducible Syntax File:**
+
+1. Use comments to organize and communicate each step of your data cleaning plan
+  - Consider using R Notebooks to make file more readable
+2. Put all cleaning steps into syntax
+3. Use relative file paths to import and export data
+  - Don't set your working directory in your syntax
+  - Consider using R projects to set your working directory
+4. Integrate your data dictionary into your syntax
+5. Record Session Info
+  + Operating system info
+  + R Version info
+  + Package versions
+
+]
+
+???
+
+So now I'd like to talk about putting this all together and creating this reproducible workflow
+
+If you follow these steps, you should make a reproducible workflow for yourself, that you can run as many times as you want without errors, and reduces time and effort when changes are made to your data or cleaning process.
+
+And it should make a reproducible syntax file that you can share with others and they should be able to run on their machine as well.
+
+No intermediary steps between the raw data and your cleaning process should happen. It should all be in the syntax (just read in the raw file directly). Removing participants, removing variables, etc. should all happen in syntax so your process is reproducible. If the project coordinator has any info to tell you about who should be dropped, it should be written in a Readme for you to write into your syntax.
+
+...
+
+Remember data cleaning plans? This is a plain text document where you write out the transformations you want to do to the data, in order of how you plan to do them. This will be your syntax guide. 
+
+In addition to your data cleaning plan, your data dictionary will be your guide and way for you to validate each data cleaning step.
+
+We will hopefully get to talking about how to integrate your data dictionary into your syntax next session
+
+You can record SessionInfo into a plain text file so that future users of your syntax can know all of the requirements needed for running your syntax. They may never run into issues using your syntax, but what if one of your functions doesn't work for them when they try to run your syntax on their computer.
+
+They might look at your SessionInfo and find out you have a newer version of a certain package than they have and it provides additional functionality. So the SessionInfo helps solve these problems. We will look at an example of this in a minute.
+
+
+---
+
+# Setting up your Syntax File
+
+
+```r
+1. Add your libraries
+
+2. Check your working directory
+
+3. Change your working directory if needed (in console or drop-down)
+
+4. Import data using relative paths
+
+5. For each step of your data cleaning plan
+  - Comment
+  - Code
+  - Check
+
+6. Validate data
+
+7. Export data using relative paths
+
+8. Write out a Session Info file
+```
+
+???
+
+The general order of your syntax file will look like this. This is subject to variation depending on the task.
+
+
+If you recall the session on data cleaning plans, validating data includes all your final checks to make sure no mistakes exist in the data.
+
+  - Number of cases matches what you see in tracking database
+  - Number of variables in your data match what you see in your data dictionary
+  - No duplicate rows
+  - No missing IDs and all IDs are real IDs
+  - All variable classes match your data dictionary
+  - All variables fall within the ranges laid out in your data dictionary
+  - Cross validation for impossible values
+  - All variables contain necessary labels
+
+You won't record session info until the entire syntax is finished. It will capture all of the packages you used for the session.
+
+---
+
+.pull-left[
+
+```r
+library(magrittr)
+library(fs)
+library(readr)
+library(dplyr)
+library(janitor)
+
+# Check working directory 
+
+getwd()
+
+# (01) Read in data ----
+
+tch_svy &lt;- read_csv(
+  path(".", "data", "tch_survey_raw.csv"))
+
+# Check: Review your data
+
+str(tch_svy)
+
+# (02) Identify duplicates ----
+
+tch_svy %&gt;%
+  get_dupes(tch_id) # No duplicates found
+
+# (03) Remove identifier variables ----
+
+tch_svy &lt;- tch_svy %&gt;%
+  select(-first_name, -last_name)
+```
+]
+
+.pull-right[
+
+```r
+# Check: What variables do I have now?
+
+names(tch_svy)
+
+# (04) Create intervention variable
+
+tch_svy &lt;- tch_svy %&gt;%
+  mutate(intervention = if_else(
+    sch_id %in% c(101, 103, 105), 1, 0))
+
+# Check: Did intervention calculate correctly?
+
+tch_svy %&gt;% 
+  tabyl(sch_id, intervention)
+
+# (05) Data Validation ----
+
+# Various checks
+
+# (06) Export data to a csv ----
+
+write_csv(tch_svy, 
+      path("data", "tch_survey_clean.csv"))
+
+
+# Print out Session Info ----
+
+sessionInfo() %&gt;%
+  capture.output(
+    file = "tch_survey_sessionInfo.txt")
+```
+]
+
+???
+
+Review your data: Do I have all the cases I expected? Remember you would want to compare this number to your tracking database.
+
+Do I have all the variables I expected? Compared to the data dictionary?
+
+Do my variable types match my data dictionary?
+
+---
+
+background-image: url(img/session_info.PNG)
+
+---
+
+# Data Cleaning Plan
+
+.pull-left[
+
+1. Import the SPSS file into R **
+
+1. Rename variables based on our data dictionary **
+
+1. Remove any participant who did not **consent** **
+
+1. Check for duplicates
+
+1. Recode **degree** `( 6 -&gt; 0)` **
+
+1. Remove strings from **yrs_teach** and make it a numeric variable
+
+]
+
+.pull-right[
+
+7\. Convert **tch_id** to a character variable
+
+8\. Remove identifier variables (**survey_date**)
+
+9\. Add variable labels for **degree** and **yrs_teach**
+
+10\. Add value labels for **degree** **
+
+11\. Validate data
+
+12\. Export data to SPSS **
+]
+
+???
+
+What I would like to have us do is to try to clean a file start to finish (minus validation)
+
+We are just going to use the small dataset we already have, but we are going to practice running through a data cleaning plan
+
+I am going to live code with you and walk you through the process of setting up a reproducible syntax file. I want everyone to follow along and do everything with me. So we are going to move back over to RStudio. I am going to move slowly to give everyone time to follow my steps.
+
+---
+
+class: center, middle
+
+# <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> Let's Practice <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+
+---
+
+class: inverse, center, middle
+
+# Questions?
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "rainbow",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

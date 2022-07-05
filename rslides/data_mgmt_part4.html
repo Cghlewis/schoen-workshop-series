@@ -1225,7 +1225,7 @@ The dictionary should tell you some general information about what exists in you
 |---------|-----------|-----------|
 |rename variables | dplyr | rename |
 |rename all variables | purrr | set_names|
-|concatenate to variable names | dplyr | rename_with |
+|modify variable names | dplyr | rename_with |
 
 **Review data**
 
@@ -1493,7 +1493,7 @@ Formula is `new name = old name`
 
 ```r
 data %&gt;%
-  rename(new name = old name)
+  rename(new_name = old_name)
 ```
 
 If the old name has spaces in it, you need to surround the name in backticks ` `
@@ -1517,7 +1517,7 @@ Names must be in ""
 
 ```r
 data %&gt;%
-  set_names("new name 1", "new name 2", "new name 3")
+  set_names("new_name1", "new_name2", "new_name3")
 ```
 ]
 
@@ -1575,7 +1575,7 @@ Any variable name with spaces need to be surrounded by back ticks. R cannot hand
 
 You would use this function to rename ALL of your variables
 
-2. rename_with
+3. rename_with
 
 This one is a lot more complicated to use, but I think it's a really helpful one to show you because as we know, there are many times when we need to concatenate time to our variable names and this is the most efficient way to do that
 
