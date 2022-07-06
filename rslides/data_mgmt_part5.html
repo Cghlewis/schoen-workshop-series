@@ -351,6 +351,8 @@ setwd("C:/Users/Crystal/Desktop/
 
 If when you check your working directory, you are not in the top level folder you want to be in (ex: Schoen Example Files), there are several ways you can change your working directory
 
+...
+
 Which is the default that Windows uses
 
 
@@ -368,9 +370,11 @@ But what if our data is not in the same folder as our working directory?
 
 ???
 
-Which is typically what happens, you don't usually throw everything (syntax, data, output) all into the same folder. 
+...
 
-Our data files in our Schoen Example Files folder are one path deeper in a "data" folder. How do we tell R to grab our files from this folder when we import data?
+Which is typically what happens, you don't usually throw everything (syntax, data, output) all into the same folder. You usually have subfolders.
+
+Our data files in our Schoen Example Files folder, for example, are one path deeper in a "data" folder. How do we tell R to grab our files from this folder when we import data?
 
 ---
 
@@ -414,13 +418,21 @@ svy_csv &lt;- read_csv(
 
 ???
 
+So we have 2 options
+
+...
+
 Leaves room for error, also just a pain
 
 Not reproducible
 
 Option 2 which is what is recommended for both reproducibility and for reducing errors
 
+...
+
 We also learned about the here function but people were having issues with that function so we are just ignoring that for now
+
+...
 
 ---
 
@@ -475,9 +487,11 @@ I want to say 2 reminders, as I go through these functions, I do not expect you 
 
 To this day, I still do not remember every function and I forget the arguments ALL the time
 
-But what I do want you to get out of this overview, is an understanding that these transformations are possible and that functions do exist to make them happen. Once you have that understanding, you can always go back to these slides to look up the functions or you can even just google, R function to rename variables and you will find these functions
+And that is okay, that is what documentation is for
 
-The second reminder I want to draw your attention to, is the fact that it is important to remember that each of these functions come from a package. And that if you try to use a function and it gives you an error, like, can't find this function, it's because you probably forgot to load the package. Remember last session I said, each time you open R, the first thing you need to do is "library" all of the packages you need for your functions.
+But what I do want you to get out of this overview, is an understanding that these transformations are possible and that functions do exist to make them happen. Once you have that understanding, you can always go back to these slides to look up the functions or you can even just google a transformation you are wanting to do and you will find these functions
+
+The second reminder I want to draw your attention to is the fact that it is important to remember that each of these functions come from a package. And that if you try to use a function and it gives you an error, like, can't find this function, it's because you probably forgot to load the package. Remember last session I said, each time you open R, the first thing you need to do is "library" all of the packages you need for your functions.
 
 You can see in these tables, I always list what package each function comes from. You don't have to memorize this, you can come back to this table at any point.
 
@@ -559,6 +573,10 @@ data %&gt;%
 
 ???
 
+So let's recap some functions for naming variables
+
+The first function we learned last week was the rename function
+
 1. rename
 
 This is a function you can use to rename one or more variables
@@ -583,8 +601,11 @@ Names must be in ""
 
 This one is good for modifying variable names. A particular use case for this one was, when you need to concatenate something like time to your variable names.
 
+The way you set this function up is, you choose a function within the rename_with function, that you want to use to modify your variable names
+
 In our example we used the base R paste0 within our rename_with function, to concatenate the year _1819 to the end of our variable names.
 
+But you can use any other functions you want to modify variable names. Another common one is to use the function tolower to change all variable names to lower case
 
 ---
 
@@ -836,6 +857,8 @@ data %&gt;%
 
 To find duplicates you can use this function get_dupes
 
+And you would include identifier variables you want to use to check for duplicates
+
 An example identifier variable would be a student or teacher id, and it would print out the duplicate rows
 
 And then when you want to remove those duplicates, you can use the distinct function
@@ -845,6 +868,8 @@ You can simply list the identifier variable you want to remove duplicates for
 Reminder to use the .keep_all = TRUE argument for this function, the default of this function is false and it basically drops all of your variables except your identifier variable, which is not helpful for our purposes
 
 I also mentioned that using distinct keeps the first instance of an identifier and drops all remaining cases. If this is not what you want, maybe you want to keep the most recent instance of the duplicate, you can use the arrange function to order your data in the way you want before dropping duplicates.
+
+And arranging data before dropping duplicates is a reproducible best practice because if someone reorders your raw data on accident, and you re-run your syntax, you may end up dropping a different duplicate row
 
 
 ---
@@ -1061,7 +1086,7 @@ We covered how to select variables
 
 We learned we can select the variables we want (either by listing them out explicitly or using the : if they are in sequential order)
 
-We learned we can remove the variables we don't want by adding a negative sign in front of them
+Or we can remove the variables we don't want by adding a negative sign in front of them
 
 And we learned that there are special statements within the tidyverse, called selection helpers, that help you do things quicker and more efficiently. So if we want to grab all variables with the word bmtl in them, we can use the selection helper "contains" to grab just those variables. You can imagine if we had 50 bmtl variables, not all in sequential order, using these selection helpers could save us a lot of time.
 
@@ -1252,10 +1277,13 @@ data %&gt;%
 
 ???
 
-...
+String Remove All is a function to remove strings in variables
 
 Remember that we have to use mutate because we are transforming a variable and we have to write that transformation into a new variable
 
+...
+
+String Replace All is a function to replace strings in variables
 
 ---
 
@@ -1332,13 +1360,17 @@ data %&gt;%
 
 Say I have a character variable and I want to convert it to numeric, I can use mutate to create a new variable and then use the function as. numeric to transform my existing character variable
 
-2\. class-date:
+2\. You can also change a numeric variable to character using as.character
+
+3\. class-date:
 
 Changing variables to dates can be a little more complicated because there is no one catch-all way to do this. It more so depends on how your existing variable is formatted
 
 Notice that after we ran the mdy() function, our date variable looks like this now: YYYY-MM-DD
 
 And that is because date variables are always formatted as YYYY-MM-DD
+
+...
 
 The mdy() only told R the format that our character date variable was in so it knew how to interpret it. Once the character variable is transformed to a date, it will appear in the R date format of YYYY-MM-DD
 
@@ -1380,6 +1412,8 @@ data %&gt;%
 ...
 
 This is a special circumstance where we don't have to use mutate because we aren't creating a new variable. We are splitting a variable into multiple variables and we will name those new variables within the separate function.
+
+...
 
 ---
 
@@ -1880,6 +1914,9 @@ class: center, middle
 
 1. Have your data cleaning plan ready
 
+1. Review any ReadMe files
+  + Incorporate into data cleaning plan
+
 1. Have your data dictionary ready
 
 1. Set up a consistent folder structure according to your Style Guide
@@ -1894,12 +1931,13 @@ class: center, middle
 **Tips for a Reproducible Syntax File:**
 
 1. Use comments to organize and communicate each step of your data cleaning plan
-  - Consider using R Notebooks to make file more readable
 2. Put all cleaning steps into syntax
 3. Use relative file paths to import and export data
   - Don't set your working directory in your syntax
   - Consider using R projects to set your working directory
-4. Integrate your data dictionary into your syntax
+4. Don't do anything random in your syntax
+  - Set seeds for random number generation
+  - Order your data before removing duplicates
 5. Record Session Info
   + Operating system info
   + R Version info
@@ -1909,21 +1947,55 @@ class: center, middle
 
 ???
 
-So now I'd like to talk about putting this all together and creating this reproducible workflow
+So now I'd like to talk about putting this all together and creating a reproducible workflow
 
-If you follow these steps, you should make a reproducible workflow for yourself, that you can run as many times as you want without errors, and reduces time and effort when changes are made to your data or cleaning process.
+If you follow the steps on this slide, you should make a minimal reproducible workflow for yourself and others. 
 
-And it should make a reproducible syntax file that you can share with others and they should be able to run on their machine as well.
+Anyone should be able to run your code, on their machine, and get the same clean output file that you got.
 
-No intermediary steps between the raw data and your cleaning process should happen. It should all be in the syntax (just read in the raw file directly). Removing participants, removing variables, etc. should all happen in syntax so your process is reproducible. If the project coordinator has any info to tell you about who should be dropped, it should be written in a Readme for you to write into your syntax.
+So before you open up R to create your syntax files, you should make sure you have a few things in place:
 
-...
+1. Have your Data Cleaning Plan Ready
 
-Remember data cleaning plans? This is a plain text document where you write out the transformations you want to do to the data, in order of how you plan to do them. This will be your syntax guide. 
+If you remember data cleaning plans from 2 sessions ago, this is a plain text document where you write out the transformations you want to do to the data, in order of how you plan to do them. This will be your syntax guide. 
+
+2\. Review any ReadMes left for you by the project coordinator
+
+Were there any notes that the person overseeing data collection wanted you to know about? Duplicates in files, IDs entered incorrectly. Whatever is in the ReadMe, incorporate that into your data cleaning plan.
+
+3\. Have your data dictionary ready to refer to
 
 In addition to your data cleaning plan, your data dictionary will be your guide and way for you to validate each data cleaning step.
 
-We will hopefully get to talking about how to integrate your data dictionary into your syntax next session
+4\. ....
+
+5\. ... Name raw files "raw" and clean files "clean"
+
+And then when it's time to start writing your cleaning syntax, these tips can make your workflow more reproducible
+
+1\. Use comments to organize and communicate each step of your data cleaning plan
+
+You can even consider writing your cleaning code in an RMarkdown file or R Notebook instead of a syntax file to make your code more readable. We won't cover those types of files in this workshop, but it's worth learning more about. They are file types that allow you to execute your code in chunks and they make your code more readable.
+
+2\. Put all your data cleaning steps in syntax.
+
+No intermediary steps between the raw data and your cleaning process should happen. It should all be in the syntax (just read in the raw file directly). Removing participants, removing variables, etc. should all happen in syntax so your process is reproducible. If the project coordinator has any info to tell you about who should be dropped, it should be written in a Readme for you to write into your syntax.
+
+3\. Use relative paths to import and export data
+
+Also, as best you can, don't set your working directory in your syntax. Set it in the console or using the drop down menu. We don't want any paths hard coded in our syntax because we've talked about how different users will have different paths and so hard coding these paths reduces the reproducibility of our code.
+
+Once you get more comfortable with R and RStudio, you may consider using R projects, which permanently sets a folder as your working directory so you no longer have to check your working directory all the time. We won't cover that in these sessions though. It's a little more involved.
+
+4\. ....
+
+If you randomly generate any numbers in your data (like IDs) then you need to set a seed. set.seed is a function in base R that you can add to your syntax. Using the set.seed function in your syntax means when someone else runs your syntax to randomly generate your numbers, they will get the same set of random numbers.
+
+Also when you are removing duplicates, its best to be purposeful about how you remove those duplicates and order your data in a specific way first. Like I mentioned earlier, if someone at some point shuffles your raw data around, and you re-run your syntax, you may end up dropping a different duplicate if you did not arrange your data first.
+
+5\. Record Session Info
+
+...
 
 You can record SessionInfo into a plain text file so that future users of your syntax can know all of the requirements needed for running your syntax. They may never run into issues using your syntax, but what if one of your functions doesn't work for them when they try to run your syntax on their computer.
 
@@ -1932,7 +2004,101 @@ They might look at your SessionInfo and find out you have a newer version of a c
 
 ---
 
-# Setting up your Syntax File
+# Creating Reliable and Automated Workflows
+
+.pull-left[
+
+**Reliable practices:**
+
+1. Review your data upon import
+
+1. Check each transformation
+  - Review the data before and after
+
+2. Validate your data before exporting
+  
+3. Versioning and keeping change logs
+  - Data
+  - Code
+
+]
+
+.pull-right[
+
+**Automation practices:**
+
+1. Integrate your data dictionary into your syntax
+
+2. Writing functions for repeatable tasks
+
+3. Package up useful functions
+
+4. Using make files to execute multiple files
+
+5. Making documentation using code
+
+]
+
+???
+
+In addition to reproducibility, there are also practices that improve reliability and automation
+
+Reliable data practices are necessary practices to integrate into your workflow. They don't make your syntax more reproducible, but they ensure you can trust your data.
+
+1. Review your data upon import
+
+You want to make sure the raw data is coming to you the way you expected it to.
+
+Do the number of cases in the data match what you expected. Do the number of variables match what you have in your data dictionary? Are the variables named the way you expected?
+
+Do the variable types match my data dictionary?
+
+2\. ...
+
+Did the transformation work correctly?
+
+3\. Validate your data
+
+If you recall the session on data cleaning plans, validating data includes all your final checks to make sure no mistakes exist in the data before you export it.
+
+  - Number of cases matches what you see in tracking database
+  - Number of variables in your data match what you see in your data dictionary
+  - No duplicate rows
+  - No missing IDs and all IDs are real IDs
+  - All variable classes match your data dictionary
+  - All variables fall within the ranges laid out in your data dictionary
+  - Cross validation for impossible values
+  - All variables contain necessary labels
+
+
+4\. Versioning both our data and our code and keep change logs
+
+We never want to save over versions of our syntax or data that we put out into the world because then one person may be using one version of our file and we are using a new updated version of our file but they are called the same thing. Not a good practice. So we want to name them differently based on version.
+
+Then there are practices that improve automation
+
+Automation practices are considered nice to have, but not entirely necessary. These are practices that make your process quicker, more efficient and less error prone because they reduce the amount of manual work you are doing. But I wouldn't expect any of you to use these practices. I don't even use all of these practices. They are just "nice to have". We aren't covering any of these in this series because they are more advanced but I want to introduce them to you.
+
+1\. Integrate your data dictionary into your syntax
+
+Instead of hard coding variable names and labels into your syntax, you can read your data dictionary into R and use it to do things like rename your variables, label your variables and remove variables you don't want to keep.
+
+2\. You can write your own functions for repeatable steps
+
+If you have certain steps that you do over and over in your code, you can write those steps into a function which you can call in your cleaning syntax. This reduces the length of your syntax and can reduce errors.
+
+3\. You can create your own package. If you wrote a bunch of functions for data cleaning, you can document and package those all up to be used by you and your team. It would look just any other package we have talked about and your team can benefit from your work.  You can call it the naomi_package
+
+4\. If your cleaning process involves multiple syntax files, you can use these special files called make files that will run all of your syntax files for you in an efficient way.
+
+5\. You can automate some of your documentation. Consort Diagrams and Codebooks can be created using syntax. And it will update whenever you update your dataset, rather than you having to update by hand.
+
+
+https://kbroman.org/steps2rr/
+
+---
+
+# Setting up your Syntax File Basics
 
 
 ```r
@@ -1943,6 +2109,7 @@ They might look at your SessionInfo and find out you have a newer version of a c
 3. Change your working directory if needed (in console or drop-down)
 
 4. Import data using relative paths
+  - Check your data
 
 5. For each step of your data cleaning plan
   - Comment
@@ -1960,17 +2127,10 @@ They might look at your SessionInfo and find out you have a newer version of a c
 
 The general order of your syntax file will look like this. This is subject to variation depending on the task.
 
+...
 
-If you recall the session on data cleaning plans, validating data includes all your final checks to make sure no mistakes exist in the data.
-
-  - Number of cases matches what you see in tracking database
-  - Number of variables in your data match what you see in your data dictionary
-  - No duplicate rows
-  - No missing IDs and all IDs are real IDs
-  - All variable classes match your data dictionary
-  - All variables fall within the ranges laid out in your data dictionary
-  - Cross validation for impossible values
-  - All variables contain necessary labels
+For each step of data cleaning plan, integrate these 3 things
+- comments, coding, checks
 
 You won't record session info until the entire syntax is finished. It will capture all of the packages you used for the session.
 
@@ -2005,34 +2165,29 @@ tch_svy %&gt;%
 
 # (03) Remove identifier variables ----
 
-tch_svy &lt;- tch_svy %&gt;%
-  select(-first_name, -last_name)
+# Check: What variables do I have?
+
+names(tch_svy)
 ```
 ]
 
 .pull-right[
 
 ```r
+# Drop variables
+
+tch_svy &lt;- tch_svy %&gt;%
+  select(-first_name, -last_name)
+
 # Check: What variables do I have now?
 
 names(tch_svy)
 
-# (04) Create intervention variable
-
-tch_svy &lt;- tch_svy %&gt;%
-  mutate(intervention = if_else(
-    sch_id %in% c(101, 103, 105), 1, 0))
-
-# Check: Did intervention calculate correctly?
-
-tch_svy %&gt;% 
-  tabyl(sch_id, intervention)
-
-# (05) Data Validation ----
+# (04) Data Validation ----
 
 # Various checks
 
-# (06) Export data to a csv ----
+# (05) Export data to a csv ----
 
 write_csv(tch_svy, 
       path("data", "tch_survey_clean.csv"))
@@ -2048,15 +2203,23 @@ sessionInfo() %&gt;%
 
 ???
 
-Review your data: Do I have all the cases I expected? Remember you would want to compare this number to your tracking database.
+This is a very simplistic overview of a reproducible syntax file
 
-Do I have all the variables I expected? Compared to the data dictionary?
+1. We add our libraries at the top
+2. We use comments to explain our steps
+3. We didn't change the working directory in the syntax (we do it in the console or drop-down menu if need be)
+4. We use relative paths to import and export our data
+5. We do a series of checks throughout the syntax
+6. And we write out our Session Info at the end
 
-Do my variable types match my data dictionary?
 
 ---
 
 background-image: url(img/session_info.PNG)
+
+???
+
+This is an example of a Session Info file. You can see it has...
 
 ---
 
@@ -2095,11 +2258,16 @@ background-image: url(img/session_info.PNG)
 
 ???
 
-What I would like to have us do is to try to clean a file start to finish (minus validation)
+What I would like to have us do is to try to clean a file start to finish
 
 We are just going to use the small dataset we already have, but we are going to practice running through a data cleaning plan
 
+Because I know we are going to run out of time, I am going to only focus on the steps with stars next to them
+
 I am going to live code with you and walk you through the process of setting up a reproducible syntax file. I want everyone to follow along and do everything with me. So we are going to move back over to RStudio. I am going to move slowly to give everyone time to follow my steps.
+
+Please interrupt me at any point if I am going too fast or if I am doing something confusing or wrong
+
 
 ---
 
