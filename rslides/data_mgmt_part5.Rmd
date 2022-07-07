@@ -2226,6 +2226,10 @@ For each step of data cleaning plan, integrate these 3 things
 
 You won't record session info until the entire syntax is finished. It will capture all of the packages you used for the session.
 
+The great thing about writing this all in syntax is that you can use this syntax across time. If you used the syntax to clean a student survey in spring 2021, you can copy this same syntax and use this to clean spring 2022 as well. The only thing you may need to change are the names of the import and export files to match the name of the new year files. And check your data dictionary to make sure no changes were made to the survey in the new year. 
+
+Not only is this reusability created by cleaning using syntax, but it's also possible because of our style guide rule where we are not adding time to the variable names until we need to merge files. Currently our variable names are consistent across time which allows us to reuse this syntax each wave of data collection.
+
 ---
 
 .pull-left[
