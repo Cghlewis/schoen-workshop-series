@@ -2124,7 +2124,7 @@ They might look at your SessionInfo and find out you have a newer version of a c
 
 3. Package up useful functions
 
-4. Using make files to execute multiple files
+4. Using Makefiles to execute multiple files
 
 5. Making documentation using code
 
