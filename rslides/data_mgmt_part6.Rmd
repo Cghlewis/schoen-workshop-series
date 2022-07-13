@@ -1733,6 +1733,14 @@ We can also structure our data from long back to wide using the pivot_wider() fu
 
 Again I think it's easiest to see how they arguments work through a visual
 
+So here we have our long data with repeating participants and we want to transform this to a wide dataset
+
+Our first argument in the pivot_wider function is names_from, which is, which column contains our new variable names (this is typically your categorical variable or time variable)
+
+Note that we no longer need to use quotes for this argument because we are no longer naming variables we are referring to existing variables. 
+
+So if we look at this in code, it would look like this
+
 ---
 
 # Restructure Wide
@@ -1770,11 +1778,11 @@ data %>%
 
 * `values_from` = which columns have the values we want to pivot into wide format
 
-* `names_sep` = what separator should be used to separate the item and category (ex: time) in the new variable name
+* `names_sep` = what separator should be used to separate the two pieces of our new variable names
 
 ???
 
-names_from is a little different now, instead of which values should be the new variable names, it is which values should be appended to new variable names (I'll show what that means in a second)
+names_from is a little different now, instead of which column holds our new variable names, it is which column values should be appended to new variable names (I'll show what that means in a second). This is still typically your categorical or time variable.
 
 values_from is the same
 
