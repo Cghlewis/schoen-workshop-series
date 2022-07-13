@@ -120,12 +120,23 @@ Last week we had a fictitious scenario where we were given this data cleaning pl
 
 I have since updated the plan a little bit. I've included more steps. We still are not going to do all of the steps but I wanted to realistically lay out everything I would actually do. And give this to you in case you want to run through it on your own at a later time.
 
+Hopefully everyone was able to download those updated files I sent on Tuesday and add those to your example files folder.
 
 ---
 
 class: center, middle
 
 # <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> Let's Practice <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+
+???
+
+Open syntax file
+
+Open data dictionary
+
+Open data cleaning plan
+
+Make sure we added the updated data into the data folder
 
 ---
 
@@ -141,7 +152,7 @@ Let's remember what data validation might include
 
 .pull-left[
 
-* Number of cases matches what you see in tracking database
+* Number of cases match what you see in tracking database
 
 * Number of variables in your data match what you see in your data dictionary
 
@@ -167,6 +178,16 @@ Let's remember what data validation might include
 ???
 
 This is the last step in your syntax before you export your data
+
+...
+
+Cross validation:
+
+Kindergartners aren't saying their age is 12
+
+Variable and value labels
+
+...
 
 ---
 
@@ -243,6 +264,14 @@ Data Dictionary
 &lt;/tbody&gt;
 &lt;/table&gt;
 
+???
+
+In order to begin validating your data, you need two things
+
+You need your clean data (with all transformations complete)
+
+And you need your data dictionary for comparison purposes
+
   
 ---
 
@@ -275,6 +304,11 @@ tibble [3 x 4] (S3: tbl_df/tbl/data.frame)
  $ enjoy_teach: num [1:3] 1 2 1
 ```
 
+???
+
+There are some checks you can do very simply
+
+Like check the number of rows and columns using a function like glimpse or structure
 
 ---
 
@@ -315,7 +349,15 @@ tibble [3 x 4] (S3: tbl_df/tbl/data.frame)
 
 ???
 
-There are many other ways to validate data. Using tables, and cross tabulations and correlations and graphs and other packages and functions. But today I am going to teach you about one package, called pointblank, that is a straight-forward, nicely packaged up way to do a good chunk of your data validation. And the extra nice thing is, you can make this into a report to share with others for review.
+But other checks can be more involved and I think a nice way to package up many of these steps into a manageable process is using the pointblank package in R. This is a validation package developed by someone in the R community and I love it.
+
+There are many other ways to validate data. Using tables, and cross tabulations and correlations and graphs and other packages and functions. But today I am going to teach you about pointblank. It is a straight-forward, nicely packaged up way to do a good chunk of your data validation. And the extra nice thing is, you can make this into a report to share with others for review.
+
+You can do some basic tests in pointblank using functions that begin with the word test_
+
+...
+
+For each of these functions, once you run it you will get an output to your console that either says TRUE or FALSE. TRUE meaning the criteria passed and FALSE meaning it did not pass and there are still errors in your data.
 
 ---
 
@@ -324,7 +366,7 @@ There are many other ways to validate data. Using tables, and cross tabulations 
 .panelset[
 .panel[.panel-name[test-distinct]
 
-Test that there are no duplicate IDs in the data
+Test that there are no duplicates in the data
 
 
 ```r
@@ -347,7 +389,7 @@ svy %&gt;%
 
 .panel[.panel-name[test-not-null]
 
-Test that no IDs are missing
+Test that no values are missing
 
 
 ```r
@@ -385,7 +427,9 @@ data %&gt;%
                         na_pass = value)
 ```
 
-* If your variable has NA values and you expect it to have NA values, na_pass = TRUE. If you do not want NA values in your variable, na_pass = FALSE. Default is FALSE.
+* `left` is the lowest value in the range
+* `right` is the highest value in the range
+* `na_pass` are NA values allowed in your variable. The default is false.
 
 ]
 
@@ -432,7 +476,7 @@ data %&gt;%
                        set = c())
 ```
 
-* If your variable may have NA values and you are okay with it having NA values, add NA values to your set. Otherwise, you will get "FALSE" when your variable has NAs.
+* `set` is a vector of the values that are allowed for this variable
 
 
 ```r
@@ -497,6 +541,59 @@ print(svy)
 ]
 ]
 
+???
+
+So let's review how to use some of these functions
+
+1. test-distinct
+
+You can use this to test something like, there are no duplicate IDs left in the data
+
+2\. test-not-null
+
+You can use this to test something like, no IDs are missing
+
+It's the same arguments as before
+
+3\. test-continuous
+
+...
+
+The arguments for this include the column names again and then a couple of new arguments
+
+...
+
+na_pass: you would set this to false for something like tch_id but true for items that might have missing data like a survey item
+
+In this example, we tested the range for tch_id. I expected values to be between 1230 and 1240.
+But when I tested, I got a FALSE output.
+
+Does anyone see why?
+
+So I would need to go investigate this particular case. Maybe the 3 and 6 got transposed.
+
+4\. test-categorical
+
+I can also test that categorical variables fall within a set of expected values
+
+Instead of a left and right range, I now have a set argument
+
+...
+
+(1, 2, 3, 4)
+
+If your variable is allowed to have NA values, you will want to specifically add NA to your set. Otherwise, you will get "FALSE" when your variable has NAs.
+
+You can see I added NAs for my example here where I am checking the values for the variable any_degree
+
+4\. test-col-type
+
+For testing variable types, you just need to choose the function appropriate for your variable
+
+test_col_is_character, test_col_is_numeric, etc
+
+In my example I am testing that tch_id is a character variable, which is what I said I wanted it to be in my data dictionary. But I got a FALSE. Does anyone know why?
+
 ---
 
 # Generating a Report
@@ -536,6 +633,20 @@ svy %&gt;%
 
 How do I know which variable/s the FALSE applies to? Which rows are having the issues?
 ]
+
+???
+
+...
+
+You can see here I got a false but I can easily identify the problem variable because I only included one variable (enjoy_teach)
+
+...
+
+
+Which is typically what you want to do because if you have 200 variables you don't want to validate them one at a time
+
+You can see now when I add multiple variables, any_degree and enjoy_teach, I get a FALSE again. But now I'm not sure which variable the FALSE applies to. I also don't know which rows have issues. So it's going to take some digging on my part to figure out where the problem is.
+
 
 ---
 
@@ -1018,7 +1129,7 @@ html {
       <th colspan="14" class="gt_heading gt_title gt_font_normal" style="color: #444444; font-size: 28px; text-align: left; font-weight: 500;">Pointblank Validation</th>
     </tr>
     <tr>
-      <th colspan="14" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="font-size: 12px; text-align: left;"><span style="text-decoration-style:solid;text-decoration-color:#ADD8E6;text-decoration-line:underline;text-underline-position:under;color:#333333;font-variant-numeric:tabular-nums;padding-left:4px;margin-right:5px;padding-right:2px;">[2022-07-12|08:52:56]</span></p>
+      <th colspan="14" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="font-size: 12px; text-align: left;"><span style="text-decoration-style:solid;text-decoration-color:#ADD8E6;text-decoration-line:underline;text-underline-position:under;color:#333333;font-variant-numeric:tabular-nums;padding-left:4px;margin-right:5px;padding-right:2px;">[2022-07-13|16:50:33]</span></p>
 <div style="height:25px;"><span style="background-color: #F1D35A;color: #222222;padding: 0.5em 0.5em;position: inherit;text-transform: uppercase;margin: 5px 1px 5px 4px;font-weight: bold;border: solid 1px #F1D35A;padding: 2px 10px 2px 10px;font-size: smaller;">tibble</span></div>
 </th>
     </tr>
@@ -1107,9 +1218,9 @@ html {
   </tbody>
   <tfoot class="gt_sourcenotes">
     <tr>
-      <td class="gt_sourcenote" colspan="14"><span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin-left:10px;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;padding:2px 10px 2px 10px;">2022-07-12 08:52:56 CDT</span>
+      <td class="gt_sourcenote" colspan="14"><span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin-left:10px;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;padding:2px 10px 2px 10px;">2022-07-13 16:50:33 CDT</span>
 <span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;margin:5px 1px 5px 0;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;">&lt; 1 s</span>
-<span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin:5px 1px 5px -1px;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;">2022-07-12 08:52:56 CDT</span></td>
+<span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin:5px 1px 5px -1px;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;">2022-07-13 16:50:33 CDT</span></td>
     </tr>
   </tfoot>
   
@@ -1119,11 +1230,18 @@ html {
 
 ???
 
-create_agent() creates an object which is used in the data quality reporting workflow
+In comes the reporting functionality to save the day
 
-interrogate() assesses our object based on our evaluation plan. All the things we asked it to check. It is the function that creates this output.
+You can use this create_agent() function to first create an object which is used in the data quality reporting workflow
 
-If you add this code to your syntax, it will output in your Viewer window (in the bottom left corner RStudio Pane)
+Then add your validation steps, but now we just remove the "test_" part of our function. Otherwise the functions are the same.
+
+And then at the end, add this interrogate() function which assesses our object based on our validation plan and creates this output to the right.
+
+If we review this output, we can see that it tells us what tests were run, on what variables,
+and which variables failed the test (and how many rows failed). We can also export a csv of the rows with issues.
+
+If you add this code to your syntax, it will output this report in your Viewer window (in the bottom right corner RStudio Pane)
 
 ---
 
@@ -1605,7 +1723,7 @@ html {
       <th colspan="14" class="gt_heading gt_title gt_font_normal" style="color: #444444; font-size: 28px; text-align: left; font-weight: 500;">Pointblank Validation</th>
     </tr>
     <tr>
-      <th colspan="14" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="font-size: 12px; text-align: left;"><span style="text-decoration-style:solid;text-decoration-color:#ADD8E6;text-decoration-line:underline;text-underline-position:under;color:#333333;font-variant-numeric:tabular-nums;padding-left:4px;margin-right:5px;padding-right:2px;">[2022-07-12|08:52:57]</span></p>
+      <th colspan="14" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="font-size: 12px; text-align: left;"><span style="text-decoration-style:solid;text-decoration-color:#ADD8E6;text-decoration-line:underline;text-underline-position:under;color:#333333;font-variant-numeric:tabular-nums;padding-left:4px;margin-right:5px;padding-right:2px;">[2022-07-13|16:50:34]</span></p>
 <div style="height:25px;"><span style="background-color: #F1D35A;color: #222222;padding: 0.5em 0.5em;position: inherit;text-transform: uppercase;margin: 5px 1px 5px 4px;font-weight: bold;border: solid 1px #F1D35A;padding: 2px 10px 2px 10px;font-size: smaller;">tibble</span></div>
 </th>
     </tr>
@@ -1781,9 +1899,9 @@ html {
   </tbody>
   <tfoot class="gt_sourcenotes">
     <tr>
-      <td class="gt_sourcenote" colspan="14"><span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin-left:10px;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;padding:2px 10px 2px 10px;">2022-07-12 08:52:57 CDT</span>
+      <td class="gt_sourcenote" colspan="14"><span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin-left:10px;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;padding:2px 10px 2px 10px;">2022-07-13 16:50:34 CDT</span>
 <span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;margin:5px 1px 5px 0;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;">&lt; 1 s</span>
-<span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin:5px 1px 5px -1px;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;">2022-07-12 08:52:57 CDT</span></td>
+<span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin:5px 1px 5px -1px;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;">2022-07-13 16:50:34 CDT</span></td>
     </tr>
   </tfoot>
   
@@ -1791,6 +1909,16 @@ html {
 </div>
 
 ]
+
+???
+
+...
+
+So you can see here I am validating the range for two categorical variables
+
+And I am validating the data types of 3 variables
+
+And again, we get a comprehensive report
 
 ---
 
@@ -1814,7 +1942,9 @@ html {
 
 ???
 
-Think about how Qualtrics has options to fill missing values with -99 or 0. Were one of those options selected and you did or did not want those options selected?
+...
+
+Think about how Qualtrics has options to fill missing values with -99 or 0. Were one of those options selected and you didn't plan on that?
 
 ---
 
@@ -1822,18 +1952,45 @@ class: inverse, center, middle
 
 # Merging and Appending
 
+???
+
+Before we move on, were there any questions about validation?
+
 ---
 
 # Merging
 
 Binding two datasets together in a wide format, linked by a **unique identifier** across forms. 
 
-You may be merging similar forms across time, or you may be merging different forms within time. Variable names (besides your identifier) **must be unique**
+Variable names (besides your identifier) **must be unique**
 
 We can merge data using the `*_join()` functions from the `dplyr` package in R.
 
 ![](img/merge.PNG)
 
+???
+
+...
+
+You may be merging similar forms across time, you may be merging different forms within time, or you may be merging one participant data type with another participant data type (merging teacher data into student data).
+
+In order to merge, you need to make sure your variable names are unique, besides your identifier variable which should be identical across forms
+
+...
+
+
+meaning there are different types of joins and we will review some of those in a second
+
+...
+
+
+Notice here in our 2 example datasets that we are going to use for demonstration purposes.
+
+We have two identical forms across time. One was collected in 1819 and one in 1920. 
+
+The variable names are identical except for the year component. This allows us to have unique variable names but still be able to know which variables are comparable across time.
+
+Most of the participants are the same across forms but the 1819 data has one participant who is not in the 1920 data and the 1920 data has one new participant who is not in the 1819 data.
 
 ---
 
@@ -1916,6 +2073,36 @@ test_1819 %&gt;%
 
 ]
 
+???
+
+1. full-join
+
+The most common type of join in our work is probably the full join. This is when you want cases from both datasets to be included in the final data.
+
+The function to create this join is full_join.
+
+The format of this is to first call your first dataset, pipe that data into your join function, then call your second dataset, and then use the *by* argument to say what the unique identifier is that you want to join on. Your identifier variable does need to be in quotes for this argument.
+
+You can see when join our 2 datasets using a full_join, we now have 5 now. Before each dataset had 4 rows. So we gained a row.
+
+
+2\. left_join
+
+There is also left join. This is commonly used if your left dataset (the dataset you call first) contains your specific sample and you only want to merge in those participants who are in your sample.
+
+This is also used if you are doing something like merging teacher data into student data. You only want to merge teacher data into the student data for teachers that exist in your student data.
+
+You can see, using the left join, which has the same arguments as before, our number of cases is now 4 because that is what our original left-side dataset had. We didn't gain any new participants.
+
+
+3\. inner_join
+
+This is the most uncommon join in our field. You would use this if for some reason you only wanted to keep participants who have data for both forms.
+
+You can see our number of cases is now down to 3.
+
+Questions?
+
 ---
 
 # Appending
@@ -1928,11 +2115,15 @@ We can append data using the `bind_rows()` functions from the `dplyr` package in
 
 Used for the instances such as:
 
-1. For people who want to analyze long datasets.
+1. For people who want to analyze long datasets over time
 
 2. For combining similar forms within time (ex: Two Qualtrics survey links used and forms need to be combined)
 
-3. For combining groups of data across time (ex: Stacking Cohort 1 and Cohort 2).
+3. For combining groups of data (ex: Stacking Cohort 1 and Cohort 2)
+
+???
+
+Which is the opposite of what we saw before
 
 ---
 
@@ -1962,6 +2153,19 @@ When appending data using `bind_rows()`:
 
 ]
 
+???
+
+Here we have an example where we sent out two Qualtrics links for the same survey in the same time period. So now we need to stack those together to make one dataset for this time period.
+
+When appending data you need to check for 3 things:
+
+1. As I mentioned a second ago, variable names must be identical in the forms. Columns are appended based on variable names. You can see in our example data that variable names are the same across forms. If they weren't you would need to rename the columns before binding.
+
+2\. ...
+
+If your variable types are not all the same, you will need to convert data types before appending.
+
+
 ---
 
 # Appending
@@ -1984,13 +2188,19 @@ class: inverse, center, middle
 
 # Restructure
 
+???
+
+The last topic we are going to cover is restructuring data
+
+Before we move on, are there any questions about merging or appending data?
+
 ---
 
 # Restructure
 
 .pull-left[
 
-Wide Data: One row per case
+Wide Data: One row per case and variables repeat
 
 ![](img/wide.PNG)
 
@@ -1998,13 +2208,17 @@ Wide Data: One row per case
 
 .pull-right[
 
-Long Data: Repeating rows per case
+Long Data: Repeating rows per case and no repeating variables
 
 ![](img/long.PNG)
 
 ]
 
 ???
+
+There are essentially two structural forms for your data
+
+...
 
 The reasons for wanting your data in one format or the other all depend on things like the type of analysis you are wanting to do, what the user is most familiar with, best format for data storage, and so forth
 
@@ -2058,13 +2272,42 @@ data %&gt;%
       - Select all except using `-`
       - List multiple variables using c()
 
-* `names_to` = name of your new categorical column/s typically (ex: time)
+* `names_to` = name of your new categorical variable/s to store your old variable names
   + Use quotation marks around this name
 
-* `values_to` = name of the new column/s
+* `values_to` = name of the new variable/s storing your values
   + Use quotation marks around this name
 
 ]
+]
+
+.panel[.panel-name[pivot_longer]
+
+.pull-left[
+
+* `cols` = the variables you want to pivot
+  + These can be selected using 
+      - selection helpers (such as starts_with)
+      - Using : for consecutive variables
+      - Select all except using `-`
+      - List multiple variables using c()
+
+* `names_to` = name of your new categorical variable/s to store your old variable names
+  + Use quotation marks around this name
+
+* `values_to` = name of the new variable/s storing your values
+  + Use quotation marks around this name
+  
+]
+
+.pull-right[
+
+This is a dataset of test scores over time
+
+![](img/pivot_long.PNG)
+
+]
+
 ]
 
 .panel[.panel-name[example_one]
@@ -2072,8 +2315,6 @@ data %&gt;%
 .pull-left[
 
 Our wide dataset
-
-This is a dataset of test scores by time
 
 
 ```
@@ -2166,13 +2407,16 @@ data_wide %&gt;%
 
 
 ```
-  sch_id eighth   grade enrollment
-1     24    100   sixth        150
-2     24    100 seventh         80
-3     25    110   sixth         75
-4     25    110 seventh        120
-5     27     70   sixth         50
-6     27     70 seventh         65
+  sch_id   grade enrollment
+1     24   sixth        150
+2     24 seventh         80
+3     24  eighth        100
+4     25   sixth         75
+5     25 seventh        120
+6     25  eighth        110
+7     27   sixth         50
+8     27 seventh         65
+9     27  eighth         70
 ```
 ]
 ]
@@ -2180,7 +2424,37 @@ data_wide %&gt;%
 
 ???
 
-The variables you want to pivot are the ones that currently repeat across a row. 
+Bear with me because these restructuring functions are not super intuitive. I do not expect you to grasp all of this today. Again, I just want you to know this is all possible, and that the more you practice these functions, the more it will all start to make sense.
+
+...
+
+There are 3 arguments that I want to review, but I think they are best explained with a visual
+
+So demonstrate these arguments, I wanted to show you an actual wide dataset that I can pivot to long format
+
+This is a dataset of test scores over time
+
+You can see how the data is currently in wide format (one row per participant but repeating pieces of data across time), but we are trying to restructure our data to this long format where there are repeating rows per participant but no repeating variables across time
+
+
+1. pivot_longer
+
+So there are 3 arguments for the pivot_longer function
+
+cols: These are typically your repeating variables. So you can see here that scores repeat across time. So the variables I would choose for this argument are time1 and time2.
+
+...
+
+names_to: This argument is going to create this new column after we run the function
+
+values_to: This argument is going to create this new column after we run the function
+
+So let's see what this actually looks like in a function
+
+
+2. example-one
+
+Does everyone see how each row repeats now?
 
 
 
@@ -2190,7 +2464,7 @@ The variables you want to pivot are the ones that currently repeat across a row.
 
 But most of the time our data will not be that simple. It will look more like this. 
 
-Multiple recurring variables across different waves of data.
+Multiple recurring variables across different waves of data, and multiple components in the variable name.
 
 &lt;br&gt;
 
@@ -2263,12 +2537,60 @@ data %&gt;%
 
 * `cols` = still the columns we wish to pivot
 
-* `names_to` = is now two pieces of information
-  1. the categorical piece (ex: time) to be made into a new variable
-  2. .value which indicates to copy over the variable name in the transformed data
-  + Provide these two pieces of information in the order in which they appear
+* `names_to` = is now two pieces of information 
+  1. provide a name for the categorical piece to be made into a new variable (ex: time) 
+  2. `.value` which indicates to create new columns based off of your item names
+  
+  Provide these two pieces of information in the order in which they appear in your variable name
 
-* `names_sep` = the separator between the categorical piece (ex: time) and the variable name
+* `names_sep` = the separator between the categorical piece (ex: time) and the item in the current variable names
+
+???
+
+When our data has multiple variable types and multiple components in our variable names, our arguments for
+pivot_longer will change a little
+
+...
+
+Because there are two pieces of information in our variable name now (item and time)
+
+And there is a new argument, names_sep, which replaces values_to
+
+So let's look at these arguments with another visual
+
+---
+
+# Restructure Long
+
+.pull-left[
+
+* `cols` = still the columns we wish to pivot
+
+* `names_to` = is now two pieces of information
+  1. provide a name for the categorical piece to be made into a new variable (ex: time) 
+  2. `.value` which indicates to create new columns based off of your item names
+  
+  Provide these two pieces of information in the order in which they appear in your variable name
+
+* `names_sep` = the separator between the categorical piece (ex: time) and the item in the current variable names
+
+]
+
+.pull-right[
+
+![](img/pivot_long2.PNG)
+
+]
+
+???
+
+So let's look at a visual depiction of these arguments
+
+...
+
+So if the time component is first, list that first, if the time component is second, list that second
+
+And last the names_sep is a new argument and this is where you list what separates the time component from the item component of your variable name (for example, an underscore)
 
 ---
 
@@ -2544,6 +2866,19 @@ data_wide %&gt;%
 
 ]
 
+???
+
+So if I wanted to pivot this data to a long format, I would start by using my pivot_longer function
+
+Then for the cols argument I am going to select everything that repeats
+
+For names_to, I would use that .value indicator to say, grab all of my item names and make new columns from those and I would name by second categorical piece, whatever I want.
+
+Here I am going to name it year. Remember I am giving these arguments in the order in which they appear in my variable names (item then time).
+
+And last, for names_sep, I am going to say, split my variable names based on an underscore
+
+
 ---
 
 # Restructure Wide
@@ -2567,9 +2902,31 @@ data %&gt;%
 
 .pull-right[
 
-* `names_from` = which column values should be appended to new variable names
+* `names_from` = which column contains our new variable names
+  + Use quotes around this name
 
-* `values_from` = the variables we want to pivot into wide format
+* `values_from` = which column has the values we want to pivot into wide format
+  + Use quotes around this name
+
+]
+]
+
+.panel[.panel-name[pivot_wider]
+
+.pull-left[
+
+* `names_from` = which column contains our new variable names
+  + Quotes are **not** needed around this input
+
+* `values_from` = which column has the values we want to pivot into wide format
+  + Quotes are **not** needed around this input
+
+
+]
+
+.pull-right[
+
+![](img/pivot_wide.PNG)
 
 ]
 ]
@@ -2602,8 +2959,8 @@ Our long dataset
 ```r
 data_long %&gt;%
   pivot_wider(
-    names_from = "time",
-    values_from = "score"
+    names_from = time,
+    values_from = score
   )
 ```
 
@@ -2684,6 +3041,12 @@ data_long %&gt;%
 ]
 ]
 ]
+
+???
+
+We can also structure our data from long back to wide using the pivot_wider() function from the tidyr package
+
+Again I think it's easiest to see how they arguments work through a visual
 
 ---
 
@@ -2776,15 +3139,28 @@ And our arguments for `pivot_wider()` will change just a little bit
 data %&gt;%
   pivot_wider(
     names_from = variable,
-    values_from = variable,
-    names_glue = pieces of information to create new variable names)
+    values_from = variable/s,
+    names_sep = separator)
 ```
 
-* `names_from` = which column values should be appended to new variable names
+* `names_from` = which column values should be appended to new variable names (ex: time)
 
-* `values_from` = the variables we want to pivot into wide format
+* `values_from` = which columns have the values we want to pivot into wide format
 
-* `names_sep` = If your names_from contains multiple variables, what should separate the names
+* `names_sep` = what separator should be used to separate the item and category (ex: time) in the new variable name
+
+???
+
+names_from is a little different now, instead of which values should be the new variable names, it is which values should be appended to new variable names (I'll show what that means in a second)
+
+values_from is the same
+
+names_sep is a new argument, it is what separator should be used to separate the item and category in the new variable name
+
+---
+
+![](img/pivot_wide2.PNG)
+
 
 ---
 
@@ -2872,8 +3248,8 @@ data %&gt;%
 ```r
 test_long %&gt;%
   pivot_wider(
-    names_from = variable,
-    values_from = year,
+    names_from = year,
+    values_from = contains("score"),
     names_sep = "_"
   )
 ```
@@ -3081,6 +3457,10 @@ background-size: cover
 
 .footnote[[Source: Susie Ho on Unsplash](https://unsplash.com/s/photos/wrapping-paper)]
 
+???
+
+Ok, before we wrap this up, are there any questions about restructuring data?
+
 ---
 
 
@@ -3094,9 +3474,7 @@ class: center
 
 ???
 
-Truly the only way to get better at R is to force yourself to use it. You will fail a bunch, and 
-you will learn from those failures. And as you see your code finally start working, you'll feel so
-accomplished because it will eventually start clicking.
+Truly the only way to get better at R is to force yourself to use it. You will fail a bunch, everyone does, and you will learn from those failures. But at some point you'll start to fail less and you will see your code start working you'll feel so accomplished because it will eventually start clicking.
 
 ---
 
@@ -3164,6 +3542,12 @@ class: center, middle
 If you have 5 minutes, please take this workshop survey to help me improve trainings in the future.
 
 ## https://forms.gle/9wE47TTjvBqK7G819
+
+???
+
+I really appreciate you all hanging in there with me over these 6 sessions. I know it has been a lot to digest. I've really enjoyed getting to know all of you and please don't hesitate to continue to reach out to me if you have questions at any point. You are not bothering me.
+
+I did want to ask, if you have 5 minutes or less, if you wouldn't mind, please take this short workshop survey to help me improve future training sessions. I would really appreciate it!
 
 
 
