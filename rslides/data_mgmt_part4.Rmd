@@ -2486,8 +2486,9 @@ If you want to only apply this to certain variables, then you need to use the `a
 ```{r, eval = FALSE}
 
 data %>%
-  mutate(across(c(variable1:variable3),  
-                ~na_if(., -999))
+  mutate(across(c(variable1, variable2, 
+                  variable3),  
+                ~na_if(., -999)))
 
 ```
 
@@ -2509,9 +2510,8 @@ data %>%
 
 ```
 
-]
+<br>
 
-.pull-right[
 ```{r, eval = FALSE}
 
 data %>%
@@ -2519,13 +2519,17 @@ data %>%
 
 ```
 
-You can also replace NA values for multiple variables using the function `across` from the `dplyr` package.
+]
 
+.pull-right[
+
+You can also replace NA values for multiple variables using the function `across` from the `dplyr` package.
+  
 ```{r, eval = FALSE}
 
 data %>% 
-  mutate(across(c(variable1:variable10), 
-                ~ replace_na(., -999))
+  mutate(across(variable1:variable10, 
+                ~ replace_na(., -999)))
 
 ```
 

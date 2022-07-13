@@ -2565,8 +2565,9 @@ If you want to only apply this to certain variables, then you need to use the `a
 
 ```r
 data %&gt;%
-  mutate(across(c(variable1:variable3),  
-                ~na_if(., -999))
+  mutate(across(c(variable1, variable2, 
+                  variable3),  
+                ~na_if(., -999)))
 ```
 
 * `~` = as a function of
@@ -2586,22 +2587,25 @@ data %&gt;%
     variable, value))
 ```
 
-]
+&lt;br&gt;
 
-.pull-right[
 
 ```r
 data %&gt;%
   mutate(iss = replace_na(iss, 0))
 ```
 
-You can also replace NA values for multiple variables using the function `across` from the `dplyr` package.
+]
 
+.pull-right[
+
+You can also replace NA values for multiple variables using the function `across` from the `dplyr` package.
+  
 
 ```r
 data %&gt;% 
-  mutate(across(c(variable1:variable10), 
-                ~ replace_na(., -999))
+  mutate(across(variable1:variable10, 
+                ~ replace_na(., -999)))
 ```
 
 * `~` = as a function of

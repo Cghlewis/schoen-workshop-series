@@ -1,0 +1,3311 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data Management Overview: Session 5</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="  Crystal Lewis" />
+    <script src="data_mgmt_part6_files/header-attrs/header-attrs.js"></script>
+    <link href="data_mgmt_part6_files/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="data_mgmt_part6_files/tile-view/tile-view.js"></script>
+    <link href="data_mgmt_part6_files/panelset/panelset.css" rel="stylesheet" />
+    <script src="data_mgmt_part6_files/panelset/panelset.js"></script>
+    <script src="data_mgmt_part6_files/kePrint/kePrint.js"></script>
+    <link href="data_mgmt_part6_files/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+class: inverse, left, middle
+
+background-image: url(img/cover2.png)
+
+# Data Management Overview: Session 6
+## Training for Schoen Research
+
+----
+
+## Crystal Lewis
+
+Slides available on [<svg aria-hidden="true" role="img" viewBox="0 0 496 512" style="height:1em;width:0.97em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:white;overflow:visible;position:relative;"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>](https://cghlewis.github.io/schoen-workshop-series/)
+
+---
+
+# Plan for this series
+
+.pull-left[
+
+Session 3
+* ~~Why R?~~
+* ~~Getting acclimated with R and RStudio~~
+* ~~Understanding objects, functions, and packages~~
+* ~~Code writing best practices~~
+
+Session 4
+* ~~Packages and functions for data wrangling~~
+]
+
+.pull-right[
+
+Session 5
+* ~~Setting up a reproducible syntax file~~
+
+Session 6
+* Validating Data
+* Merging and Appending Data
+* Restructuring Data
+
+&lt;img src="img/r-project.svg" width="300px" style="display: block; margin: auto;" /&gt;
+]
+
+???
+
+Last week we started creating a reproducible syntax file from scratch
+
+Today we are going to pick up where we left off and finish that syntax
+
+Then we are going to learn a few more functions for data validation, data merging and appending and 
+restructuring
+
+---
+
+# Data Cleaning Plan
+
+.pull-left[
+
+1. Import the SPSS file into R **
+
+1. Rename variables based on our data dictionary **
+
+1. Remove any participant who did not **consent** **
+
+1. Check for duplicate **tch_id** **
+
+1. Recode **degree** `( 6 -&gt; 0)`
+
+1. Remove strings from **yrs_teach** and make it a numeric variable
+
+1. Convert **tch_id** to a character variable
+
+
+]
+
+.pull-right[
+
+8\. Collapse misspellings of **dist_school_name**
+
+9\. Calculate/Create all variables on the second tab of the data dictionary
+
+10\. Remove identifier variables (**survey_date**, **dist_school_name**, **dist_name**, **sch_name**)
+
+11\. Add variable labels for all variables
+
+12\. Add value labels for **consent**, **degree**, **cohort**, **any_degree**
+
+13\. Validate data
+
+14\. Export data to SPSS **
+]
+
+???
+
+Last week we had a fictitious scenario where we were given this data cleaning plan and we needed to implement it
+
+I have since updated the plan a little bit. I've included more steps. We still are not going to do all of the steps but I wanted to realistically lay out everything I would actually do. And give this to you in case you want to run through it on your own at a later time.
+
+
+---
+
+class: center, middle
+
+# <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg> Let's Practice <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:#782F40;overflow:visible;position:relative;"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></svg>
+
+---
+
+class: inverse, center, middle
+
+# Validation
+
+---
+
+# Validation
+
+Let's remember what data validation might include
+
+.pull-left[
+
+* Number of cases matches what you see in tracking database
+
+* Number of variables in your data match what you see in your data dictionary
+
+* No duplicate IDs
+
+* No missing IDs and all IDs are real IDs
+]
+
+.pull-right[
+* All variable classes match your data dictionary
+
+* All variables fall within the ranges laid out in your data dictionary
+
+* Cross validation for impossible values
+
+* All variables contain necessary labels
+]
+
+&lt;br&gt;
+
+.center[You want to validate your data **BEFORE** you export it for the world to use]
+
+???
+
+This is the last step in your syntax before you export your data
+
+---
+
+# Your Clean Data and Your Data Dictionary
+
+Clean Data
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; tch_id &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; any_degree &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; yrs_teach &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; enjoy_teach &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1234 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1235 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1263 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+Data Dictionary
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; name &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; label &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; type &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; values &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; tch_id &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; study teacher id &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; character &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1230-1240 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; any_degree &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; does the participant have a degree? &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; numeric &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1 = yes, 0 = no &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; yrs_teach &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; how many years have you taught school? &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; numeric &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 0-100 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; enjoy_teach &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; do you enjoy teaching? &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; numeric &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1 = yes, 0 = no &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+  
+---
+
+# Checking the Number of Rows and Columns
+
+
+```r
+glimpse(svy)
+```
+
+```
+Rows: 3
+Columns: 4
+$ tch_id      &lt;dbl&gt; 1234, 1235, 1263
+$ any_degree  &lt;dbl&gt; 0, 1, 1
+$ yrs_teach   &lt;dbl&gt; 1, 2, 6
+$ enjoy_teach &lt;dbl&gt; 1, 2, 1
+```
+
+
+```r
+str(svy)
+```
+
+```
+tibble [3 x 4] (S3: tbl_df/tbl/data.frame)
+ $ tch_id     : num [1:3] 1234 1235 1263
+ $ any_degree : num [1:3] 0 1 1
+ $ yrs_teach  : num [1:3] 1 2 6
+ $ enjoy_teach: num [1:3] 1 2 1
+```
+
+
+---
+
+
+# The pointblank Package
+
+.center[**You can do basic tests using "test_" functions**]
+
+.pull-left[
+1. Test for duplicates
+
+`test_rows_distinct()`
+
+2\. Test no IDs are missing
+
+`test_col_vals_not_null()`
+
+3\. Test continuous values within range
+
+`test_col_vals_between()`
+
+]
+
+.pull-right[
+
+4\. Test categorical values within a set
+
+`test_col_vals_in_set()`
+
+5\. Test the variable types
+
+`test_col_is_numeric()`
+
+`test_col_is_character()`
+
+`test_col_is_date()`
+]
+
+???
+
+There are many other ways to validate data. Using tables, and cross tabulations and correlations and graphs and other packages and functions. But today I am going to teach you about one package, called pointblank, that is a straight-forward, nicely packaged up way to do a good chunk of your data validation. And the extra nice thing is, you can make this into a report to share with others for review.
+
+---
+
+# Validation
+
+.panelset[
+.panel[.panel-name[test-distinct]
+
+Test that there are no duplicate IDs in the data
+
+
+```r
+data %&gt;%
+  test_rows_distinct(columns = vars())
+```
+
+You need both the *columns = * argument and the *vars* function which allows you to select variables using tidy evaluation (without "" around the variable name)
+
+
+```r
+svy %&gt;%
+  test_rows_distinct(columns = vars(tch_id))
+```
+
+```
+[1] TRUE
+```
+]
+
+.panel[.panel-name[test-not-null]
+
+Test that no IDs are missing
+
+
+```r
+data %&gt;%
+  test_col_vals_not_null(columns = vars())
+```
+
+&lt;br&gt;
+
+
+```r
+svy %&gt;%
+  test_col_vals_not_null(columns = vars(tch_id))
+```
+
+```
+[1] TRUE
+```
+
+
+]
+
+.panel[.panel-name[test-continuous]
+
+.pull-left[
+
+Test that continuous variables fall within an expected range
+
+
+```r
+data %&gt;%
+  test_col_vals_between(columns = vars(), 
+                        left = value,
+                        right = value, 
+                        na_pass = value)
+```
+
+* If your variable has NA values and you expect it to have NA values, na_pass = TRUE. If you do not want NA values in your variable, na_pass = FALSE. Default is FALSE.
+
+]
+
+.pull-right[
+
+
+```r
+svy %&gt;%
+ test_col_vals_between(
+   columns = vars(tch_id), 
+   left = 1230, right = 1240)
+```
+
+```
+*[1] FALSE
+```
+
+**What happened here?**
+
+
+```r
+print(svy)
+```
+
+```
+# A tibble: 3 x 4
+  tch_id any_degree yrs_teach enjoy_teach
+   &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+1   1234          0         1           1
+2   1235          1         2           2
+*3   1263          1         6           1
+```
+]
+]
+
+.panel[.panel-name[test-categorical]
+
+Test that categorical variables fall within a set of expected values
+
+
+```r
+data %&gt;%
+  test_col_vals_in_set(columns = vars(), 
+                       set = c())
+```
+
+* If your variable may have NA values and you are okay with it having NA values, add NA values to your set. Otherwise, you will get "FALSE" when your variable has NAs.
+
+
+```r
+svy %&gt;%
+  test_col_vals_in_set(columns = vars(any_degree),
+                       set = c(NA, 0, 1))
+```
+
+```
+[1] TRUE
+```
+
+]
+
+.panel[.panel-name[test-col-type]
+
+Test that variables are the types we expect
+
+.pull-left[
+
+```r
+data %&gt;%
+  test_col_is_character(columns = vars())
+
+data %&gt;%
+  test_col_is_numeric(columns = vars())
+```
+
+&lt;br&gt;
+
+
+```r
+svy %&gt;%
+  test_col_is_character(columns = 
+                          vars(tch_id))
+```
+
+```
+*[1] FALSE
+```
+]
+
+.pull-right[
+
+**What happened here?**
+
+
+```r
+print(svy)
+```
+
+```
+# A tibble: 3 x 4
+  tch_id any_degree yrs_teach enjoy_teach
+*   &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+1   1234          0         1           1
+2   1235          1         2           2
+3   1263          1         6           1
+```
+
+]
+]
+]
+
+---
+
+# Generating a Report
+
+.pull-left[
+
+"test_" works great when working with one variable at a time
+
+
+```r
+svy %&gt;%
+  test_col_vals_in_set(columns = 
+                          vars(enjoy_teach),
+                      set = c(NA, 0, 1))
+```
+
+```
+*[1] FALSE
+```
+]
+
+.pull-right[
+But what if you want to validate multiple variables at the same time
+
+
+```r
+svy %&gt;%
+  test_col_vals_in_set(columns = 
+                          vars(any_degree, 
+                               enjoy_teach),
+                      set = c(NA, 0, 1))
+```
+
+```
+*[1] FALSE
+```
+
+How do I know which variable/s the FALSE applies to? Which rows are having the issues?
+]
+
+---
+
+# Create a Report
+
+.pull-left[
+Add the `create_agent()` function and the `interrogate()` function
+
+You will remove the "test_" from all of your functions. These are new functions.
+
+
+```r
+svy %&gt;%
+create_agent() %&gt;%
+  col_vals_in_set(columns = 
+                    vars(any_degree, 
+                         enjoy_teach),
+                      set = c(NA, 0, 1)) %&gt;%
+  interrogate()
+```
+
+]
+
+.pull-right[
+
+&lt;br&gt;
+
+<div id="pb_agent" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://unpkg.com/balloon-css/balloon.min.css");
+html {
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#pb_agent .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 90%;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pb_agent .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pb_agent .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pb_agent .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pb_agent .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pb_agent .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pb_agent .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pb_agent .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pb_agent .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pb_agent .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pb_agent .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pb_agent .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pb_agent .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pb_agent .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pb_agent .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pb_agent .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pb_agent .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pb_agent .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pb_agent .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pb_agent .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pb_agent .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pb_agent .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pb_agent .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pb_agent .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pb_agent .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pb_agent .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pb_agent .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pb_agent .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pb_agent .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pb_agent .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pb_agent .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pb_agent .gt_left {
+  text-align: left;
+}
+
+#pb_agent .gt_center {
+  text-align: center;
+}
+
+#pb_agent .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pb_agent .gt_font_normal {
+  font-weight: normal;
+}
+
+#pb_agent .gt_font_bold {
+  font-weight: bold;
+}
+
+#pb_agent .gt_font_italic {
+  font-style: italic;
+}
+
+#pb_agent .gt_super {
+  font-size: 65%;
+}
+
+#pb_agent .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#pb_agent .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#pb_agent .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pb_agent .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#pb_agent .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#pb_agent .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+
+#pb_agent {
+  -webkit-font-smoothing: antialiased;
+}
+
+#pb_agent .gt_row {
+  overflow: visible;
+}
+
+#pb_agent .gt_sourcenote {
+  height: 35px;
+  padding: 0;
+}
+
+#pb_agent code {
+  font-family: 'IBM Plex Mono', monospace, courier;
+  background-color: transparent;
+  padding: 0;
+}
+</style>
+<table class="gt_table" style="table-layout: fixed;; width: 0px">
+  <colgroup>
+    <col style="width:6px;"/>
+    <col style="width:35px;"/>
+    <col style="width:190px;"/>
+    <col style="width:120px;"/>
+    <col style="width:120px;"/>
+    <col style="width:50px;"/>
+    <col style="width:50px;"/>
+    <col style="width:50px;"/>
+    <col style="width:50px;"/>
+    <col style="width:50px;"/>
+    <col style="width:30px;"/>
+    <col style="width:30px;"/>
+    <col style="width:30px;"/>
+    <col style="width:65px;"/>
+  </colgroup>
+  <thead class="gt_header">
+    <tr>
+      <th colspan="14" class="gt_heading gt_title gt_font_normal" style="color: #444444; font-size: 28px; text-align: left; font-weight: 500;">Pointblank Validation</th>
+    </tr>
+    <tr>
+      <th colspan="14" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="font-size: 12px; text-align: left;"><span style="text-decoration-style:solid;text-decoration-color:#ADD8E6;text-decoration-line:underline;text-underline-position:under;color:#333333;font-variant-numeric:tabular-nums;padding-left:4px;margin-right:5px;padding-right:2px;">[2022-07-12|08:52:56]</span></p>
+<div style="height:25px;"><span style="background-color: #F1D35A;color: #222222;padding: 0.5em 0.5em;position: inherit;text-transform: uppercase;margin: 5px 1px 5px 4px;font-weight: bold;border: solid 1px #F1D35A;padding: 2px 10px 2px 10px;font-size: smaller;">tibble</span></div>
+</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">STEP</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">COLUMNS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">VALUES</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">TBL</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">EVAL</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">UNITS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">PASS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">FAIL</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">W</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">S</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">N</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">EXT</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left" style="background-color: #4CA64C; height:  40px"></td>
+<td class="gt_row gt_right" style="color: #666666; font-size: 13px; font-weight: bold; height:  40px">1</td>
+<td class="gt_row gt_left" style="height:  40px"><div class='gt_from_md'><div aria-label="Expect that values in `any_degree` should be in the set of `NA`, `0`, `1`. " data-balloon-pos="right" style="width:fit-content;">
+  <div style="margin:0;padding:0;display:inline-block;height:30px;vertical-align:middle;"><?xml version="1.0" encoding="UTF-8"?><svg width="30px" height="30px" viewBox="0 0 67 67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    <title>col_vals_in_set</title>    <g id="All-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">        <g id="col_vals_in_set" transform="translate(0.000000, 0.172414)">            <path d="M56.712234,1 C59.1975153,1 61.4475153,2.00735931 63.076195,3.63603897 C64.7048747,5.26471863 65.712234,7.51471863 65.712234,10 L65.712234,10 L65.712234,65 L10.712234,65 C8.22695259,65 5.97695259,63.9926407 4.34827294,62.363961 C2.71959328,60.7352814 1.71223397,58.4852814 1.71223397,56 L1.71223397,56 L1.71223397,10 C1.71223397,7.51471863 2.71959328,5.26471863 4.34827294,3.63603897 C5.97695259,2.00735931 8.22695259,1 10.712234,1 L10.712234,1 Z" id="rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>            <path d="M44.127969,41.1538382 L31.0814568,41.1538382 C29.9510748,41.1536429 28.8827052,40.9256134 27.9079888,40.5136953 C26.4467442,39.8960136 25.19849,38.8599685 24.3189894,37.5577099 C23.8792391,36.906727 23.5314818,36.1899233 23.2936866,35.4252675 C23.2130217,35.16589 23.1460289,34.9005554 23.0913409,34.6307286 L44.1278714,34.6307286 C45.028466,34.6306309 45.7586488,33.9004481 45.7586488,32.9998535 C45.7586488,32.0992589 45.028466,31.3690761 44.1278714,31.3690761 L23.0905596,31.3690761 C23.1990567,30.8337194 23.3597028,30.3180894 23.5675173,29.8264831 C24.185199,28.3652386 25.2212442,27.1169844 26.5236004,26.2374838 C27.1745833,25.7977334 27.891387,25.4499762 28.6560428,25.2122786 C29.4208939,24.9744833 30.2334994,24.8459665 31.0813591,24.8459665 L44.1277737,24.8459665 C45.0283683,24.8459665 45.7586488,24.1157837 45.7586488,23.2151891 C45.7586488,22.3145945 45.0283683,21.5844117 44.1277737,21.5844117 L31.0813591,21.5844117 C29.5096643,21.5844117 28.0039858,21.9038483 26.6373711,22.4820765 C24.5866678,23.3498583 22.8469049,24.7950871 21.6163267,26.616296 C20.3856508,28.4362354 19.665136,30.6413347 19.6658191,33.0000488 C19.6658191,34.5717436 19.9852563,36.0774222 20.5635822,37.4440369 C21.4312663,39.4947402 22.8765927,41.2345031 24.697704,42.4650813 C26.5176434,43.6957572 28.7227427,44.4155883 31.0814568,44.4155883 L44.1278714,44.4155883 C45.028466,44.4155883 45.7586488,43.6854055 45.7586488,42.7848109 C45.7586488,41.8842163 45.0285636,41.1538382 44.127969,41.1538382 Z" id="set_of" fill="#000000" fill-rule="nonzero"></path>        </g>    </g></svg></div>
+  <code style="font-size:11px;">&nbsp;col_vals_in_set()</code>
+</div>
+</div></td>
+<td class="gt_row gt_left" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; height:  40px"><div class='gt_from_md'><div aria-label="any_degree" data-balloon-pos="left">
+  <p style="margin-top:0;margin-bottom:0;font-size:11px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;line-height:2em;">
+    <code><span style="color:purple;">&marker;</span>any_degree</code>
+  </p>
+</div>
+</div></td>
+<td class="gt_row gt_left" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; height:  40px"><div class='gt_from_md'><div aria-label="NA, 0, 1" data-balloon-pos="left"><p style="margin-top: 0px; margin-bottom: 0px; font-size: 11px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"><code>NA, 0, 1</code></p></div>
+</div></td>
+<td class="gt_row gt_center" style="border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p><span style="background:transparent;padding:0;color:#333333;vertical-align:middle;font-size:10px;border:none;border-radius:4px;" aria-label="No modifications of the table." data-balloon-pos="left"><svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="vertical-align: middle;">    <g id="unchanged" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">        <g id="unchanged" transform="translate(0.500000, 0.570147)">            <rect id="Rectangle" x="0.125132506" y="0" width="23.749735" height="23.7894737"></rect>            <path d="M5.80375046,8.18194736 C3.77191832,8.18194736 2.11875046,9.83495328 2.11875046,11.8669474 C2.11875046,13.8989414 3.77191832,15.5519474 5.80375046,15.5519474 C7.8355826,15.5519474 9.48875046,13.8989414 9.48875046,11.8669474 C9.48875046,9.83495328 7.83552863,8.18194736 5.80375046,8.18194736 Z M5.80375046,14.814915 C4.17821997,14.814915 2.85578285,13.4924778 2.85578285,11.8669474 C2.85578285,10.2414169 4.17821997,8.91897975 5.80375046,8.91897975 C7.42928095,8.91897975 8.75171807,10.2414169 8.75171807,11.8669474 C8.75171807,13.4924778 7.42928095,14.814915 5.80375046,14.814915 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>            <path d="M13.9638189,8.699335 C13.9364621,8.70430925 13.9091059,8.71176968 13.8842359,8.71923074 C13.7822704,8.73663967 13.6877654,8.77643115 13.6056956,8.83860518 L10.2433156,11.3852598 C10.0766886,11.5046343 9.97720993,11.6986181 9.97720993,11.9025491 C9.97720993,12.1064807 10.0766886,12.3004639 10.2433156,12.4198383 L13.6056956,14.966493 C13.891697,15.1803725 14.2970729,15.1231721 14.5109517,14.8371707 C14.7248313,14.5511692 14.6676309,14.145794 14.3816294,13.9319145 L12.5313257,12.5392127 L21.8812495,12.5392127 L21.8812495,11.2658854 L12.5313257,11.2658854 L14.3816294,9.87318364 C14.6377872,9.71650453 14.7497006,9.40066014 14.6477351,9.11714553 C14.5482564,8.83363156 14.262255,8.65954352 13.9638189,8.699335 Z" id="arrow" fill="#000000" transform="translate(15.929230, 11.894737) rotate(-180.000000) translate(-15.929230, -11.894737) "></path>        </g>    </g></svg></span></p>
+</div></td>
+<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p><span style="background:transparent;padding:5px;color:#4CA64C;vertical-align:middle;font-size:15px;border:none;" aria-label="No evaluation issues." data-balloon-pos="left">✓</span></p>
+</div></td>
+<td class="gt_row gt_right" style="font-size: 11px; height:  40px"><code>3</code></td>
+<td class="gt_row gt_right" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; font-size: 11px; height:  40px"><code>3</code><br><code>1.00</code></td>
+<td class="gt_row gt_right" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; font-size: 11px; height:  40px"><code>0</code><br><code>0.00</code></td>
+<td class="gt_row gt_center" style="border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="background-color: rgba(76,166,76,0.5); height:  40px"></td>
+<td class="gt_row gt_right" style="color: #666666; font-size: 13px; font-weight: bold; height:  40px">2</td>
+<td class="gt_row gt_left" style="height:  40px"><div class='gt_from_md'><div aria-label="Expect that values in `enjoy_teach` should be in the set of `NA`, `0`, `1`. " data-balloon-pos="right" style="width:fit-content;">
+  <div style="margin:0;padding:0;display:inline-block;height:30px;vertical-align:middle;"><?xml version="1.0" encoding="UTF-8"?><svg width="30px" height="30px" viewBox="0 0 67 67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    <title>col_vals_in_set</title>    <g id="All-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">        <g id="col_vals_in_set" transform="translate(0.000000, 0.172414)">            <path d="M56.712234,1 C59.1975153,1 61.4475153,2.00735931 63.076195,3.63603897 C64.7048747,5.26471863 65.712234,7.51471863 65.712234,10 L65.712234,10 L65.712234,65 L10.712234,65 C8.22695259,65 5.97695259,63.9926407 4.34827294,62.363961 C2.71959328,60.7352814 1.71223397,58.4852814 1.71223397,56 L1.71223397,56 L1.71223397,10 C1.71223397,7.51471863 2.71959328,5.26471863 4.34827294,3.63603897 C5.97695259,2.00735931 8.22695259,1 10.712234,1 L10.712234,1 Z" id="rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>            <path d="M44.127969,41.1538382 L31.0814568,41.1538382 C29.9510748,41.1536429 28.8827052,40.9256134 27.9079888,40.5136953 C26.4467442,39.8960136 25.19849,38.8599685 24.3189894,37.5577099 C23.8792391,36.906727 23.5314818,36.1899233 23.2936866,35.4252675 C23.2130217,35.16589 23.1460289,34.9005554 23.0913409,34.6307286 L44.1278714,34.6307286 C45.028466,34.6306309 45.7586488,33.9004481 45.7586488,32.9998535 C45.7586488,32.0992589 45.028466,31.3690761 44.1278714,31.3690761 L23.0905596,31.3690761 C23.1990567,30.8337194 23.3597028,30.3180894 23.5675173,29.8264831 C24.185199,28.3652386 25.2212442,27.1169844 26.5236004,26.2374838 C27.1745833,25.7977334 27.891387,25.4499762 28.6560428,25.2122786 C29.4208939,24.9744833 30.2334994,24.8459665 31.0813591,24.8459665 L44.1277737,24.8459665 C45.0283683,24.8459665 45.7586488,24.1157837 45.7586488,23.2151891 C45.7586488,22.3145945 45.0283683,21.5844117 44.1277737,21.5844117 L31.0813591,21.5844117 C29.5096643,21.5844117 28.0039858,21.9038483 26.6373711,22.4820765 C24.5866678,23.3498583 22.8469049,24.7950871 21.6163267,26.616296 C20.3856508,28.4362354 19.665136,30.6413347 19.6658191,33.0000488 C19.6658191,34.5717436 19.9852563,36.0774222 20.5635822,37.4440369 C21.4312663,39.4947402 22.8765927,41.2345031 24.697704,42.4650813 C26.5176434,43.6957572 28.7227427,44.4155883 31.0814568,44.4155883 L44.1278714,44.4155883 C45.028466,44.4155883 45.7586488,43.6854055 45.7586488,42.7848109 C45.7586488,41.8842163 45.0285636,41.1538382 44.127969,41.1538382 Z" id="set_of" fill="#000000" fill-rule="nonzero"></path>        </g>    </g></svg></div>
+  <code style="font-size:11px;">&nbsp;col_vals_in_set()</code>
+</div>
+</div></td>
+<td class="gt_row gt_left" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; height:  40px"><div class='gt_from_md'><div aria-label="enjoy_teach" data-balloon-pos="left">
+  <p style="margin-top:0;margin-bottom:0;font-size:11px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;line-height:2em;">
+    <code><span style="color:purple;">&marker;</span>enjoy_teach</code>
+  </p>
+</div>
+</div></td>
+<td class="gt_row gt_left" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; height:  40px"><div class='gt_from_md'><div aria-label="NA, 0, 1" data-balloon-pos="left"><p style="margin-top: 0px; margin-bottom: 0px; font-size: 11px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"><code>NA, 0, 1</code></p></div>
+</div></td>
+<td class="gt_row gt_center" style="border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p><span style="background:transparent;padding:0;color:#333333;vertical-align:middle;font-size:10px;border:none;border-radius:4px;" aria-label="No modifications of the table." data-balloon-pos="left"><svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="vertical-align: middle;">    <g id="unchanged" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">        <g id="unchanged" transform="translate(0.500000, 0.570147)">            <rect id="Rectangle" x="0.125132506" y="0" width="23.749735" height="23.7894737"></rect>            <path d="M5.80375046,8.18194736 C3.77191832,8.18194736 2.11875046,9.83495328 2.11875046,11.8669474 C2.11875046,13.8989414 3.77191832,15.5519474 5.80375046,15.5519474 C7.8355826,15.5519474 9.48875046,13.8989414 9.48875046,11.8669474 C9.48875046,9.83495328 7.83552863,8.18194736 5.80375046,8.18194736 Z M5.80375046,14.814915 C4.17821997,14.814915 2.85578285,13.4924778 2.85578285,11.8669474 C2.85578285,10.2414169 4.17821997,8.91897975 5.80375046,8.91897975 C7.42928095,8.91897975 8.75171807,10.2414169 8.75171807,11.8669474 C8.75171807,13.4924778 7.42928095,14.814915 5.80375046,14.814915 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>            <path d="M13.9638189,8.699335 C13.9364621,8.70430925 13.9091059,8.71176968 13.8842359,8.71923074 C13.7822704,8.73663967 13.6877654,8.77643115 13.6056956,8.83860518 L10.2433156,11.3852598 C10.0766886,11.5046343 9.97720993,11.6986181 9.97720993,11.9025491 C9.97720993,12.1064807 10.0766886,12.3004639 10.2433156,12.4198383 L13.6056956,14.966493 C13.891697,15.1803725 14.2970729,15.1231721 14.5109517,14.8371707 C14.7248313,14.5511692 14.6676309,14.145794 14.3816294,13.9319145 L12.5313257,12.5392127 L21.8812495,12.5392127 L21.8812495,11.2658854 L12.5313257,11.2658854 L14.3816294,9.87318364 C14.6377872,9.71650453 14.7497006,9.40066014 14.6477351,9.11714553 C14.5482564,8.83363156 14.262255,8.65954352 13.9638189,8.699335 Z" id="arrow" fill="#000000" transform="translate(15.929230, 11.894737) rotate(-180.000000) translate(-15.929230, -11.894737) "></path>        </g>    </g></svg></span></p>
+</div></td>
+<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p><span style="background:transparent;padding:5px;color:#4CA64C;vertical-align:middle;font-size:15px;border:none;" aria-label="No evaluation issues." data-balloon-pos="left">✓</span></p>
+</div></td>
+<td class="gt_row gt_right" style="font-size: 11px; height:  40px"><code>3</code></td>
+<td class="gt_row gt_right" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; font-size: 11px; height:  40px"><code>2</code><br><code>0.67</code></td>
+<td class="gt_row gt_right" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; font-size: 11px; height:  40px"><code>1</code><br><code>0.33</code></td>
+<td class="gt_row gt_center" style="border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="height:  40px"><div class='gt_from_md'><a href="data:text/csv;base64,InRjaF9pZCIsImFueV9kZWdyZWUiLCJ5cnNfdGVhY2giLCJlbmpveV90ZWFjaCINCjEyMzUsMSwyLDINCg==" download="extract_0002.csv">
+  <button aria-label="There are 1 &#39;fail&#39; rows available as a CSV file." data-balloon-pos="left" style="background-color:#67C2DC;color:#FFFFFF;border:none;padding:5px;font-weight:bold;cursor:pointer;border-radius:4px;">CSV</button>
+</a>
+</div></td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="14"><span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin-left:10px;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;padding:2px 10px 2px 10px;">2022-07-12 08:52:56 CDT</span>
+<span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;margin:5px 1px 5px 0;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;">&lt; 1 s</span>
+<span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin:5px 1px 5px -1px;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;">2022-07-12 08:52:56 CDT</span></td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+]
+
+???
+
+create_agent() creates an object which is used in the data quality reporting workflow
+
+interrogate() assesses our object based on our evaluation plan. All the things we asked it to check. It is the function that creates this output.
+
+If you add this code to your syntax, it will output in your Viewer window (in the bottom left corner RStudio Pane)
+
+---
+
+# Create a Report
+
+.pull-left[
+You can also add multiple steps to your report. Each step chained using the %&gt;%
+
+
+```r
+svy %&gt;%
+create_agent() %&gt;%
+  col_vals_in_set(columns = 
+                    vars(any_degree, 
+                         enjoy_teach),
+                      set = c(NA, 0, 1)) %&gt;%
+  col_is_numeric(columns = 
+                   vars(any_degree, 
+                        enjoy_teach)) %&gt;%
+  col_is_character(columns = 
+                     vars(tch_id)) %&gt;%
+  interrogate()
+```
+]
+
+.pull-right[
+<div id="pb_agent" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://unpkg.com/balloon-css/balloon.min.css");
+html {
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#pb_agent .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 90%;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pb_agent .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pb_agent .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pb_agent .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pb_agent .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pb_agent .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pb_agent .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pb_agent .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pb_agent .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pb_agent .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pb_agent .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pb_agent .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pb_agent .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pb_agent .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pb_agent .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pb_agent .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pb_agent .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pb_agent .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pb_agent .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pb_agent .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pb_agent .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pb_agent .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pb_agent .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pb_agent .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pb_agent .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pb_agent .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pb_agent .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pb_agent .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pb_agent .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pb_agent .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pb_agent .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pb_agent .gt_left {
+  text-align: left;
+}
+
+#pb_agent .gt_center {
+  text-align: center;
+}
+
+#pb_agent .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pb_agent .gt_font_normal {
+  font-weight: normal;
+}
+
+#pb_agent .gt_font_bold {
+  font-weight: bold;
+}
+
+#pb_agent .gt_font_italic {
+  font-style: italic;
+}
+
+#pb_agent .gt_super {
+  font-size: 65%;
+}
+
+#pb_agent .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#pb_agent .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#pb_agent .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pb_agent .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#pb_agent .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#pb_agent .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+
+#pb_agent {
+  -webkit-font-smoothing: antialiased;
+}
+
+#pb_agent .gt_row {
+  overflow: visible;
+}
+
+#pb_agent .gt_sourcenote {
+  height: 35px;
+  padding: 0;
+}
+
+#pb_agent code {
+  font-family: 'IBM Plex Mono', monospace, courier;
+  background-color: transparent;
+  padding: 0;
+}
+</style>
+<table class="gt_table" style="table-layout: fixed;; width: 0px">
+  <colgroup>
+    <col style="width:6px;"/>
+    <col style="width:35px;"/>
+    <col style="width:190px;"/>
+    <col style="width:120px;"/>
+    <col style="width:120px;"/>
+    <col style="width:50px;"/>
+    <col style="width:50px;"/>
+    <col style="width:50px;"/>
+    <col style="width:50px;"/>
+    <col style="width:50px;"/>
+    <col style="width:30px;"/>
+    <col style="width:30px;"/>
+    <col style="width:30px;"/>
+    <col style="width:65px;"/>
+  </colgroup>
+  <thead class="gt_header">
+    <tr>
+      <th colspan="14" class="gt_heading gt_title gt_font_normal" style="color: #444444; font-size: 28px; text-align: left; font-weight: 500;">Pointblank Validation</th>
+    </tr>
+    <tr>
+      <th colspan="14" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="font-size: 12px; text-align: left;"><span style="text-decoration-style:solid;text-decoration-color:#ADD8E6;text-decoration-line:underline;text-underline-position:under;color:#333333;font-variant-numeric:tabular-nums;padding-left:4px;margin-right:5px;padding-right:2px;">[2022-07-12|08:52:57]</span></p>
+<div style="height:25px;"><span style="background-color: #F1D35A;color: #222222;padding: 0.5em 0.5em;position: inherit;text-transform: uppercase;margin: 5px 1px 5px 4px;font-weight: bold;border: solid 1px #F1D35A;padding: 2px 10px 2px 10px;font-size: smaller;">tibble</span></div>
+</th>
+    </tr>
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">STEP</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">COLUMNS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">VALUES</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">TBL</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">EVAL</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">UNITS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">PASS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">FAIL</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">W</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">S</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">N</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="color: #666666; font-weight: bold;">EXT</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left" style="background-color: #4CA64C; height:  40px"></td>
+<td class="gt_row gt_right" style="color: #666666; font-size: 13px; font-weight: bold; height:  40px">1</td>
+<td class="gt_row gt_left" style="height:  40px"><div class='gt_from_md'><div aria-label="Expect that values in `any_degree` should be in the set of `NA`, `0`, `1`. " data-balloon-pos="right" style="width:fit-content;">
+  <div style="margin:0;padding:0;display:inline-block;height:30px;vertical-align:middle;"><?xml version="1.0" encoding="UTF-8"?><svg width="30px" height="30px" viewBox="0 0 67 67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    <title>col_vals_in_set</title>    <g id="All-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">        <g id="col_vals_in_set" transform="translate(0.000000, 0.172414)">            <path d="M56.712234,1 C59.1975153,1 61.4475153,2.00735931 63.076195,3.63603897 C64.7048747,5.26471863 65.712234,7.51471863 65.712234,10 L65.712234,10 L65.712234,65 L10.712234,65 C8.22695259,65 5.97695259,63.9926407 4.34827294,62.363961 C2.71959328,60.7352814 1.71223397,58.4852814 1.71223397,56 L1.71223397,56 L1.71223397,10 C1.71223397,7.51471863 2.71959328,5.26471863 4.34827294,3.63603897 C5.97695259,2.00735931 8.22695259,1 10.712234,1 L10.712234,1 Z" id="rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>            <path d="M44.127969,41.1538382 L31.0814568,41.1538382 C29.9510748,41.1536429 28.8827052,40.9256134 27.9079888,40.5136953 C26.4467442,39.8960136 25.19849,38.8599685 24.3189894,37.5577099 C23.8792391,36.906727 23.5314818,36.1899233 23.2936866,35.4252675 C23.2130217,35.16589 23.1460289,34.9005554 23.0913409,34.6307286 L44.1278714,34.6307286 C45.028466,34.6306309 45.7586488,33.9004481 45.7586488,32.9998535 C45.7586488,32.0992589 45.028466,31.3690761 44.1278714,31.3690761 L23.0905596,31.3690761 C23.1990567,30.8337194 23.3597028,30.3180894 23.5675173,29.8264831 C24.185199,28.3652386 25.2212442,27.1169844 26.5236004,26.2374838 C27.1745833,25.7977334 27.891387,25.4499762 28.6560428,25.2122786 C29.4208939,24.9744833 30.2334994,24.8459665 31.0813591,24.8459665 L44.1277737,24.8459665 C45.0283683,24.8459665 45.7586488,24.1157837 45.7586488,23.2151891 C45.7586488,22.3145945 45.0283683,21.5844117 44.1277737,21.5844117 L31.0813591,21.5844117 C29.5096643,21.5844117 28.0039858,21.9038483 26.6373711,22.4820765 C24.5866678,23.3498583 22.8469049,24.7950871 21.6163267,26.616296 C20.3856508,28.4362354 19.665136,30.6413347 19.6658191,33.0000488 C19.6658191,34.5717436 19.9852563,36.0774222 20.5635822,37.4440369 C21.4312663,39.4947402 22.8765927,41.2345031 24.697704,42.4650813 C26.5176434,43.6957572 28.7227427,44.4155883 31.0814568,44.4155883 L44.1278714,44.4155883 C45.028466,44.4155883 45.7586488,43.6854055 45.7586488,42.7848109 C45.7586488,41.8842163 45.0285636,41.1538382 44.127969,41.1538382 Z" id="set_of" fill="#000000" fill-rule="nonzero"></path>        </g>    </g></svg></div>
+  <code style="font-size:11px;">&nbsp;col_vals_in_set()</code>
+</div>
+</div></td>
+<td class="gt_row gt_left" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; height:  40px"><div class='gt_from_md'><div aria-label="any_degree" data-balloon-pos="left">
+  <p style="margin-top:0;margin-bottom:0;font-size:11px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;line-height:2em;">
+    <code><span style="color:purple;">&marker;</span>any_degree</code>
+  </p>
+</div>
+</div></td>
+<td class="gt_row gt_left" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; height:  40px"><div class='gt_from_md'><div aria-label="NA, 0, 1" data-balloon-pos="left"><p style="margin-top: 0px; margin-bottom: 0px; font-size: 11px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"><code>NA, 0, 1</code></p></div>
+</div></td>
+<td class="gt_row gt_center" style="border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p><span style="background:transparent;padding:0;color:#333333;vertical-align:middle;font-size:10px;border:none;border-radius:4px;" aria-label="No modifications of the table." data-balloon-pos="left"><svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="vertical-align: middle;">    <g id="unchanged" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">        <g id="unchanged" transform="translate(0.500000, 0.570147)">            <rect id="Rectangle" x="0.125132506" y="0" width="23.749735" height="23.7894737"></rect>            <path d="M5.80375046,8.18194736 C3.77191832,8.18194736 2.11875046,9.83495328 2.11875046,11.8669474 C2.11875046,13.8989414 3.77191832,15.5519474 5.80375046,15.5519474 C7.8355826,15.5519474 9.48875046,13.8989414 9.48875046,11.8669474 C9.48875046,9.83495328 7.83552863,8.18194736 5.80375046,8.18194736 Z M5.80375046,14.814915 C4.17821997,14.814915 2.85578285,13.4924778 2.85578285,11.8669474 C2.85578285,10.2414169 4.17821997,8.91897975 5.80375046,8.91897975 C7.42928095,8.91897975 8.75171807,10.2414169 8.75171807,11.8669474 C8.75171807,13.4924778 7.42928095,14.814915 5.80375046,14.814915 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>            <path d="M13.9638189,8.699335 C13.9364621,8.70430925 13.9091059,8.71176968 13.8842359,8.71923074 C13.7822704,8.73663967 13.6877654,8.77643115 13.6056956,8.83860518 L10.2433156,11.3852598 C10.0766886,11.5046343 9.97720993,11.6986181 9.97720993,11.9025491 C9.97720993,12.1064807 10.0766886,12.3004639 10.2433156,12.4198383 L13.6056956,14.966493 C13.891697,15.1803725 14.2970729,15.1231721 14.5109517,14.8371707 C14.7248313,14.5511692 14.6676309,14.145794 14.3816294,13.9319145 L12.5313257,12.5392127 L21.8812495,12.5392127 L21.8812495,11.2658854 L12.5313257,11.2658854 L14.3816294,9.87318364 C14.6377872,9.71650453 14.7497006,9.40066014 14.6477351,9.11714553 C14.5482564,8.83363156 14.262255,8.65954352 13.9638189,8.699335 Z" id="arrow" fill="#000000" transform="translate(15.929230, 11.894737) rotate(-180.000000) translate(-15.929230, -11.894737) "></path>        </g>    </g></svg></span></p>
+</div></td>
+<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p><span style="background:transparent;padding:5px;color:#4CA64C;vertical-align:middle;font-size:15px;border:none;" aria-label="No evaluation issues." data-balloon-pos="left">✓</span></p>
+</div></td>
+<td class="gt_row gt_right" style="font-size: 11px; height:  40px"><code>3</code></td>
+<td class="gt_row gt_right" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; font-size: 11px; height:  40px"><code>3</code><br><code>1.00</code></td>
+<td class="gt_row gt_right" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; font-size: 11px; height:  40px"><code>0</code><br><code>0.00</code></td>
+<td class="gt_row gt_center" style="border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="background-color: rgba(76,166,76,0.5); height:  40px"></td>
+<td class="gt_row gt_right" style="color: #666666; font-size: 13px; font-weight: bold; height:  40px">2</td>
+<td class="gt_row gt_left" style="height:  40px"><div class='gt_from_md'><div aria-label="Expect that values in `enjoy_teach` should be in the set of `NA`, `0`, `1`. " data-balloon-pos="right" style="width:fit-content;">
+  <div style="margin:0;padding:0;display:inline-block;height:30px;vertical-align:middle;"><?xml version="1.0" encoding="UTF-8"?><svg width="30px" height="30px" viewBox="0 0 67 67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    <title>col_vals_in_set</title>    <g id="All-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">        <g id="col_vals_in_set" transform="translate(0.000000, 0.172414)">            <path d="M56.712234,1 C59.1975153,1 61.4475153,2.00735931 63.076195,3.63603897 C64.7048747,5.26471863 65.712234,7.51471863 65.712234,10 L65.712234,10 L65.712234,65 L10.712234,65 C8.22695259,65 5.97695259,63.9926407 4.34827294,62.363961 C2.71959328,60.7352814 1.71223397,58.4852814 1.71223397,56 L1.71223397,56 L1.71223397,10 C1.71223397,7.51471863 2.71959328,5.26471863 4.34827294,3.63603897 C5.97695259,2.00735931 8.22695259,1 10.712234,1 L10.712234,1 Z" id="rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>            <path d="M44.127969,41.1538382 L31.0814568,41.1538382 C29.9510748,41.1536429 28.8827052,40.9256134 27.9079888,40.5136953 C26.4467442,39.8960136 25.19849,38.8599685 24.3189894,37.5577099 C23.8792391,36.906727 23.5314818,36.1899233 23.2936866,35.4252675 C23.2130217,35.16589 23.1460289,34.9005554 23.0913409,34.6307286 L44.1278714,34.6307286 C45.028466,34.6306309 45.7586488,33.9004481 45.7586488,32.9998535 C45.7586488,32.0992589 45.028466,31.3690761 44.1278714,31.3690761 L23.0905596,31.3690761 C23.1990567,30.8337194 23.3597028,30.3180894 23.5675173,29.8264831 C24.185199,28.3652386 25.2212442,27.1169844 26.5236004,26.2374838 C27.1745833,25.7977334 27.891387,25.4499762 28.6560428,25.2122786 C29.4208939,24.9744833 30.2334994,24.8459665 31.0813591,24.8459665 L44.1277737,24.8459665 C45.0283683,24.8459665 45.7586488,24.1157837 45.7586488,23.2151891 C45.7586488,22.3145945 45.0283683,21.5844117 44.1277737,21.5844117 L31.0813591,21.5844117 C29.5096643,21.5844117 28.0039858,21.9038483 26.6373711,22.4820765 C24.5866678,23.3498583 22.8469049,24.7950871 21.6163267,26.616296 C20.3856508,28.4362354 19.665136,30.6413347 19.6658191,33.0000488 C19.6658191,34.5717436 19.9852563,36.0774222 20.5635822,37.4440369 C21.4312663,39.4947402 22.8765927,41.2345031 24.697704,42.4650813 C26.5176434,43.6957572 28.7227427,44.4155883 31.0814568,44.4155883 L44.1278714,44.4155883 C45.028466,44.4155883 45.7586488,43.6854055 45.7586488,42.7848109 C45.7586488,41.8842163 45.0285636,41.1538382 44.127969,41.1538382 Z" id="set_of" fill="#000000" fill-rule="nonzero"></path>        </g>    </g></svg></div>
+  <code style="font-size:11px;">&nbsp;col_vals_in_set()</code>
+</div>
+</div></td>
+<td class="gt_row gt_left" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; height:  40px"><div class='gt_from_md'><div aria-label="enjoy_teach" data-balloon-pos="left">
+  <p style="margin-top:0;margin-bottom:0;font-size:11px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;line-height:2em;">
+    <code><span style="color:purple;">&marker;</span>enjoy_teach</code>
+  </p>
+</div>
+</div></td>
+<td class="gt_row gt_left" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; height:  40px"><div class='gt_from_md'><div aria-label="NA, 0, 1" data-balloon-pos="left"><p style="margin-top: 0px; margin-bottom: 0px; font-size: 11px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"><code>NA, 0, 1</code></p></div>
+</div></td>
+<td class="gt_row gt_center" style="border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p><span style="background:transparent;padding:0;color:#333333;vertical-align:middle;font-size:10px;border:none;border-radius:4px;" aria-label="No modifications of the table." data-balloon-pos="left"><svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="vertical-align: middle;">    <g id="unchanged" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">        <g id="unchanged" transform="translate(0.500000, 0.570147)">            <rect id="Rectangle" x="0.125132506" y="0" width="23.749735" height="23.7894737"></rect>            <path d="M5.80375046,8.18194736 C3.77191832,8.18194736 2.11875046,9.83495328 2.11875046,11.8669474 C2.11875046,13.8989414 3.77191832,15.5519474 5.80375046,15.5519474 C7.8355826,15.5519474 9.48875046,13.8989414 9.48875046,11.8669474 C9.48875046,9.83495328 7.83552863,8.18194736 5.80375046,8.18194736 Z M5.80375046,14.814915 C4.17821997,14.814915 2.85578285,13.4924778 2.85578285,11.8669474 C2.85578285,10.2414169 4.17821997,8.91897975 5.80375046,8.91897975 C7.42928095,8.91897975 8.75171807,10.2414169 8.75171807,11.8669474 C8.75171807,13.4924778 7.42928095,14.814915 5.80375046,14.814915 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>            <path d="M13.9638189,8.699335 C13.9364621,8.70430925 13.9091059,8.71176968 13.8842359,8.71923074 C13.7822704,8.73663967 13.6877654,8.77643115 13.6056956,8.83860518 L10.2433156,11.3852598 C10.0766886,11.5046343 9.97720993,11.6986181 9.97720993,11.9025491 C9.97720993,12.1064807 10.0766886,12.3004639 10.2433156,12.4198383 L13.6056956,14.966493 C13.891697,15.1803725 14.2970729,15.1231721 14.5109517,14.8371707 C14.7248313,14.5511692 14.6676309,14.145794 14.3816294,13.9319145 L12.5313257,12.5392127 L21.8812495,12.5392127 L21.8812495,11.2658854 L12.5313257,11.2658854 L14.3816294,9.87318364 C14.6377872,9.71650453 14.7497006,9.40066014 14.6477351,9.11714553 C14.5482564,8.83363156 14.262255,8.65954352 13.9638189,8.699335 Z" id="arrow" fill="#000000" transform="translate(15.929230, 11.894737) rotate(-180.000000) translate(-15.929230, -11.894737) "></path>        </g>    </g></svg></span></p>
+</div></td>
+<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p><span style="background:transparent;padding:5px;color:#4CA64C;vertical-align:middle;font-size:15px;border:none;" aria-label="No evaluation issues." data-balloon-pos="left">✓</span></p>
+</div></td>
+<td class="gt_row gt_right" style="font-size: 11px; height:  40px"><code>3</code></td>
+<td class="gt_row gt_right" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; font-size: 11px; height:  40px"><code>2</code><br><code>0.67</code></td>
+<td class="gt_row gt_right" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; font-size: 11px; height:  40px"><code>1</code><br><code>0.33</code></td>
+<td class="gt_row gt_center" style="border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="height:  40px"><div class='gt_from_md'><a href="data:text/csv;base64,InRjaF9pZCIsImFueV9kZWdyZWUiLCJ5cnNfdGVhY2giLCJlbmpveV90ZWFjaCINCjEyMzUsMSwyLDINCg==" download="extract_0002.csv">
+  <button aria-label="There are 1 &#39;fail&#39; rows available as a CSV file." data-balloon-pos="left" style="background-color:#67C2DC;color:#FFFFFF;border:none;padding:5px;font-weight:bold;cursor:pointer;border-radius:4px;">CSV</button>
+</a>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="background-color: #4CA64C; height:  40px"></td>
+<td class="gt_row gt_right" style="color: #666666; font-size: 13px; font-weight: bold; height:  40px">3</td>
+<td class="gt_row gt_left" style="height:  40px"><div class='gt_from_md'><div aria-label="Expect that column `any_degree` is of type: numeric. " data-balloon-pos="right" style="width:fit-content;">
+  <div style="margin:0;padding:0;display:inline-block;height:30px;vertical-align:middle;"><?xml version="1.0" encoding="UTF-8"?><svg width="30px" height="30px" viewBox="0 0 67 67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    <title>col_is_numeric</title>    <g id="All-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">        <g id="col_is_numeric" transform="translate(0.000000, 0.931034)">            <path d="M56.712234,1.01466935 C59.1975153,1.01466935 61.4475153,2.02202867 63.076195,3.65070832 C64.7048747,5.27938798 65.712234,7.52938798 65.712234,10.0146694 L65.712234,10.0146694 L65.712234,65.0146694 L10.712234,65.0146694 C8.22695259,65.0146694 5.97695259,64.00731 4.34827294,62.3786304 C2.71959328,60.7499507 1.71223397,58.4999507 1.71223397,56.0146694 L1.71223397,56.0146694 L1.71223397,10.0146694 C1.71223397,7.52938798 2.71959328,5.27938798 4.34827294,3.65070832 C5.97695259,2.02202867 8.22695259,1.01466935 10.712234,1.01466935 L10.712234,1.01466935 Z" id="rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>            <rect id="column" fill="#000000" x="12.2117153" y="12.0146694" width="20" height="42" rx="1"></rect>            <path d="M49.7957388,43.0146694 L49.7957388,40.4248256 C48.7801087,42.3629863 47.248223,43.3320522 45.2000357,43.3320522 C43.5411732,43.3320522 42.2356849,42.726915 41.2835317,41.5166225 C40.3313785,40.30633 39.8553091,38.6517241 39.8553091,36.5527553 C39.8553091,34.259124 40.3948545,32.4140904 41.4739614,31.017599 C42.5530684,29.6211077 43.9728133,28.9228725 45.7332388,28.9228725 C47.3667105,28.9228725 48.7208636,29.5491683 49.7957388,30.8017787 L49.7957388,22.9687709 L52.3094107,22.9687709 L52.3094107,43.0146694 L49.7957388,43.0146694 Z M49.7957388,32.5156459 C48.5008104,31.3730621 47.2736092,30.8017787 46.1140982,30.8017787 C43.7189039,30.8017787 42.5213247,32.6341172 42.5213247,36.298849 C42.5213247,39.5234745 43.5877203,41.1357631 45.7205435,41.1357631 C47.1085712,41.1357631 48.4669561,40.3782837 49.7957388,38.8633022 L49.7957388,32.5156459 Z" id="d" fill="#000000"></path>        </g>    </g></svg></div>
+  <code style="font-size:11px;">&nbsp;col_is_numeric()</code>
+</div>
+</div></td>
+<td class="gt_row gt_left" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; height:  40px"><div class='gt_from_md'><div aria-label="any_degree" data-balloon-pos="left">
+  <p style="margin-top:0;margin-bottom:0;font-size:11px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;line-height:2em;">
+    <code><span style="color:purple;">&marker;</span>any_degree</code>
+  </p>
+</div>
+</div></td>
+<td class="gt_row gt_left" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; height:  40px">&mdash;</td>
+<td class="gt_row gt_center" style="border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p><span style="background:transparent;padding:0;color:#333333;vertical-align:middle;font-size:10px;border:none;border-radius:4px;" aria-label="No modifications of the table." data-balloon-pos="left"><svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="vertical-align: middle;">    <g id="unchanged" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">        <g id="unchanged" transform="translate(0.500000, 0.570147)">            <rect id="Rectangle" x="0.125132506" y="0" width="23.749735" height="23.7894737"></rect>            <path d="M5.80375046,8.18194736 C3.77191832,8.18194736 2.11875046,9.83495328 2.11875046,11.8669474 C2.11875046,13.8989414 3.77191832,15.5519474 5.80375046,15.5519474 C7.8355826,15.5519474 9.48875046,13.8989414 9.48875046,11.8669474 C9.48875046,9.83495328 7.83552863,8.18194736 5.80375046,8.18194736 Z M5.80375046,14.814915 C4.17821997,14.814915 2.85578285,13.4924778 2.85578285,11.8669474 C2.85578285,10.2414169 4.17821997,8.91897975 5.80375046,8.91897975 C7.42928095,8.91897975 8.75171807,10.2414169 8.75171807,11.8669474 C8.75171807,13.4924778 7.42928095,14.814915 5.80375046,14.814915 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>            <path d="M13.9638189,8.699335 C13.9364621,8.70430925 13.9091059,8.71176968 13.8842359,8.71923074 C13.7822704,8.73663967 13.6877654,8.77643115 13.6056956,8.83860518 L10.2433156,11.3852598 C10.0766886,11.5046343 9.97720993,11.6986181 9.97720993,11.9025491 C9.97720993,12.1064807 10.0766886,12.3004639 10.2433156,12.4198383 L13.6056956,14.966493 C13.891697,15.1803725 14.2970729,15.1231721 14.5109517,14.8371707 C14.7248313,14.5511692 14.6676309,14.145794 14.3816294,13.9319145 L12.5313257,12.5392127 L21.8812495,12.5392127 L21.8812495,11.2658854 L12.5313257,11.2658854 L14.3816294,9.87318364 C14.6377872,9.71650453 14.7497006,9.40066014 14.6477351,9.11714553 C14.5482564,8.83363156 14.262255,8.65954352 13.9638189,8.699335 Z" id="arrow" fill="#000000" transform="translate(15.929230, 11.894737) rotate(-180.000000) translate(-15.929230, -11.894737) "></path>        </g>    </g></svg></span></p>
+</div></td>
+<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p><span style="background:transparent;padding:5px;color:#4CA64C;vertical-align:middle;font-size:15px;border:none;" aria-label="No evaluation issues." data-balloon-pos="left">✓</span></p>
+</div></td>
+<td class="gt_row gt_right" style="font-size: 11px; height:  40px"><code>1</code></td>
+<td class="gt_row gt_right" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; font-size: 11px; height:  40px"><code>1</code><br><code>1.00</code></td>
+<td class="gt_row gt_right" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; font-size: 11px; height:  40px"><code>0</code><br><code>0.00</code></td>
+<td class="gt_row gt_center" style="border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="background-color: #4CA64C; height:  40px"></td>
+<td class="gt_row gt_right" style="color: #666666; font-size: 13px; font-weight: bold; height:  40px">4</td>
+<td class="gt_row gt_left" style="height:  40px"><div class='gt_from_md'><div aria-label="Expect that column `enjoy_teach` is of type: numeric. " data-balloon-pos="right" style="width:fit-content;">
+  <div style="margin:0;padding:0;display:inline-block;height:30px;vertical-align:middle;"><?xml version="1.0" encoding="UTF-8"?><svg width="30px" height="30px" viewBox="0 0 67 67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    <title>col_is_numeric</title>    <g id="All-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">        <g id="col_is_numeric" transform="translate(0.000000, 0.931034)">            <path d="M56.712234,1.01466935 C59.1975153,1.01466935 61.4475153,2.02202867 63.076195,3.65070832 C64.7048747,5.27938798 65.712234,7.52938798 65.712234,10.0146694 L65.712234,10.0146694 L65.712234,65.0146694 L10.712234,65.0146694 C8.22695259,65.0146694 5.97695259,64.00731 4.34827294,62.3786304 C2.71959328,60.7499507 1.71223397,58.4999507 1.71223397,56.0146694 L1.71223397,56.0146694 L1.71223397,10.0146694 C1.71223397,7.52938798 2.71959328,5.27938798 4.34827294,3.65070832 C5.97695259,2.02202867 8.22695259,1.01466935 10.712234,1.01466935 L10.712234,1.01466935 Z" id="rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>            <rect id="column" fill="#000000" x="12.2117153" y="12.0146694" width="20" height="42" rx="1"></rect>            <path d="M49.7957388,43.0146694 L49.7957388,40.4248256 C48.7801087,42.3629863 47.248223,43.3320522 45.2000357,43.3320522 C43.5411732,43.3320522 42.2356849,42.726915 41.2835317,41.5166225 C40.3313785,40.30633 39.8553091,38.6517241 39.8553091,36.5527553 C39.8553091,34.259124 40.3948545,32.4140904 41.4739614,31.017599 C42.5530684,29.6211077 43.9728133,28.9228725 45.7332388,28.9228725 C47.3667105,28.9228725 48.7208636,29.5491683 49.7957388,30.8017787 L49.7957388,22.9687709 L52.3094107,22.9687709 L52.3094107,43.0146694 L49.7957388,43.0146694 Z M49.7957388,32.5156459 C48.5008104,31.3730621 47.2736092,30.8017787 46.1140982,30.8017787 C43.7189039,30.8017787 42.5213247,32.6341172 42.5213247,36.298849 C42.5213247,39.5234745 43.5877203,41.1357631 45.7205435,41.1357631 C47.1085712,41.1357631 48.4669561,40.3782837 49.7957388,38.8633022 L49.7957388,32.5156459 Z" id="d" fill="#000000"></path>        </g>    </g></svg></div>
+  <code style="font-size:11px;">&nbsp;col_is_numeric()</code>
+</div>
+</div></td>
+<td class="gt_row gt_left" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; height:  40px"><div class='gt_from_md'><div aria-label="enjoy_teach" data-balloon-pos="left">
+  <p style="margin-top:0;margin-bottom:0;font-size:11px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;line-height:2em;">
+    <code><span style="color:purple;">&marker;</span>enjoy_teach</code>
+  </p>
+</div>
+</div></td>
+<td class="gt_row gt_left" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; height:  40px">&mdash;</td>
+<td class="gt_row gt_center" style="border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p><span style="background:transparent;padding:0;color:#333333;vertical-align:middle;font-size:10px;border:none;border-radius:4px;" aria-label="No modifications of the table." data-balloon-pos="left"><svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="vertical-align: middle;">    <g id="unchanged" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">        <g id="unchanged" transform="translate(0.500000, 0.570147)">            <rect id="Rectangle" x="0.125132506" y="0" width="23.749735" height="23.7894737"></rect>            <path d="M5.80375046,8.18194736 C3.77191832,8.18194736 2.11875046,9.83495328 2.11875046,11.8669474 C2.11875046,13.8989414 3.77191832,15.5519474 5.80375046,15.5519474 C7.8355826,15.5519474 9.48875046,13.8989414 9.48875046,11.8669474 C9.48875046,9.83495328 7.83552863,8.18194736 5.80375046,8.18194736 Z M5.80375046,14.814915 C4.17821997,14.814915 2.85578285,13.4924778 2.85578285,11.8669474 C2.85578285,10.2414169 4.17821997,8.91897975 5.80375046,8.91897975 C7.42928095,8.91897975 8.75171807,10.2414169 8.75171807,11.8669474 C8.75171807,13.4924778 7.42928095,14.814915 5.80375046,14.814915 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>            <path d="M13.9638189,8.699335 C13.9364621,8.70430925 13.9091059,8.71176968 13.8842359,8.71923074 C13.7822704,8.73663967 13.6877654,8.77643115 13.6056956,8.83860518 L10.2433156,11.3852598 C10.0766886,11.5046343 9.97720993,11.6986181 9.97720993,11.9025491 C9.97720993,12.1064807 10.0766886,12.3004639 10.2433156,12.4198383 L13.6056956,14.966493 C13.891697,15.1803725 14.2970729,15.1231721 14.5109517,14.8371707 C14.7248313,14.5511692 14.6676309,14.145794 14.3816294,13.9319145 L12.5313257,12.5392127 L21.8812495,12.5392127 L21.8812495,11.2658854 L12.5313257,11.2658854 L14.3816294,9.87318364 C14.6377872,9.71650453 14.7497006,9.40066014 14.6477351,9.11714553 C14.5482564,8.83363156 14.262255,8.65954352 13.9638189,8.699335 Z" id="arrow" fill="#000000" transform="translate(15.929230, 11.894737) rotate(-180.000000) translate(-15.929230, -11.894737) "></path>        </g>    </g></svg></span></p>
+</div></td>
+<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p><span style="background:transparent;padding:5px;color:#4CA64C;vertical-align:middle;font-size:15px;border:none;" aria-label="No evaluation issues." data-balloon-pos="left">✓</span></p>
+</div></td>
+<td class="gt_row gt_right" style="font-size: 11px; height:  40px"><code>1</code></td>
+<td class="gt_row gt_right" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; font-size: 11px; height:  40px"><code>1</code><br><code>1.00</code></td>
+<td class="gt_row gt_right" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; font-size: 11px; height:  40px"><code>0</code><br><code>0.00</code></td>
+<td class="gt_row gt_center" style="border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td></tr>
+    <tr><td class="gt_row gt_left" style="background-color: rgba(76,166,76,0.5); height:  40px"></td>
+<td class="gt_row gt_right" style="color: #666666; font-size: 13px; font-weight: bold; height:  40px">5</td>
+<td class="gt_row gt_left" style="height:  40px"><div class='gt_from_md'><div aria-label="Expect that column `tch_id` is of type: character. " data-balloon-pos="right" style="width:fit-content;">
+  <div style="margin:0;padding:0;display:inline-block;height:30px;vertical-align:middle;"><?xml version="1.0" encoding="UTF-8"?><svg width="30px" height="30px" viewBox="0 0 67 67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    <title>col_is_character</title>    <g id="All-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">        <g id="col_is_character" transform="translate(0.000000, 0.448276)">            <path d="M56.712234,1.01466935 C59.1975153,1.01466935 61.4475153,2.02202867 63.076195,3.65070832 C64.7048747,5.27938798 65.712234,7.52938798 65.712234,10.0146694 L65.712234,10.0146694 L65.712234,65.0146694 L10.712234,65.0146694 C8.22695259,65.0146694 5.97695259,64.00731 4.34827294,62.3786304 C2.71959328,60.7499507 1.71223397,58.4999507 1.71223397,56.0146694 L1.71223397,56.0146694 L1.71223397,10.0146694 C1.71223397,7.52938798 2.71959328,5.27938798 4.34827294,3.65070832 C5.97695259,2.02202867 8.22695259,1.01466935 10.712234,1.01466935 L10.712234,1.01466935 Z" id="rectangle" stroke="#000000" stroke-width="2" fill="#FFFFFF"></path>            <rect id="column" fill="#000000" x="12.2117153" y="12.0146694" width="20" height="42" rx="1"></rect>            <path d="M47.853356,43.3320522 C45.9913675,43.3320522 44.4467866,42.6422804 43.2195669,41.2627162 C41.9923472,39.883152 41.3787466,38.1439116 41.3787466,36.0449428 C41.3787466,33.802093 41.9859996,32.0543892 43.2005239,30.8017787 C44.4150482,29.5491683 46.1098555,28.9228725 48.2849966,28.9228725 C49.3598718,28.9228725 50.5616827,29.070983 51.8904653,29.3672084 L51.8904653,31.461935 C50.4770468,31.0472194 49.3260167,30.8398647 48.4373403,30.8398647 C47.1593392,30.8398647 46.133145,31.3201659 45.3587271,32.2807826 C44.5843091,33.2413994 44.197106,34.5214973 44.197106,36.1211147 C44.197106,37.6699505 44.5948884,38.9225422 45.3904653,39.8789272 C46.1860422,40.8353122 47.2270474,41.3134975 48.5135122,41.3134975 C49.6560961,41.3134975 50.8325166,41.0215082 52.0428091,40.4375209 L52.0428091,42.595724 C50.4262645,43.0866119 49.0297941,43.3320522 47.853356,43.3320522 Z" id="c" fill="#000000"></path>        </g>    </g></svg></div>
+  <code style="font-size:10px;">&nbsp;col_is_character()</code>
+</div>
+</div></td>
+<td class="gt_row gt_left" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; height:  40px"><div class='gt_from_md'><div aria-label="tch_id" data-balloon-pos="left">
+  <p style="margin-top:0;margin-bottom:0;font-size:11px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;line-height:2em;">
+    <code><span style="color:purple;">&marker;</span>tch_id</code>
+  </p>
+</div>
+</div></td>
+<td class="gt_row gt_left" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; height:  40px">&mdash;</td>
+<td class="gt_row gt_center" style="border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p><span style="background:transparent;padding:0;color:#333333;vertical-align:middle;font-size:10px;border:none;border-radius:4px;" aria-label="No modifications of the table." data-balloon-pos="left"><svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="vertical-align: middle;">    <g id="unchanged" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">        <g id="unchanged" transform="translate(0.500000, 0.570147)">            <rect id="Rectangle" x="0.125132506" y="0" width="23.749735" height="23.7894737"></rect>            <path d="M5.80375046,8.18194736 C3.77191832,8.18194736 2.11875046,9.83495328 2.11875046,11.8669474 C2.11875046,13.8989414 3.77191832,15.5519474 5.80375046,15.5519474 C7.8355826,15.5519474 9.48875046,13.8989414 9.48875046,11.8669474 C9.48875046,9.83495328 7.83552863,8.18194736 5.80375046,8.18194736 Z M5.80375046,14.814915 C4.17821997,14.814915 2.85578285,13.4924778 2.85578285,11.8669474 C2.85578285,10.2414169 4.17821997,8.91897975 5.80375046,8.91897975 C7.42928095,8.91897975 8.75171807,10.2414169 8.75171807,11.8669474 C8.75171807,13.4924778 7.42928095,14.814915 5.80375046,14.814915 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>            <path d="M13.9638189,8.699335 C13.9364621,8.70430925 13.9091059,8.71176968 13.8842359,8.71923074 C13.7822704,8.73663967 13.6877654,8.77643115 13.6056956,8.83860518 L10.2433156,11.3852598 C10.0766886,11.5046343 9.97720993,11.6986181 9.97720993,11.9025491 C9.97720993,12.1064807 10.0766886,12.3004639 10.2433156,12.4198383 L13.6056956,14.966493 C13.891697,15.1803725 14.2970729,15.1231721 14.5109517,14.8371707 C14.7248313,14.5511692 14.6676309,14.145794 14.3816294,13.9319145 L12.5313257,12.5392127 L21.8812495,12.5392127 L21.8812495,11.2658854 L12.5313257,11.2658854 L14.3816294,9.87318364 C14.6377872,9.71650453 14.7497006,9.40066014 14.6477351,9.11714553 C14.5482564,8.83363156 14.262255,8.65954352 13.9638189,8.699335 Z" id="arrow" fill="#000000" transform="translate(15.929230, 11.894737) rotate(-180.000000) translate(-15.929230, -11.894737) "></path>        </g>    </g></svg></span></p>
+</div></td>
+<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p><span style="background:transparent;padding:5px;color:#4CA64C;vertical-align:middle;font-size:15px;border:none;" aria-label="No evaluation issues." data-balloon-pos="left">✓</span></p>
+</div></td>
+<td class="gt_row gt_right" style="font-size: 11px; height:  40px"><code>1</code></td>
+<td class="gt_row gt_right" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; font-size: 11px; height:  40px"><code>0</code><br><code>0.00</code></td>
+<td class="gt_row gt_right" style="border-left-width: 1px; border-left-style: dashed; border-left-color: #E5E5E5; font-size: 11px; height:  40px"><code>1</code><br><code>1.00</code></td>
+<td class="gt_row gt_center" style="border-left-width: 1px; border-left-style: solid; border-left-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #D3D3D3; background-color: #FCFCFC; height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td>
+<td class="gt_row gt_center" style="height:  40px"><div class='gt_from_md'><p>—</p>
+</div></td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="14"><span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin-left:10px;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;padding:2px 10px 2px 10px;">2022-07-12 08:52:57 CDT</span>
+<span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;margin:5px 1px 5px 0;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;">&lt; 1 s</span>
+<span style="background-color:#FFF;color:#444;padding:0.5em 0.5em;position:inherit;text-transform:uppercase;margin:5px 1px 5px -1px;border:solid 1px #999999;font-variant-numeric:tabular-nums;border-radius:0;padding:2px 10px 2px 10px;">2022-07-12 08:52:57 CDT</span></td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+
+]
+
+---
+
+# What do you do with this information?
+
+1. **Go back to your raw data**
+  + Did the data not come in the way I expected it to? Did I miss something in my initial review of the raw data?
+  + If the raw data does not look as expected, you may need to go back to the source to find out why
+      - Was the Qualtrics survey built differently than you expected?
+      - Was the data exported differently than you expected? 
+  
+2. **Review your code**
+  + Did I miss a recoding or transformation step from my data cleaning plan?
+  
+3. **Review your data dictionary**
+  + Were the ranges I set for variables incorrect? Did I mess up the expected variable type?
+
+4. **Begin to make your changes** in your code and/or data dictionary based on the information you collect. Re-run your cleaning code.
+
+5. **Run your validation syntax again**
+
+???
+
+Think about how Qualtrics has options to fill missing values with -99 or 0. Were one of those options selected and you did or did not want those options selected?
+
+---
+
+class: inverse, center, middle
+
+# Merging and Appending
+
+---
+
+# Merging
+
+Binding two datasets together in a wide format, linked by a **unique identifier** across forms. 
+
+You may be merging similar forms across time, or you may be merging different forms within time. Variable names (besides your identifier) **must be unique**
+
+We can merge data using the `*_join()` functions from the `dplyr` package in R.
+
+![](img/merge.PNG)
+
+
+---
+
+# Merging
+
+.panelset[
+.panel[.panel-name[full_join]
+
+All rows are included in the merged data. Those with no data will be filled with NA.
+
+
+
+.pull-left[
+
+```r
+data1 %&gt;%
+  full_join(data2, by = identifier)
+```
+]
+
+.pull-right[
+
+```r
+test_1819 %&gt;%
+  full_join(test_1920, by = "tch_id")
+```
+]
+
+.center[![](img/fulljoin.PNG)]
+
+]
+
+.panel[.panel-name[left_join]
+
+Only rows for IDs from the left dataset are included
+
+.pull-left[
+
+```r
+data1 %&gt;%
+  left_join(data2, by = identifier)
+```
+]
+
+.pull-right[
+
+```r
+test_1819 %&gt;%
+  left_join(test_1920, by = "tch_id")
+```
+]
+
+.center[![](img/leftjoin.PNG)]
+
+]
+
+.panel[.panel-name[inner_join]
+
+Only rows for IDs that are in BOTH dataset are included
+
+.pull-left[
+
+```r
+data1 %&gt;%
+  inner_join(data2, by = identifier)
+```
+]
+
+.pull-right[
+
+```r
+test_1819 %&gt;%
+  inner_join(test_1920, by = "tch_id")
+```
+]
+
+.center[![](img/innerjoin.PNG)]
+
+]
+
+]
+
+---
+
+# Appending
+
+Stacking datasets on top of each other.
+
+Variable names **must be identical**.
+
+We can append data using the `bind_rows()` functions from the `dplyr` package in R.
+
+Used for the instances such as:
+
+1. For people who want to analyze long datasets.
+
+2. For combining similar forms within time (ex: Two Qualtrics survey links used and forms need to be combined)
+
+3. For combining groups of data across time (ex: Stacking Cohort 1 and Cohort 2).
+
+---
+
+# Appending
+
+.pull-left[
+
+Qualtrics link 1
+
+![](img/append1.PNG)
+
+Qualtrics link 2
+
+![](img/append2.PNG)
+]
+
+.pull-right[
+
+When appending data using `bind_rows()`:
+
+1. Variable names must be the same. Columns are appended based on variable names.
+
+2. The variable classes **have** to be the same type. If they are not, you will get an error. 
+  - Ex: item 1 is numeric in both datasets
+  
+3. If one dataset has additional variables the other dataset does not have, those values will be filled with NAs for the rows that don't have data for that variable.
+
+]
+
+---
+
+# Appending
+
+
+
+
+
+```r
+qual1 %&gt;%
+  bind_rows(qual2)
+```
+
+
+.center[![](img/appended.PNG)]
+
+---
+
+class: inverse, center, middle
+
+# Restructure
+
+---
+
+# Restructure
+
+.pull-left[
+
+Wide Data: One row per case
+
+![](img/wide.PNG)
+
+]
+
+.pull-right[
+
+Long Data: Repeating rows per case
+
+![](img/long.PNG)
+
+]
+
+???
+
+The reasons for wanting your data in one format or the other all depend on things like the type of analysis you are wanting to do, what the user is most familiar with, best format for data storage, and so forth
+
+But as I've been saying throughout this series, you can always choose one format, and then change your mind. Once you learn the functions to restructure your data, pivoting back and forth between long and wide is a fairly quick process.
+
+---
+
+# Restructure
+
+You can restructure your data from wide to long
+
+.center[![](img/wide_to_long.PNG)]
+
+---
+
+# Restructure
+
+And then back again, from long to wide
+
+.center[![](img/long_to_wide.PNG)]
+
+
+---
+
+# Restructure Long
+
+.panelset[
+.panel[.panel-name[pivot_longer]
+
+.pull-left[
+Restructure wide to long using `pivot_longer()` from the `tidyr` package
+
+
+
+
+```r
+data %&gt;%
+  pivot_longer(
+    cols = variables,
+    names_to = names,
+    values_to = names)
+```
+]
+
+.pull-right[
+
+* `cols` = the variables you want to pivot
+  + These can be selected using 
+      - selection helpers (such as starts_with)
+      - Using : for consecutive variables
+      - Select all except using `-`
+      - List multiple variables using c()
+
+* `names_to` = name of your new categorical column/s typically (ex: time)
+  + Use quotation marks around this name
+
+* `values_to` = name of the new column/s
+  + Use quotation marks around this name
+
+]
+]
+
+.panel[.panel-name[example_one]
+
+.pull-left[
+
+Our wide dataset
+
+This is a dataset of test scores by time
+
+
+```
+  tch_id time1 time2
+1   2345    30    40
+2   2346    30    50
+3   2347    NA    40
+4   2348    45    NA
+```
+
+
+]
+
+.pull-right[
+
+
+```r
+data_wide %&gt;%
+  pivot_longer(
+    cols = time1:time2,
+    names_to = "time",
+    values_to = "score"
+  )
+```
+
+
+```
+  tch_id  time score
+1   2345 time1    30
+2   2345 time2    40
+3   2346 time1    30
+4   2346 time2    50
+5   2347 time1    NA
+6   2347 time2    40
+7   2348 time1    45
+8   2348 time2    NA
+```
+
+]
+]
+
+.panel[.panel-name[your_turn]
+
+**YOUR TURN!**
+
+This is a dataset of school enrollment by grade level
+
+
+```
+  sch_id sixth seventh eighth
+1     24   150      80    100
+2     25    75     120    110
+3     27    50      65     70
+```
+
+
+
+```r
+data_wide %&gt;%
+  pivot_longer(
+    cols = 
+*     what goes here,
+    names_to = 
+*     what goes here,
+    values_to = 
+*     what goes here
+  )
+```
+
+]
+
+.panel[.panel-name[your_turn]
+
+.pull-left[
+
+```r
+data_wide %&gt;%
+  pivot_longer(
+    cols = 
+      sixth:eighth,
+    names_to = 
+      "grade",
+    values_to = 
+      "enrollment"
+  )
+```
+]
+
+.pull-right[
+
+
+```
+  sch_id eighth   grade enrollment
+1     24    100   sixth        150
+2     24    100 seventh         80
+3     25    110   sixth         75
+4     25    110 seventh        120
+5     27     70   sixth         50
+6     27     70 seventh         65
+```
+]
+]
+]
+
+???
+
+The variables you want to pivot are the ones that currently repeat across a row. 
+
+
+
+---
+
+# Restructure Long
+
+But most of the time our data will not be that simple. It will look more like this. 
+
+Multiple recurring variables across different waves of data.
+
+&lt;br&gt;
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; tch_id &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score1_1819 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score2_1819 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score3_1819 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score1_1920 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score2_1920 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score3_1920 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2345 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 200 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 300 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 247 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 220 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 301 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 250 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2346 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 256 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 302 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 253 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2347 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 231 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 278 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 280 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 270 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 330 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 247 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2348 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 258 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 269 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 290 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 241 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 270 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 300 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# Restructure Long
+
+And our arguments for `pivot_longer()` will change just a little bit
+
+
+```r
+data %&gt;%
+  pivot_longer(
+    cols = variables,
+    names_to = names,
+*   names_sep = separator)
+```
+
+* `cols` = still the columns we wish to pivot
+
+* `names_to` = is now two pieces of information
+  1. the categorical piece (ex: time) to be made into a new variable
+  2. .value which indicates to copy over the variable name in the transformed data
+  + Provide these two pieces of information in the order in which they appear
+
+* `names_sep` = the separator between the categorical piece (ex: time) and the variable name
+
+---
+
+# Restructure Long
+
+.panelset[
+.panel[.panel-name[example_one]
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; tch_id &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score1_1819 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score2_1819 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score3_1819 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score1_1920 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score2_1920 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score3_1920 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2345 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 200 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 300 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 247 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 220 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 301 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 250 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2346 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 256 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 302 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 253 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2347 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 231 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 278 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 280 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 270 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 330 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 247 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2348 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 258 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 269 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 290 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 241 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 270 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 300 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+```r
+test_wide %&gt;%
+  pivot_longer(
+    cols = -tch_id,
+    names_to = c(".value", "year"),
+    names_sep = "_"
+  )
+```
+
+]
+
+.panel[.panel-name[example_one]
+
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; tch_id &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; year &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score3 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2345 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1819 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 200 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 300 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 247 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2345 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1920 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 220 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 301 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 250 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2346 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1819 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 256 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 302 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 253 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2346 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1920 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2347 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1819 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 231 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 278 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 280 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2347 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1920 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 270 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 330 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 247 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2348 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1819 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 258 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 269 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 290 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2348 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1920 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 241 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 270 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 300 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+.panel[.panel-name[your_turn]
+
+
+
+**YOUR TURN!**
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; stu_id &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; wave1_q1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; wave1_q2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; wave2_q1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; wave2_q2 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 444 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 445 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 446 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+```r
+data_wide %&gt;%
+  pivot_longer(
+    cols = 
+*     what goes here,
+    names_to = 
+*     c(what goes here, what goes here),
+    names_sep = 
+*     what goes here
+)
+```
+
+
+]
+
+.panel[.panel-name[your_turn]
+
+.pull-left[
+
+```r
+data_wide %&gt;%
+  pivot_longer(
+    cols = -stu_id,
+    names_to = 
+      c("wave", ".value"),
+    names_sep = 
+      "_"
+)
+```
+]
+
+.pull-right[
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; stu_id &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; wave &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; q1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; q2 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 444 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; wave1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 444 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; wave2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 445 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; wave1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 445 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; wave2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 446 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; wave1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 446 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; wave2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+]
+
+]
+
+---
+
+# Restructure Wide
+
+.panelset[
+.panel[.panel-name[pivot_wider]
+
+.pull-left[
+Restructure long to wide using `pivot_wider()` from the `tidyr` package
+
+
+
+
+```r
+data %&gt;%
+  pivot_wider(
+    names_from = variable,
+    values_from = variable)
+```
+]
+
+.pull-right[
+
+* `names_from` = which column values should be appended to new variable names
+
+* `values_from` = the variables we want to pivot into wide format
+
+]
+]
+
+.panel[.panel-name[example_one]
+
+.pull-left[
+
+Our long dataset
+
+
+```
+  tch_id  time score
+1   2345 time1    30
+2   2345 time2    40
+3   2346 time1    30
+4   2346 time2    50
+5   2347 time1    NA
+6   2347 time2    40
+7   2348 time1    45
+8   2348 time2    NA
+```
+
+
+]
+
+.pull-right[
+
+
+```r
+data_long %&gt;%
+  pivot_wider(
+    names_from = "time",
+    values_from = "score"
+  )
+```
+
+
+```
+  tch_id time1 time2
+1   2345    30    40
+2   2346    30    50
+3   2347    NA    40
+4   2348    45    NA
+```
+
+]
+]
+
+.panel[.panel-name[your_turn]
+
+.pull-left[
+**YOUR TURN!**
+
+This is a dataset of school enrollment by grade level
+
+
+```
+  sch_id   grade enrollment
+1     24   sixth        150
+2     24 seventh         80
+3     24  eighth        100
+4     25   sixth         75
+5     25 seventh        120
+6     25  eighth        110
+7     27   sixth         50
+8     27 seventh         65
+9     27  eighth         70
+```
+]
+
+.pull-right[
+
+
+```r
+data_long %&gt;%
+  pivot_wider(
+    names_from = 
+*     what goes here,
+    values_from = 
+*     what goes here,
+  )
+```
+
+]
+]
+
+.panel[.panel-name[your_turn]
+
+.pull-left[
+
+```r
+data_long %&gt;%
+  pivot_wider(
+    names_from = 
+      grade,
+    values_from = 
+      enrollment
+  )
+```
+]
+
+.pull-right[
+
+
+```
+  sch_id sixth seventh eighth
+1     24   150      80    100
+2     25    75     120    110
+3     27    50      65     70
+```
+]
+]
+]
+
+---
+
+# Restructure Wide
+
+But again, most of the time our data will not be that simple. It will look more like this. 
+
+Multiple recurring variables across different waves of data.
+
+&lt;br&gt;
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; tch_id &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; year &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score3 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2345 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1819 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 200 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 300 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 247 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2345 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1920 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 220 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 301 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 250 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2346 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1819 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 256 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 302 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 253 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2346 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1920 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2347 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1819 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 231 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 278 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 280 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2347 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1920 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 270 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 330 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 247 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2348 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1819 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 258 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 269 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 290 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2348 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1920 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 241 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 270 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 300 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# Restructure Wide
+
+And our arguments for `pivot_wider()` will change just a little bit
+
+
+```r
+data %&gt;%
+  pivot_wider(
+    names_from = variable,
+    values_from = variable,
+    names_glue = pieces of information to create new variable names)
+```
+
+* `names_from` = which column values should be appended to new variable names
+
+* `values_from` = the variables we want to pivot into wide format
+
+* `names_sep` = If your names_from contains multiple variables, what should separate the names
+
+---
+
+# Restructure Wide
+
+.panelset[
+.panel[.panel-name[example_one]
+
+.pull-left[
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; tch_id &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; year &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score3 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2345 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1819 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 200 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 300 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 247 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2345 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1920 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 220 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 301 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 250 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2346 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1819 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 256 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 302 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 253 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2346 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1920 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2347 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1819 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 231 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 278 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 280 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2347 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1920 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 270 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 330 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 247 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2348 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1819 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 258 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 269 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 290 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2348 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1920 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 241 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 270 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 300 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+.pull-right[
+
+
+```r
+test_long %&gt;%
+  pivot_wider(
+    names_from = variable,
+    values_from = year,
+    names_sep = "_"
+  )
+```
+
+]
+]
+
+.panel[.panel-name[example_one]
+
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; tch_id &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score1_1819 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score1_1920 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score2_1819 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score2_1920 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score3_1819 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; score3_1920 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2345 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 200 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 220 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 300 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 301 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 247 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 250 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2346 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 256 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 302 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 253 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2347 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 231 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 270 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 278 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 330 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 280 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 247 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2348 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 258 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 241 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 269 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 270 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 290 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 300 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+.panel[.panel-name[your_turn]
+
+
+
+**YOUR TURN!**
+
+.pull-left[
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; stu_id &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; wave &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; q1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; q2 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 444 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; wave1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 444 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; wave2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 445 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; wave1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 445 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; wave2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 446 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; wave1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 446 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; wave2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+.pull-right[
+
+```r
+data_long %&gt;%
+  pivot_wider(
+    names_from = 
+*     what goes here,
+    values_from = 
+*     what goes here,
+    names_sep = 
+*     what goes here
+)
+```
+]
+
+]
+
+.panel[.panel-name[your_turn]
+
+.pull-left[
+
+```r
+data_long %&gt;%
+  pivot_wider(
+    names_from = wave,
+    values_from = q1:q2,
+    names_sep = "_"
+)
+```
+]
+
+.pull-right[
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; stu_id &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; q1_wave1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; q1_wave2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; q2_wave1 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; q2_wave2 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 444 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 445 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 446 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+&lt;br&gt;
+
+Notice that using the `names_sep` argument, the categorical variable (ex: wave or year) is always appended to the end of the variable. If you don't want this, there is a different argument, `names_glue`, that can be used to create custom variable names.
+
+]
+
+]
+
+---
+
+background-image: url(img/wrapping.jpg)
+background-size: cover
+
+# Wrapping it up
+
+.footnote[[Source: Susie Ho on Unsplash](https://unsplash.com/s/photos/wrapping-paper)]
+
+---
+
+
+background-image: url(img/practice.PNG)
+background-size: 80%
+background-position: 50% 80%
+
+class: center
+
+### The only way to really get better at using R is practice
+
+???
+
+Truly the only way to get better at R is to force yourself to use it. You will fail a bunch, and 
+you will learn from those failures. And as you see your code finally start working, you'll feel so
+accomplished because it will eventually start clicking.
+
+---
+
+# Ways to Practice!
+
+.pull-left[
+
+Try to complete the rest of the data cleaning plan.
+
+Write code, on your own, for Steps 5 - 13 in the cleaning syntax we started.
+
+If you get stuck:
+
+1. Refer to the slides
+2. Google it!
+3. Use the help in RStudio: ?functionname
+4. Email me!
+]
+
+.pull-right[
+
+![](img/clean.jpg)
+]
+
+.footnote[Source: [meowguide](https://www.meowguide.com/should-you-wash-your-cat/)]
+
+---
+
+# Keep Learning
+
+.pull-left[
+1. **Learn additional reproducibility practices**
+  - Using R projects
+  
+2. **Learn automation practices**
+  - Integrating your data dictionary
+  - Writing your own functions
+  - Automating your reporting (documentation)
+
+]
+
+.pull-right[
+3\. **Learn more functions!**
+  - Creating row sums and means (for scoring)
+  - Functions to iterate processes (read multiple files, display tables for multiple variables)
+  - More functions to work with strings
+  - More functions to work with dates
+  - Other joins such as anti_joins
+  
+4\. **Learn other R document types you can work with**
+  - R Markdown
+  - R Notebooks
+]
+
+???
+
+The more data you work with, the more you realize no dataset is the same. The functions we've covered will get you half way there, but there are going to be additional functions you need to learn, or additional arguments you need to add to work with your particular data.
+
+---
+
+class: center, middle
+
+# THANK YOU!!
+
+If you have 5 minutes, please take this workshop survey to help me improve trainings in the future.
+
+## https://forms.gle/9wE47TTjvBqK7G819
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "rainbow",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
