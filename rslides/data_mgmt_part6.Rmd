@@ -1288,9 +1288,9 @@ cols: These are the variables you want to pivot longer. These are your repeating
 
 ...
 
-names_to: You will provide a name for the new categorical variable to store your old variable names. So when you pivot longer your variable names will become a new categorical column. You can name this column whatever you want. This name needs to be in quotation marks when you add it to your argument.
+names_to: You will provide a name for the new categorical variable to store your old variable names. So when you pivot longer, your variable names will become a new categorical column. You can name this column whatever you want. I chose the name "time". Whatever you choose, this name needs to be in quotation marks when you add it to your argument.
 
-values_to: You will provide a name for the new variable storing your values. When you pivot longer your values will be combined into this one column. Again, you can name this column whatever you want. This name needs to be in quotation marks when you add it to your argument.
+values_to: You will provide a name for the new variable storing your values. When you pivot longer your values will be combined into this one column. Again, you can name this column whatever you want. I chose the name "score". This name needs to be in quotation marks when you add it to your argument.
 
 So let's see what this actually looks like in a function
 
@@ -1385,7 +1385,7 @@ So let's look at these arguments with another visual
 
 cols: Is the same. It is still the columns we want to pivot longer. So in this example, we would want to pivot everything except for teacher id because these are all repeating variables.
 
-names_to: is now two pieces of information
+names_to: is now two pieces of information, and these two pieces of information are separated by a comma
 
 First you will provide a name for the categorical piece of your variable name to be made into a new variable. So in our example, the categorical pieces of our variable name are these years. So I would name this piece year. Again, I could name this anything I want, I just need to put it in quotation marks.
 
@@ -1394,6 +1394,8 @@ Second you will use the term .value, verbatim, in this argument. And what this d
 When you provide these two pieces of information for this argument, you need to provide them in the order in which they appear. So if the time component is first, list that first, if the time component is second, list that second
 
 And last the names_sep is a new argument and this is where you list what separates the time component from the item component of your variable name (for example, an underscore)
+
+So again, let's look at this in actual code
 
 ---
 
@@ -1852,7 +1854,8 @@ x <- test_long %>%
     names_from = year,
     values_from = score1:score3,
     names_sep = "_"
-  )
+  ) %>%
+  relocate(tch_id, score1_1819, score2_1819, score3_1819, score1_1920, score2_1920, score3_1920)
 
 kable(x, format = "html") %>%
     kable_styling("striped", full_width=T)
@@ -1933,7 +1936,8 @@ x <- data_long %>%
     names_from = wave,
     values_from = q1:q2,
     names_sep = "_"
-)
+) %>%
+  relocate(stu_id, q1_wave1, q2_wave1, q1_wave2)
 
 kable(x, format = "html") %>%
     kable_styling("striped", full_width=T)
