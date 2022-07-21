@@ -310,18 +310,18 @@ Group by scale for readability
 
 |measure|scale|var_name|label|type|values|recode/calc|
 |------|--------|--------|-----|----|------|------|
-|demos | NA   | YearsTeach | How many years have you been a teacher? | numeric | 0-100 | NA|
+|demos | NA   | yearsteach | How many years have you been a teacher? | numeric | 0-100 | NA|
 |cip|Individual Teacher Instructional Practices| cipitsip01| Used student work to plan for mathematics instruction | numeric | 1 = Never, 2 = Less than once a month, 3 = 2 or 3 times a month, 4 = Once or twice a week, 5 = Daily | yes |
-|cip|Individual Teacher Instructional Practices - recode| cipitsip01_r| Used student work to plan for mathematics instruction | numeric | 5 = Never, 4 = Less than once a month, 3 = 2 or 3 times a month, 2 = Once or twice a week, 1 = Daily | t_cipitip01 = 1 -> 5, 2 -> 4, 3 -> 3, 4 -> 5, 5 -> 1 |
+|cip|Individual Teacher Instructional Practices - recode| cipitsip01_r| Used student work to plan for mathematics instruction | numeric | 5 = Never, 4 = Less than once a month, 3 = 2 or 3 times a month, 2 = Once or twice a week, 1 = Daily | cipitsip01 = 1 -> 5, 2 -> 4, 3 -> 3, 4 -> 5, 5 -> 1 |
 ]
 
 .panel[.panel-name[stu_srvy]
 
 |measure|scale|var_name|label|type|values|recode/calc|
 |------|--------|--------|-----|----|------|------|
-|demos | NA   | GradeLev | What grade level are you in? | numeric | 0-100 | NA|
+|demos | NA   | grade | What grade level are you in? | numeric | 0-100 | NA|
 |SelfEff|NA| selfeff01| I believe I can do math | numeric | 1 = Strongly Disagree, 2 = Disagree, 3 = Neither Agree or Disagree, 4 = Agree, 5 = Strongly Agree | NA |
-|SelfEff|NA|SelfEffSum |Self Efficacy Sum Score|numeric|0-20|selfeff01 + selfeff02 + selfeff03_r + selfeff04|
+|SelfEff|NA|selfeff_sum |Self Efficacy Sum Score|numeric|0-20|selfeff01 + selfeff02 + selfeff03_r + selfeff04|
 
 ]
 
@@ -329,7 +329,7 @@ Group by scale for readability
 
 |scale|var_name|label|type|values|recode/calc|
 |------|--------|--------|-----|----|------|------|
-| NA | Form   | Which form was given? | numeric |1 = A, 2 = B, 3 = C, 4 = D | NA|
+| NA | form   | Which form was given? | numeric |1 = A, 2 = B, 3 = C, 4 = D | NA|
 |Math Fractions| emsa01| What is the correct answer? | numeric | open | NA |
 |Math Fractions|emsass|Math Fractions Scaled Score|0-100|NA|NA|
 
